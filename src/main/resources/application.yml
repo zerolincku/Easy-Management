@@ -36,6 +36,8 @@ spring:
     filters: stat,wall,slf4j
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 
 # 自定义jwt key
@@ -44,6 +46,7 @@ jwt:
   secret: jhi40S8232amR #JWT加解密使用的密钥
   expiration: 86400 #JWT的超期限时间(60*60*24)s
   tokenHead: Linck  #JWT负载中拿到开头
+
 
 logging:
   level:
