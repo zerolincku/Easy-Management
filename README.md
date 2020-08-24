@@ -17,9 +17,9 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 
 ## 项目截图
 
-![image-20200824222859241](https://gitee.com/zerolinck/Easy-Management/blob/master/image/image-20200824222859241.png)
+![image-20200824222859241](https://gitee.com/zerolinck/Easy-Management/raw/master/image/image-20200824222859241.png)
 
-![image-20200824222938586](https://gitee.com/zerolinck/Easy-Management/blob/master/image/image-20200824222938586.png)
+![image-20200824222938586](https://gitee.com/zerolinck/Easy-Management/raw/master/image/image-20200824222938586.png)
 
 
 
