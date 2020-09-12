@@ -1,6 +1,6 @@
 package com.linck.management.common.config;
 
-import com.linck.management.common.api.ResultCode;
+import com.linck.management.common.api.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,10 +58,10 @@ public class SwaggerConfig {
     private List<ResponseMessage>  responseMessageList(){
         //添加全局响应状态码
         List<ResponseMessage> responseMessageList = new ArrayList<>();
-        Arrays.stream(ResultCode.values()).forEach(resultCode -> {
+        Arrays.stream(ResultCodeEnum.values()).forEach(resultCodeEnum -> {
             responseMessageList.add(
-                    new ResponseMessageBuilder().code(resultCode.getCode()).message(resultCode.getMessage()).responseModel(
-                            new ModelRef(resultCode.getMessage())).build()
+                    new ResponseMessageBuilder().code(resultCodeEnum.getCode()).message(resultCodeEnum.getMessage()).responseModel(
+                            new ModelRef(resultCodeEnum.getMessage())).build()
             );
         });
         return responseMessageList;

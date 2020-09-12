@@ -35,7 +35,7 @@ class ManagementApplicationTests {
 
     @Test
     void addUserTest() {
-        Random random = new Random();
+        /*Random random = new Random();
         LoginUserDTO user = new LoginUserDTO();
         int successCount = 0;
         user.setVerificationCode("1");
@@ -54,14 +54,14 @@ class ManagementApplicationTests {
                 successCount++;
             }
             System.out.println("成功插入用户数量:" + successCount);
-        }
+        }*/
 
     }
 
     @Test
     void addUserTestThread() {
 
-        ExecutorService executor = Executors.newFixedThreadPool(8);
+        /*ExecutorService executor = Executors.newFixedThreadPool(8);
         for (int i = 0; i < 7; i++) {
             executor.submit(() -> {
                 Random random = new Random();
@@ -98,7 +98,7 @@ class ManagementApplicationTests {
                 successCount++;
             }
             System.out.println("成功插入用户数量:" + successCount);
-        }
+        }*/
     }
 
 }

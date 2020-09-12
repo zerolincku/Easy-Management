@@ -4,7 +4,7 @@ package com.linck.management.common.api;
  * 枚举了一些常用API操作码
  * Created by macro on 2019/4/19.
  */
-public enum ResultCode implements IErrorCode {
+public enum ResultCodeEnum implements IErrorCode {
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),
     VALIDATE_FAILED(404, "参数检验失败"),
@@ -13,9 +13,23 @@ public enum ResultCode implements IErrorCode {
     private int code;
     private String message;
 
-    private ResultCode(int code, String message) {
+    private ResultCodeEnum(int code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    /**
+     * 通过状态码获取枚举对象
+     * @param code 状态码
+     * @return 枚举对象
+     */
+    public static ResultCodeEnum getByCode(int code){
+        for (ResultCodeEnum resultEnum : ResultCodeEnum.values()) {
+            if(code == resultEnum.getCode()){
+                return resultEnum;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -27,4 +41,6 @@ public enum ResultCode implements IErrorCode {
     public String getMessage() {
         return message;
     }
+
+
 }

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,6 +52,7 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
+
     public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail){
         String token = sysUserService.login(userDetail);
         if(token == null){

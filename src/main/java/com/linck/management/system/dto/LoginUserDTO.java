@@ -1,9 +1,6 @@
 package com.linck.management.system.dto;
 
-import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.lang.NonNull;
-
 import javax.validation.constraints.NotBlank;
 
 /**
