@@ -1,6 +1,6 @@
 package com.linck.management.system.dto;
 
-import com.linck.management.system.contants.SysUserStateEnum;
+import com.linck.management.common.constant.StateEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
@@ -63,7 +63,7 @@ public class SysUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return sysUser.getState().equals(SysUserStateEnum.ENABLE.getState());
+        return sysUser.getState().equals(StateEnum.ENABLE.getState());
     }
 
     /**

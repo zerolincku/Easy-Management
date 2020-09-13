@@ -2,7 +2,7 @@ package com.linck.management.common.compoent;
 
 import cn.hutool.json.JSONUtil;
 import com.linck.management.common.api.CommonResult;
-import com.linck.management.common.constans.Constans;
+import com.linck.management.common.constant.Constans;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

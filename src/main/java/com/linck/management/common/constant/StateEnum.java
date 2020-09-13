@@ -1,12 +1,12 @@
-package com.linck.management.system.contants;
+package com.linck.management.common.constant;
 
 /**
  * @program: MyManagement
- * @description
+ * @description 通用状态枚举
  * @author: Linck
  * @create: 2020-08-09 17:20
  **/
-public enum SysUserStateEnum {
+public enum StateEnum {
 
     /**
      * 启用
@@ -19,7 +19,7 @@ public enum SysUserStateEnum {
 
     private Integer state;
 
-    SysUserStateEnum(Integer state){
+    StateEnum(Integer state){
         this.state = state;
     }
 
