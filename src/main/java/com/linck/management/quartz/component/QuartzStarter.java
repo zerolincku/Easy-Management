@@ -1,4 +1,4 @@
-package com.linck.management.system.component;
+package com.linck.management.quartz.component;
 
 import org.quartz.*;
 import org.slf4j.Logger;

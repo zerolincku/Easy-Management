@@ -1,4 +1,4 @@
-package com.linck.management.common.util;
+package com.linck.management.quartz.util;
 
 import org.quartz.*;
 
