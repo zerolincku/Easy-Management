@@ -178,7 +178,7 @@
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
         <!--mybatis sql日志 日志的级别需要是DEBUG-->
-        <logger name="com.linck.management.system.mapper" level="debug">
+        <logger name="com.linck.management" level="debug">
         </logger>
         <root level="info">
             <appender-ref ref="CONSOLE" />

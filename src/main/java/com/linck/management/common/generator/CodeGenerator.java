@@ -258,11 +258,12 @@ public class CodeGenerator {
                 // 生成xml 位置
                 .xmlDir(mainDir + "resources")
                 // 包引用路径
-                .packageName("com.linck.management.system")
+                .packageName("com.linck.management.quartz")
                 .build();
 
         //根据表生成后台代码
-        codeGenerator.code("sys_permission","sys_role","sys_role_permission","sys_user","sys_user_role");
+        codeGenerator.code("QRTZ_FIRED_TRIGGERS","QRTZ_PAUSED_TRIGGER_GRPS","QRTZ_SCHEDULER_STATE","QRTZ_LOCKS","QRTZ_SIMPLE_TRIGGERS","QRTZ_SIMPROP_TRIGGERS","QRTZ_CRON_TRIGGERS"
+        ,"QRTZ_BLOB_TRIGGERS","QRTZ_TRIGGERS","QRTZ_JOB_DETAILS","QRTZ_CALENDARS");
 
     }
 }
