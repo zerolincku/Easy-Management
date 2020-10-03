@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**"
                 )
                 .permitAll()
-                .antMatchers("/sys/user/login", "/sys/user/register","/test/*")// 登录注册允许匿名访问
+                .antMatchers("/sys/user/login", "/sys/user/register","/test/*","/verification/code")// 登录注册允许匿名访问
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)// 跨域请求会先进行一次options请求
                 .permitAll()

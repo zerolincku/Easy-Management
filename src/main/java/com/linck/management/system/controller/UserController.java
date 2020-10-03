@@ -1,5 +1,6 @@
 package com.linck.management.system.controller;
 
+import com.google.code.kaptcha.Constants;
 import com.linck.management.common.api.CommonResult;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.dto.LoginUserDTO;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +54,10 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail){
+    public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail, HttpServletRequest request){
+        if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
+            return CommonResult.validateFailed("验证码错误");
+        }
         String token = sysUserService.login(userDetail);
         if(token == null){
             return CommonResult.validateFailed("用户名或密码错误");

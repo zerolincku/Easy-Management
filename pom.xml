@@ -97,6 +97,12 @@
             <artifactId>spring-boot-starter-quartz</artifactId>
             <version>2.1.13.RELEASE</version>
         </dependency>
+        <!-- kaptcha验证码 -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
 
         <dependency>
