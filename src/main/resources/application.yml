@@ -7,25 +7,3 @@ spring:
       path: /
   profiles:
     active: dev
-
-  #quartz相关配置
-  quartz:
-    properties:
-      org:
-        quartz:
-          scheduler:
-            instanceName: clusteredScheduler #调度器实例名称
-            instanceId: AUTO #调度器实例编号自动生成
-          jobStore:
-            class: org.quartz.impl.jdbcjobstore.JobStoreTX #持久化方式配置
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate #持久化方式配置数据驱动，MySQL数据库
-            tablePrefix: qrtz_ #quartz相关数据表前缀名
-            isClustered: false #开启分布式部署
-            clusterCheckinInterval: 10000 #分布式节点有效性检查时间间隔，单位：毫秒
-            useProperties: false #配置是否使用
-          threadPool:
-            class: org.quartz.simpl.SimpleThreadPool #线程池实现类
-            threadCount: 10 #执行最大并发线程数量
-            threadPriority: 5 #线程优先级
-            threadsInheritContextClassLoaderOfInitializingThread: true #配置是否启动自动加载数据库内的定时任务，默认true
-    job-store-type: jdbc
