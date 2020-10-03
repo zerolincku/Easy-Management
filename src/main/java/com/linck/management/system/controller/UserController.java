@@ -52,7 +52,6 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-
     public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail){
         String token = sysUserService.login(userDetail);
         if(token == null){
