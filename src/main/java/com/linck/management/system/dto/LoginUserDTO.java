@@ -17,7 +17,7 @@ public class LoginUserDTO {
 
     @ApiModelProperty(value = "密码",required = true)
     @NotBlank(message = "密码不能为空")
-    private String pwd;
+    private String password;
 
     @ApiModelProperty(value = "验证码",required = true)
     @NotBlank(message = "验证码不能为空")
@@ -31,12 +31,12 @@ public class LoginUserDTO {
         this.account = account;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getVerificationCode() {
@@ -51,7 +51,7 @@ public class LoginUserDTO {
     public String toString() {
         return "LoginUserDTO{" +
                 "account='" + account + '\'' +
-                ", pwd='" + pwd + '\'' +
+                ", password='" + password + '\'' +
                 ", verificationCode='" + verificationCode + '\'' +
                 '}';
     }

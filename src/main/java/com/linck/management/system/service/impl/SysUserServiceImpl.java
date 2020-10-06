@@ -3,11 +3,9 @@ package com.linck.management.system.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.util.JwtTokenUtil;
 import com.linck.management.system.dto.LoginUserDTO;
-import com.linck.management.system.dto.SysUserDetails;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
-import com.linck.management.system.service.SysRoleService;
 import com.linck.management.system.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
@@ -24,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,7 +60,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String token = null;
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getAccount());
-            if(!passwordEncoder.matches(loginUser.getPwd(), userDetails.getPassword())){
+            if(!passwordEncoder.matches(loginUser.getPassword(), userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
