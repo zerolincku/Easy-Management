@@ -80,8 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/sys/user/login", "/sys/user/register","/test/*")// 登录注册允许匿名访问
                 .permitAll()
-                .antMatchers(HttpMethod.OPTIONS)// 跨域请求会先进行一次options请求
-                .permitAll()
                 //.antMatchers("/**")//测试时全部允许访问
                 //.permitAll()
                 .anyRequest()
