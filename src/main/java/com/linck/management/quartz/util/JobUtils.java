@@ -24,8 +24,6 @@ public class JobUtils {
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(name,group).startAt(new Date(startAtTime)).build();
         createJob(scheduler, name, group, trigger,jobBean);
 
-
-
     }
 
     /**
