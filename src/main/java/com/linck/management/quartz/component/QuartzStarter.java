@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @program: management
- * @description
+ * @description 定时任务启动器
  * @author: Linck
  * @create: 2020-09-17 21:50
  **/
