@@ -22,6 +22,7 @@ public class QuartzStarter {
     @Autowired
     private Scheduler scheduler;
 
+
     @PostConstruct
     public void init(){
         log.debug("QuartzConfig PostConstruct Init");
