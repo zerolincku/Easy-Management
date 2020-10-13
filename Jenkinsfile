@@ -92,8 +92,7 @@ pipeline {
                                 </html>
                                 ''',
                                 subject: '${PROJECT_NAME}', to: 'aaa@sina.com'
-                    } else {
-                        echo 'scm pull error ignore send mail'
+
                     }
                 }
             }
