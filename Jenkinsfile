@@ -18,7 +18,6 @@ pipeline {
     post {
         always{
             script{
-                println("always")
                 emailext body: """
                             <!DOCTYPE html>
                             <html>
