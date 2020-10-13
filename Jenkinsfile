@@ -17,10 +17,9 @@ pipeline {
     }
     post {
         always {
-          emailext body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                                          <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-                      subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                      to: "lck@shengtex.com"
+          emailext body: """来自Jenkins的邮件""",
+                      subject: "测试邮箱",
+                      to: "1050730542@qq.com"
         }
     }
 }
