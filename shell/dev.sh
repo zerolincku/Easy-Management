@@ -6,5 +6,5 @@ date >> log
 rm -f README.md
 exit
 remotessh
-scp -P 22 target/README.md root@119.3.159.234:/home/lin
+scp -P 22 README.md root@119.3.159.234:/home/lin
 echo SUCCESS!!
