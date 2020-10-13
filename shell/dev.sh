@@ -1,3 +1,4 @@
+#!/bin/bash
 ssh -p 22 -Tq root@119.3.159.234 << remotessh
 cd /home/lin
 date | >> log
