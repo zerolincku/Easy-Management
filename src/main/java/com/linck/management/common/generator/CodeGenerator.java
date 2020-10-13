@@ -262,8 +262,7 @@ public class CodeGenerator {
                 .build();
 
         //根据表生成后台代码
-        codeGenerator.code("QRTZ_FIRED_TRIGGERS","QRTZ_PAUSED_TRIGGER_GRPS","QRTZ_SCHEDULER_STATE","QRTZ_LOCKS","QRTZ_SIMPLE_TRIGGERS","QRTZ_SIMPROP_TRIGGERS","QRTZ_CRON_TRIGGERS"
-        ,"QRTZ_BLOB_TRIGGERS","QRTZ_TRIGGERS","QRTZ_JOB_DETAILS","QRTZ_CALENDARS");
+        codeGenerator.code("sys_job");
 
     }
 }
