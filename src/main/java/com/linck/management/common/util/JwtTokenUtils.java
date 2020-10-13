@@ -20,9 +20,9 @@ import java.util.Map;
  * @create: 2020-07-12 17:28
  **/
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtils.class);
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
     @Value("${jwt.secret}")

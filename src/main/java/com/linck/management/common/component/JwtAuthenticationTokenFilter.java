@@ -1,6 +1,6 @@
 package com.linck.management.common.component;
 
-import com.linck.management.common.util.JwtTokenUtil;
+import com.linck.management.common.util.JwtTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtils jwtTokenUtils;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -45,13 +45,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         //判断authHeader不为空，同时authHeader以Head为开头
         if (authHeader != null && authHeader.startsWith(this.tokenHead)){
             String authToken = authHeader.substring(this.tokenHead.length()); //去除Head和后面空格的部分
-            String username = jwtTokenUtil.getUserNameFromToken(authToken);
+            String username = jwtTokenUtils.getUserNameFromToken(authToken);
             log.debug("jwt username:{}",username);
             // username不为null，同时未验证
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 //验证token是否有效
-                if(jwtTokenUtil.validateToken(authToken,userDetails)){
+                if(jwtTokenUtils.validateToken(authToken,userDetails)){
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);

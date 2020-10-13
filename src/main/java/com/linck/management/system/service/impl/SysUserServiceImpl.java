@@ -1,7 +1,7 @@
 package com.linck.management.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.linck.management.common.util.JwtTokenUtil;
+import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.dto.LoginUserDTO;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
@@ -40,7 +40,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtils jwtTokenUtils;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -65,7 +65,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            token = jwtTokenUtil.generateToken(userDetails);
+            token = jwtTokenUtils.generateToken(userDetails);
         } catch (AuthenticationException e){
             log.warn("登录异常:{}", e.getMessage());
         }
