@@ -49,7 +49,7 @@ pipeline {
                             </body>
                             </html>  """,
                             subject: "Jenkins-${JOB_NAME}项目构建信息 ",
-                            to: 1050730542@qq.com
+                            to: "1050730542@qq.com"
             }
         }
     }
