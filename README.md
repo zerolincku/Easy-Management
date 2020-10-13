@@ -24,5 +24,3 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 
 
 基于Vue的前端项目，正在开发中.....
-
-最新提交 2020-10-13 15:34
