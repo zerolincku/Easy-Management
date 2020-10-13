@@ -15,4 +15,12 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "lck@shengtex.com",
+            sendToIndividuals: true])
+        }
+    }
 }
