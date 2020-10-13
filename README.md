@@ -7,13 +7,14 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 | MySQL                  | 5.7.29        |
 | Druid                  | 1.1.16        |
 | Mybatis-plus           | 3.2.0         |
-| mybatis-plus-generator | 3.3.1.tmp     |
+| Mybatis-plus-generator | 3.3.1.tmp     |
 | Spring Security        | 2.3.2.RELEASE |
-| jjwt                   | 0.9.0         |
+| Jjwt                   | 0.9.0         |
 | Swagger2               | 2.9.2         |
-| knife4j                | 2.0.4         |
-| hutool                 | 4.5.7         |
-| junit                  | 4.13          |
+| Knife4j                | 2.0.4         |
+| Hutool                 | 4.5.7         |
+| Junit                  | 4.13          |
+| Quartz                 | 2.3.2         |
 
 ## 项目截图
 
