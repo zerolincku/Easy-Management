@@ -1,4 +1,4 @@
-package com.linck.management.common.compoent;
+package com.linck.management.common.component;
 
 import cn.hutool.json.JSONUtil;
 import com.linck.management.common.api.CommonResult;

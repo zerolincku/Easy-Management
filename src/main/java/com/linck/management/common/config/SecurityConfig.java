@@ -1,9 +1,9 @@
 package com.linck.management.common.config;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.linck.management.common.compoent.JwtAuthenticationTokenFilter;
-import com.linck.management.common.compoent.RestAuthenticationEntryPoint;
-import com.linck.management.common.compoent.RestfulAccessDeniedHandler;
+import com.linck.management.common.component.JwtAuthenticationTokenFilter;
+import com.linck.management.common.component.RestAuthenticationEntryPoint;
+import com.linck.management.common.component.RestfulAccessDeniedHandler;
 import com.linck.management.system.dto.SysUserDetails;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;

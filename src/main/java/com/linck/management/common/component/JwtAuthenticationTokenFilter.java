@@ -1,4 +1,4 @@
-package com.linck.management.common.compoent;
+package com.linck.management.common.component;
 
 import com.linck.management.common.util.JwtTokenUtil;
 import org.slf4j.Logger;
