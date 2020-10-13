@@ -17,9 +17,9 @@ pipeline {
     }
     post {
         always {
-          emailext body: """来自Jenkins的邮件""",
-                      subject: "测试邮箱",
-                      to: "1050730542@qq.com"
+            emailext body: """来自Jenkins的邮件""",
+                     subject: "测试邮箱",
+                     to: "1050730542@qq.com"
         }
     }
 }
