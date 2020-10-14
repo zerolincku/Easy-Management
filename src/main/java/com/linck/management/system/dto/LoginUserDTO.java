@@ -19,8 +19,8 @@ public class LoginUserDTO {
     @NotBlank(message = "密码不能为空")
     private String password;
 
-    @ApiModelProperty(value = "验证码",required = true)
-    @NotBlank(message = "验证码不能为空")
+    @ApiModelProperty(value = "验证码-暂未使用",required = false)
+    //@NotBlank(message = "验证码不能为空")
     private String verificationCode;
 
     public String getAccount() {

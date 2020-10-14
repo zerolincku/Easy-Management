@@ -40,8 +40,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public CommonResult ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
-        // 将所有的错误提示使用";"拼接起来并返回
-        StringJoiner sj = new StringJoiner(";");
+        // 将所有的错误提示使用"，"拼接起来并返回
+        StringJoiner sj = new StringJoiner("，");
         e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
 
         return CommonResult.failed(sj.toString());
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public CommonResult constraintViolationExceptionHandler(ConstraintViolationException e) {
-        StringJoiner sj = new StringJoiner(";");
+        StringJoiner sj = new StringJoiner("，");
         e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
 
         return CommonResult.failed(sj.toString());

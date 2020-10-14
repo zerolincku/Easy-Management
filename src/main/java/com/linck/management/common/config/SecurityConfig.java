@@ -88,7 +88,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/**")//测试时全部允许访问
                 //.permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                //设置跨域, 如果不设置, 即使配置了filter, 也不会生效
+                .and()
+                .cors();
         // 禁用缓存
         httpSecurity.headers().cacheControl();
         // 添加JWT filter

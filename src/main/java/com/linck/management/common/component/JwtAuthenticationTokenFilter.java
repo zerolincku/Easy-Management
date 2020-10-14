@@ -41,13 +41,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         // 获取开头Jwt的开头
         String authHeader = httpServletRequest.getHeader(this.tokenHeader);
-        log.debug("jwt authHeader:{}",authHeader);
+        // log.debug("jwt authHeader:{}",authHeader);
         // 判断authHeader不为空，同时authHeader以Head为开头
         if (authHeader != null && authHeader.startsWith(this.tokenHead)){
             // 去除Head和后面空格的部分
             String authToken = authHeader.substring(this.tokenHead.length());
             String username = jwtTokenUtils.getUserNameFromToken(authToken);
-            log.debug("jwt username:{}",username);
             // username不为null，同时未验证
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

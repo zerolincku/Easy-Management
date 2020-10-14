@@ -55,9 +55,9 @@ public class UserController {
     @ApiOperation("用户登录")
     @PostMapping("/login")
     public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail, HttpServletRequest request){
-        if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
+        /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
             return CommonResult.validateFailed("验证码错误");
-        }
+        }*/
         String token = sysUserService.login(userDetail);
         if(token == null){
             return CommonResult.validateFailed("用户名或密码错误");
