@@ -1,6 +1,7 @@
 package com.linck.management.common.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -28,22 +29,22 @@ public final class ClassUtils {
     /**
      * 获取某个包下的所有类
      * */
-    public static Set<Class> getClasses(String packageName) throws IOException {
-        Set<Class> classSet = new HashSet<>();
-        Enumeration urls = Thread.currentThread().getContextClassLoader().getResources(packageName.replace(".", "/"));
+    public static Set<Class<?>> getClasses(String packageName) throws IOException {
+        Set<Class<?>> classSet = new HashSet<>();
+        Enumeration<?> urls = Thread.currentThread().getContextClassLoader().getResources(packageName.replace(".", "/"));
         while (urls.hasMoreElements()) {
             URL url = (URL) urls.nextElement();
             if (url != null) {
                 String protocol = url.getProtocol();
-                if (protocol.equals("file")) {
+                if ("file".equals(protocol)) {
                     String packagePath = url.getPath().replaceAll("%20", " ");
                     addClass(classSet, packagePath, packageName);
-                } else if (protocol.equals("jar")) {
-                    JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
-                    if (jarURLConnection != null) {
-                        JarFile jarFile = jarURLConnection.getJarFile();
+                } else if ("jar".equals(protocol)) {
+                    JarURLConnection urlConnection = (JarURLConnection) url.openConnection();
+                    if (urlConnection != null) {
+                        JarFile jarFile = urlConnection.getJarFile();
                         if (jarFile != null) {
-                            Enumeration jarEntries = jarFile.entries();
+                            Enumeration<?> jarEntries = jarFile.entries();
                             while (jarEntries.hasMoreElements()) {
                                 JarEntry jarEntry = (JarEntry) jarEntries.nextElement();
                                 String jarEntryName = jarEntry.getName();
@@ -61,7 +62,7 @@ public final class ClassUtils {
         return classSet;
     }
 
-    private static void addClass(Set<Class> classSet, String packagePath, String packageName) {
+    private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         File[] files = new File(packagePath).listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
@@ -72,17 +73,17 @@ public final class ClassUtils {
             String fileName = file.getName();
             if (file.isFile()) {
                 String className = fileName.substring(0, fileName.lastIndexOf("."));
-                if (StringUtils.isNotEmpty(packageName)) {
+                if (Strings.isNullOrEmpty(packageName)) {
                     className = packageName + "." + className;
                 }
                 doAddClass(classSet, className);
             } else {
                 String subPackagePath = fileName;
-                if (StringUtils.isNotEmpty(packagePath)) {
+                if (Strings.isNullOrEmpty(packagePath)) {
                     subPackagePath = packagePath + "/" + subPackagePath;
                 }
                 String subPackageName = fileName;
-                if (StringUtils.isNotEmpty(packageName)) {
+                if (Strings.isNullOrEmpty(packageName)) {
                     subPackageName = packageName + "." + subPackageName;
                 }
                 addClass(classSet, subPackagePath, subPackageName);
@@ -93,8 +94,8 @@ public final class ClassUtils {
     /**
      * 加载类
      */
-    public static Class loadClass(String className, boolean isInitialized) {
-        Class cls;
+    public static Class<?> loadClass(String className, boolean isInitialized) {
+        Class<?> cls;
         try {
             cls = Class.forName(className, isInitialized, ClassUtils.class.getClassLoader());
         } catch (ClassNotFoundException e) {
@@ -102,15 +103,10 @@ public final class ClassUtils {
         }
         return cls;
     }
-    /**
-     * 加载类（默认将初始化类）
-     */
-    public static Class loadClass(String className) {
-        return loadClass(className, true);
-    }
 
-    private static void doAddClass(Set<Class> classSet, String className) {
-        Class cls = loadClass(className, false);
+
+    private static void doAddClass(Set<Class<?>> classSet, String className) {
+        Class<?> cls = loadClass(className, false);
         classSet.add(cls);
     }
 }
