@@ -89,11 +89,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.permitAll()
                 .anyRequest()
                 .authenticated();
-        //禁用缓存
+        // 禁用缓存
         httpSecurity.headers().cacheControl();
-        //添加JWT filter
+        // 添加JWT filter
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        //添加自定义未授权和未登录返回
+        // 添加自定义未授权和未登录返回
         httpSecurity.exceptionHandling()
                 .accessDeniedHandler(restfulAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthenticationEntryPoint);
@@ -115,10 +115,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
     @Override
     public UserDetailsService userDetailsService(){
-        //获取登录用户的信息
+        // 获取登录用户的信息
         return account -> {
             SysUser user = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", account));
             if(user != null){
