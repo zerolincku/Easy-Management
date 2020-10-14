@@ -40,9 +40,9 @@ public final class ClassUtils {
                     String packagePath = url.getPath().replaceAll("%20", " ");
                     addClass(classSet, packagePath, packageName);
                 } else if ("jar".equals(protocol)) {
-                    JarURLConnection urlConnection = (JarURLConnection) url.openConnection();
-                    if (urlConnection != null) {
-                        JarFile jarFile = urlConnection.getJarFile();
+                    JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
+                    if (jarURLConnection != null) {
+                        JarFile jarFile = jarURLConnection.getJarFile();
                         if (jarFile != null) {
                             Enumeration<?> jarEntries = jarFile.entries();
                             while (jarEntries.hasMoreElements()) {
@@ -58,7 +58,6 @@ public final class ClassUtils {
                 }
             }
         }
-
         return classSet;
     }
 
@@ -73,17 +72,17 @@ public final class ClassUtils {
             String fileName = file.getName();
             if (file.isFile()) {
                 String className = fileName.substring(0, fileName.lastIndexOf("."));
-                if (Strings.isNullOrEmpty(packageName)) {
+                if (!Strings.isNullOrEmpty(packageName)) {
                     className = packageName + "." + className;
                 }
                 doAddClass(classSet, className);
             } else {
                 String subPackagePath = fileName;
-                if (Strings.isNullOrEmpty(packagePath)) {
+                if (!Strings.isNullOrEmpty(packagePath)) {
                     subPackagePath = packagePath + "/" + subPackagePath;
                 }
                 String subPackageName = fileName;
-                if (Strings.isNullOrEmpty(packageName)) {
+                if (!Strings.isNullOrEmpty(packageName)) {
                     subPackageName = packageName + "." + subPackageName;
                 }
                 addClass(classSet, subPackagePath, subPackageName);
@@ -103,7 +102,6 @@ public final class ClassUtils {
         }
         return cls;
     }
-
 
     private static void doAddClass(Set<Class<?>> classSet, String className) {
         Class<?> cls = loadClass(className, false);

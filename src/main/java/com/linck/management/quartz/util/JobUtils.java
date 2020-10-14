@@ -19,7 +19,7 @@ public class JobUtils {
      * @param group 任务组名称
      * @param jobBean 具体任务
      */
-    public static void createJobByStartAt(Scheduler scheduler, long startAtTime, String name, String group, Class jobBean){
+    public static void createJobByStartAt(Scheduler scheduler, long startAtTime, String name, String group, Class<? extends Job> jobBean){
         //创建任务触发器
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(name,group).startAt(new Date(startAtTime)).build();
         createJob(scheduler, name, group, trigger,jobBean);
@@ -34,7 +34,7 @@ public class JobUtils {
      * @param cron cron表达式
      * @param jobBean 具体任务
      */
-    public static void createJobByCron(Scheduler scheduler, String name, String group,String cron,Class jobBean){
+    public static void createJobByCron(Scheduler scheduler, String name, String group,String cron,Class<? extends Job> jobBean){
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
         //创建任务触发器
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(name,group).withSchedule(scheduleBuilder).build();
@@ -42,7 +42,7 @@ public class JobUtils {
     }
 
 
-    private static void createJob(Scheduler scheduler, String name, String group, Trigger trigger,Class jobBean) {
+    private static void createJob(Scheduler scheduler, String name, String group, Trigger trigger,Class<? extends Job> jobBean) {
         //创建任务
         JobDetail jobDetail = JobBuilder.newJob(jobBean).withIdentity(name,group).build();
         try {

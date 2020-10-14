@@ -69,10 +69,14 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("管理系统")	//标题
-                .description("Management-Doc")	//描述
-                .contact(new Contact("linck", "", "zerolinck@foxmail.com")) // 三个参数依次是姓名，个人网站，邮箱
-                .version("1.0") //版本
+                //标题
+                .title("管理系统")
+                //描述
+                .description("Management-Doc")
+                // 三个参数依次是姓名，个人网站，邮箱
+                .contact(new Contact("linck", "", "zerolinck@foxmail.com"))
+                //版本
+                .version("1.0")
                 .build();
     }
 

@@ -60,13 +60,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf()// 由于使用jwt，不需要csrf
+        httpSecurity
+                // 由于使用jwt，不需要csrf
+                .csrf()
                 .disable()
-                .sessionManagement()// 基于token，所以不需要session
+                // 基于token，所以不需要session
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,// 允许对特定静态资源的无授权访问
+                // 允许对特定静态资源的GET请求无授权访问
+                .antMatchers(HttpMethod.GET,
                         "/",
                         "/*.html",
                         "/favicon.ico",
@@ -78,7 +82,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/verification/code"
                 )
                 .permitAll()
-                .antMatchers("/sys/user/login", "/sys/user/register","/test/*")// 登录注册允许匿名访问
+                // 登录注册允许匿名访问
+                .antMatchers("/sys/user/login", "/sys/user/register","/test/*")
                 .permitAll()
                 //.antMatchers("/**")//测试时全部允许访问
                 //.permitAll()

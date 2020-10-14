@@ -32,7 +32,7 @@ public class JobInitialize implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("开始初始化job包下的class");
-		Set<Class> classSet = ClassUtils.getClasses("com.linck.management.system.job");
+		Set<Class<?>> classSet = ClassUtils.getClasses("com.linck.management.system.job");
 		classSet.forEach( clazz -> {
 			log.debug("加载类:{} {}",clazz.getName(),clazz.getSimpleName());
 			Integer count = sysJobMapper.selectCount(new QueryWrapper<SysJob>().eq("job_class", clazz.getName()));
