@@ -6,4 +6,5 @@ spring:
     servlet:
       path: /
   profiles:
-    active: dev
+    # 直接运行出错，需使用maven指定profile编译打包
+    active: @active.file@

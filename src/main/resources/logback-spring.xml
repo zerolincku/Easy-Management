@@ -178,13 +178,13 @@
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
         <!--mybatis sql日志 日志的级别需要是DEBUG-->
-        <logger name="com.linck.management" level="debug">
-        </logger>
+        <logger name="com.linck.management" level="debug"></logger>
         <root level="info">
             <appender-ref ref="CONSOLE" />
         </root>
     </springProfile>
 
+    <!-- 生成环境:日志输出到文件，输出级别info -->
     <springProfile name="pro">
         <root level="info">
             <appender-ref ref="DEBUG_FILE" />
@@ -194,8 +194,11 @@
         </root>
     </springProfile>
 
+    <!-- 测试环境:日志输出到控制台及文件 -->
     <springProfile name="test">
         <root level="info">
+            <!--mybatis sql日志 日志的级别需要是DEBUG-->
+            <logger name="com.linck.management" level="debug"></logger>
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="DEBUG_FILE" />
             <appender-ref ref="INFO_FILE" />

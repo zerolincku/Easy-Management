@@ -134,4 +134,31 @@
         </plugins>
     </build>
 
+    <!-- maven操作时指定active file -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <active.file>dev</active.file>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>pro</id>
+            <properties>
+                <active.file>pro</active.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <active.file>test</active.file>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
