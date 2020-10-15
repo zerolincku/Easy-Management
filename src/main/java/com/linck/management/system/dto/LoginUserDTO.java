@@ -1,6 +1,8 @@
 package com.linck.management.system.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -11,15 +13,17 @@ import javax.validation.constraints.NotBlank;
  **/
 public class LoginUserDTO {
 
-    @ApiModelProperty(value = "账号",required = true)
+    @ApiModelProperty(value = "账号", required = true)
     @NotBlank(message = "账户不能为空")
+    @Length(min = 5, max = 32, message = "账户长度需要5-32个字符")
     private String account;
 
-    @ApiModelProperty(value = "密码",required = true)
+    @ApiModelProperty(value = "密码", required = true)
     @NotBlank(message = "密码不能为空")
+    @Length(min = 6, max = 32, message = "密码长度需要6-32个字符")
     private String password;
 
-    @ApiModelProperty(value = "验证码-暂未使用",required = false)
+    @ApiModelProperty(value = "验证码-暂未使用", required = false)
     //@NotBlank(message = "验证码不能为空")
     private String verificationCode;
 

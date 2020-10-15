@@ -1,13 +1,13 @@
 package com.linck.management.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.dto.LoginUserDTO;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
 import com.linck.management.system.service.SysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author linck
@@ -52,6 +52,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 登录功能
+     *
      * @param loginUser
      * @return 生成JWT的Token
      */
@@ -60,13 +61,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String token = null;
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getAccount());
-            if(!passwordEncoder.matches(loginUser.getPassword(), userDetails.getPassword())){
-                throw new BadCredentialsException("密码不正确");
+            if (!passwordEncoder.matches(loginUser.getPassword(), userDetails.getPassword())) {
+                throw new BadCredentialsException("用户名或密码不正确");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtils.generateToken(userDetails);
-        } catch (AuthenticationException e){
+        } catch (AuthenticationException e) {
             log.warn("登录异常:{}", e.getMessage());
         }
         return token;
@@ -84,7 +85,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         BeanUtils.copyProperties(loginUser, sysUser);
         //查询是否有相同用户名的用户
         List<SysUser> userList = sysUserMapper.selectList(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
-        if(userList.size() > 0){
+        if (userList.size() > 0) {
             return null;
         }
         //将密码进行加密操作
