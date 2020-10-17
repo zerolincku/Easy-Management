@@ -79,21 +79,21 @@ public class UserController {
         return CommonResult.success(sysUser);
     }
 
-    //示例：需要权限user:view进行访问
-    //@PreAuthorize("hasAuthority('user:view')")
+    // 示例：需要权限user:view进行访问
+    // @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户菜单和按钮")
     @PostMapping("/query/menu")
     public CommonResult<List<SysPermissionVO>> queryPermission(){
-        //从SecurityContextHolder获取当前用户
+        // 从SecurityContextHolder获取当前用户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
         SysUser sysUser = sysUserDetails.getSysUser();
-        //查询当前用户权限
+        // 查询当前用户权限
         List<SysPermission> sysPermissions = sysPermissionService.listByUserId(sysUser.getId());
-        //封装菜单和按钮返回前端
+        // 封装菜单和按钮返回前端
         List<SysPermissionVO> resultPermissions = new ArrayList<>();
         sysPermissions.forEach( sysPermission -> {
-            //权限行不返回前端
+            // 权限行不返回前端
             if(!sysPermission.getType().equals(SysPermissionTypeEnum.PERMISSION.getType())){
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
