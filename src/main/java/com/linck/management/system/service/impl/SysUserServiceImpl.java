@@ -22,8 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * <p>
  * 服务实现类
@@ -84,8 +82,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(loginUser, sysUser);
         //查询是否有相同用户名的用户
-        List<SysUser> userList = sysUserMapper.selectList(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
-        if (userList.size() > 0) {
+        int count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
+        if (count > 0) {
             return null;
         }
         //将密码进行加密操作
