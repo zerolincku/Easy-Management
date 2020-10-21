@@ -4,17 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysPermission">
-        <id column="id" property="id" />
-        <result column="pid" property="pid" />
-        <result column="name" property="name" />
-        <result column="value" property="value" />
-        <result column="type" property="type" />
-        <result column="icon" property="icon" />
-        <result column="uri" property="uri" />
-        <result column="state" property="state" />
-        <result column="sort" property="sort" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="pid" property="pid"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="url" property="url"/>
+        <result column="state" property="state"/>
+        <result column="sort" property="sort"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <select id="listByUserId" parameterType="long" resultMap="BaseResultMap">
@@ -25,7 +25,7 @@
             c.value as value,
             c.type as type,
             c.icon as icon,
-            c.uri as uri,
+            c.url as url,
             c.state as state,
             c.sort as sort,
             c.create_time as create_time,
@@ -41,5 +41,7 @@
             AND b.state = 1
             AND c.state = 1
             AND a.id = #{id}
+        ORDER BY
+            c.type,c.sort
     </select>
 </mapper>

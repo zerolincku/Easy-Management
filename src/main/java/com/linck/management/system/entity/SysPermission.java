@@ -1,14 +1,15 @@
 package com.linck.management.system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author linck
@@ -52,7 +53,7 @@ public class SysPermission extends Model<SysPermission> {
     /**
      * 前端资源路径
      */
-    private String uri;
+    private String url;
 
     /**
      * 状态 1-启用 0-禁用
@@ -81,6 +82,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getPid() {
         return pid;
     }
@@ -88,6 +90,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setPid(Long pid) {
         this.pid = pid;
     }
+
     public String getName() {
         return name;
     }
@@ -95,6 +98,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getValue() {
         return value;
     }
@@ -102,6 +106,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setValue(String value) {
         this.value = value;
     }
+
     public Integer getType() {
         return type;
     }
@@ -109,6 +114,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setType(Integer type) {
         this.type = type;
     }
+
     public String getIcon() {
         return icon;
     }
@@ -116,13 +122,15 @@ public class SysPermission extends Model<SysPermission> {
     public void setIcon(String icon) {
         this.icon = icon;
     }
-    public String getUri() {
-        return uri;
+
+    public String getUrl() {
+        return url;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
     public Boolean getState() {
         return state;
     }
@@ -130,6 +138,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setState(Boolean state) {
         this.state = state;
     }
+
     public Integer getSort() {
         return sort;
     }
@@ -137,6 +146,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setSort(Integer sort) {
         this.sort = sort;
     }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -144,6 +154,7 @@ public class SysPermission extends Model<SysPermission> {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -160,17 +171,17 @@ public class SysPermission extends Model<SysPermission> {
     @Override
     public String toString() {
         return "SysPermission{" +
-            "id=" + id +
-            ", pid=" + pid +
-            ", name=" + name +
-            ", value=" + value +
-            ", type=" + type +
-            ", icon=" + icon +
-            ", uri=" + uri +
-            ", state=" + state +
-            ", sort=" + sort +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", pid=" + pid +
+                ", name=" + name +
+                ", value=" + value +
+                ", type=" + type +
+                ", icon=" + icon +
+                ", uri=" + url +
+                ", state=" + state +
+                ", sort=" + sort +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

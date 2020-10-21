@@ -11,7 +11,7 @@ public enum SysPermissionTypeEnum {
     /**
      * 菜单
      */
-    ENABLE(1),
+    MENU(1),
     /**
      * 按钮
      */
@@ -23,7 +23,7 @@ public enum SysPermissionTypeEnum {
 
     private Integer type;
 
-    SysPermissionTypeEnum(Integer type){
+    SysPermissionTypeEnum(Integer type) {
         this.type = type;
     }
 

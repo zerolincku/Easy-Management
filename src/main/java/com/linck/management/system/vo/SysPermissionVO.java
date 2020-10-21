@@ -46,10 +46,10 @@ public class SysPermissionVO {
     private String icon;
 
     /**
-     * 前端资源路径
+     * 前端路由
      */
-    @ApiModelProperty(value = "前端资源路径")
-    private String uri;
+    @ApiModelProperty(value = "前端路由")
+    private String url;
     /**
      * 排序
      */
@@ -104,12 +104,12 @@ public class SysPermissionVO {
         this.icon = icon;
     }
 
-    public String getUri() {
-        return uri;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Integer getSort() {
@@ -129,7 +129,7 @@ public class SysPermissionVO {
                 ", value='" + value + '\'' +
                 ", type=" + type +
                 ", icon='" + icon + '\'' +
-                ", uri='" + uri + '\'' +
+                ", url='" + url + '\'' +
                 ", sort=" + sort +
                 '}';
     }

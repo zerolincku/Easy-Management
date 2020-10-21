@@ -8,6 +8,7 @@ import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
+import com.linck.management.system.vo.SysMenuAndButton;
 import com.linck.management.system.vo.SysPermissionVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,10 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: MyManagement
@@ -80,7 +78,7 @@ public class UserController {
     // @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户菜单和按钮")
     @PostMapping("/query/menu")
-    public CommonResult<List<SysPermissionVO>> queryPermission() {
+    public CommonResult<List<SysMenuAndButton>> queryPermission() {
         // 从SecurityContextHolder获取当前用户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
@@ -88,16 +86,27 @@ public class UserController {
         // 查询当前用户权限
         List<SysPermission> sysPermissions = sysPermissionService.listByUserId(sysUser.getId());
         // 封装菜单和按钮返回前端
-        List<SysPermissionVO> resultPermissions = new ArrayList<>();
+        List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
-            // 权限行不返回前端
-            if (!sysPermission.getType().equals(SysPermissionTypeEnum.PERMISSION.getType())) {
+            // 封住一级折叠菜单
+            if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
-                resultPermissions.add(sysPermissionVO);
+                SysMenuAndButton menuAndButton = new SysMenuAndButton();
+                menuAndButton.setMenu(sysPermissionVO);
+                result.add(menuAndButton);
+                // 封装二级按钮
+            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON.getType())) {
+                SysPermissionVO sysPermissionVO = new SysPermissionVO();
+                BeanUtils.copyProperties(sysPermission, sysPermissionVO);
+                Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getMenu().getId().equals(sysPermissionVO.getPid())).findFirst();
+                if (optional.get().getButtons() == null) {
+                    optional.get().setButtons(new ArrayList<>());
+                }
+                optional.get().getButtons().add(sysPermissionVO);
             }
         });
-        return CommonResult.success(resultPermissions);
+        return CommonResult.success(result);
     }
 
 }
