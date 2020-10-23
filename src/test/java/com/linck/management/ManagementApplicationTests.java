@@ -1,21 +1,14 @@
 package com.linck.management;
 
 
-import com.linck.management.system.dto.LoginUserDTO;
 import com.linck.management.system.entity.SysPermission;
-import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysPermissionMapper;
 import com.linck.management.system.service.SysUserService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 @SpringBootTest

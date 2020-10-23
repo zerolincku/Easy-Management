@@ -1,4 +1,4 @@
-package com.linck.management.system.vo;
+package com.linck.management.system.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 

@@ -1,4 +1,4 @@
-package com.linck.management.system.dto;
+package com.linck.management.system.model.dto;
 
 import com.linck.management.common.constant.StateEnum;
 import com.linck.management.system.entity.SysPermission;

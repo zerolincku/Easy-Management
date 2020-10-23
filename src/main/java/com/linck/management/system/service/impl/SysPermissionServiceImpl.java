@@ -1,9 +1,10 @@
 package com.linck.management.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.mapper.SysPermissionMapper;
 import com.linck.management.system.service.SysPermissionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author linck
@@ -29,11 +30,22 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     /**
      * 根据UserId查询所有启用状态权限
+     *
      * @param id
      * @return
      */
     @Override
     public List<SysPermission> listByUserId(Long id) {
         return sysPermissionMapper.listByUserId(id);
+    }
+
+    /**
+     * 查询所有权限列表
+     *
+     * @return
+     */
+    @Override
+    public List<SysPermission> listAll() {
+        return sysPermissionMapper.selectList(new QueryWrapper<SysPermission>().orderByAsc("type", "sort"));
     }
 }

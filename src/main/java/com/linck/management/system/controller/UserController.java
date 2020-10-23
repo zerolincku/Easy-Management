@@ -2,14 +2,14 @@ package com.linck.management.system.controller;
 
 import com.linck.management.common.api.CommonResult;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
-import com.linck.management.system.dto.LoginUserDTO;
-import com.linck.management.system.dto.SysUserDetails;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
+import com.linck.management.system.model.dto.LoginUserDTO;
+import com.linck.management.system.model.dto.SysUserDetails;
+import com.linck.management.system.model.vo.SysMenuAndButton;
+import com.linck.management.system.model.vo.SysPermissionVO;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
-import com.linck.management.system.vo.SysMenuAndButton;
-import com.linck.management.system.vo.SysPermissionVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.component.JwtAuthenticationTokenFilter;
 import com.linck.management.common.component.RestAuthenticationEntryPoint;
 import com.linck.management.common.component.RestfulAccessDeniedHandler;
-import com.linck.management.system.dto.SysUserDetails;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
+import com.linck.management.system.model.dto.SysUserDetails;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 //启用注解安全认证
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置拦截器保护请求
+     *
      * @param httpSecurity
      * @throws Exception
      */
@@ -83,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .permitAll()
                 // 登录注册允许匿名访问
-                .antMatchers("/sys/user/login", "/sys/user/register","/test/*")
+                .antMatchers("/sys/user/login", "/sys/user/register", "/test/*")
                 .permitAll()
                 //.antMatchers("/**")//测试时全部允许访问
                 //.permitAll()
@@ -104,6 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置UserDetail服务
+     *
      * @param auth
      * @throws Exception
      */
@@ -114,17 +116,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     @Override
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         // 获取登录用户的信息
         return account -> {
             SysUser user = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", account));
-            if(user != null){
+            if (user != null) {
                 List<SysPermission> permissionList = sysPermissionService.listByUserId(user.getId());
                 return new SysUserDetails(user, permissionList);
             }
@@ -133,7 +135,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter();
     }
 

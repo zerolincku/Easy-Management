@@ -1,12 +1,12 @@
 package com.linck.management.system.service;
 
-import com.linck.management.system.dto.LoginUserDTO;
-import com.linck.management.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.linck.management.system.entity.SysUser;
+import com.linck.management.system.model.dto.LoginUserDTO;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author linck
@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface SysUserService extends IService<SysUser> {
     /**
      * 登录功能
+     *
      * @param loginUser
      * @return 生成JWT的Token
      */
@@ -22,6 +23,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 注册功能
+     *
      * @param loginUser
      * @return
      */

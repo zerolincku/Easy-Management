@@ -1,4 +1,4 @@
-package com.linck.management.system.dto;
+package com.linck.management.system.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
