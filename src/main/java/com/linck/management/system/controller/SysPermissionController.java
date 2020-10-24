@@ -35,7 +35,6 @@ public class SysPermissionController {
     @ApiOperation("查询所有权限")
     @PostMapping("list")
     public List<SysMenuAndButton> list() {
-        // FIXME
         List<SysPermission> sysPermissions = sysPermissionService.listAll();
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
