@@ -2,6 +2,8 @@ package com.linck.management.system.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 /**
  * @program: MyManagement
  * @description
@@ -55,6 +57,11 @@ public class SysPermissionVO {
      */
     @ApiModelProperty(value = "排序")
     private Integer sort;
+    /**
+     * 权限集合
+     */
+    @ApiModelProperty(value = "权限集合")
+    public List<SysPermissionVO> permissions;
 
     public Long getId() {
         return id;
@@ -118,6 +125,14 @@ public class SysPermissionVO {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public List<SysPermissionVO> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<SysPermissionVO> permissions) {
+        this.permissions = permissions;
     }
 
     @Override
