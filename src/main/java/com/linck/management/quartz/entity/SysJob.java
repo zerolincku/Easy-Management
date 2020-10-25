@@ -1,15 +1,15 @@
 package com.linck.management.quartz.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author linck
@@ -22,7 +22,7 @@ public class SysJob extends Model<SysJob> {
     /**
      * 主键id
      */
-    @TableId(value = "id" , type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -48,7 +48,7 @@ public class SysJob extends Model<SysJob> {
     /**
      * 启用状态(1-启用 0-禁用)
      */
-    private Boolean state;
+    private Integer state;
 
     /**
      * 触发器name
@@ -77,6 +77,7 @@ public class SysJob extends Model<SysJob> {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getJobClass() {
         return jobClass;
     }
@@ -84,6 +85,7 @@ public class SysJob extends Model<SysJob> {
     public void setJobClass(String jobClass) {
         this.jobClass = jobClass;
     }
+
     public String getName() {
         return name;
     }
@@ -91,6 +93,7 @@ public class SysJob extends Model<SysJob> {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
@@ -98,6 +101,7 @@ public class SysJob extends Model<SysJob> {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getCron() {
         return cron;
     }
@@ -105,13 +109,15 @@ public class SysJob extends Model<SysJob> {
     public void setCron(String cron) {
         this.cron = cron;
     }
-    public Boolean getState() {
+
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
+
     public String getTriggerName() {
         return triggerName;
     }
@@ -119,6 +125,7 @@ public class SysJob extends Model<SysJob> {
     public void setTriggerName(String triggerName) {
         this.triggerName = triggerName;
     }
+
     public String getTriggerGroup() {
         return triggerGroup;
     }
@@ -126,6 +133,7 @@ public class SysJob extends Model<SysJob> {
     public void setTriggerGroup(String triggerGroup) {
         this.triggerGroup = triggerGroup;
     }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -133,6 +141,7 @@ public class SysJob extends Model<SysJob> {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -149,16 +158,16 @@ public class SysJob extends Model<SysJob> {
     @Override
     public String toString() {
         return "SysJob{" +
-            "id=" + id +
-            ", jobClass=" + jobClass +
-            ", name=" + name +
-            ", description=" + description +
-            ", cron=" + cron +
-            ", state=" + state +
-            ", triggerName=" + triggerName +
-            ", triggerGroup=" + triggerGroup +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", jobClass=" + jobClass +
+                ", name=" + name +
+                ", description=" + description +
+                ", cron=" + cron +
+                ", state=" + state +
+                ", triggerName=" + triggerName +
+                ", triggerGroup=" + triggerGroup +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

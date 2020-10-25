@@ -58,6 +58,10 @@ public class SysMenuAndButton {
     @ApiModelProperty(value = "排序")
     private Integer sort;
     /**
+     * 状态 1-启用 0-禁用
+     */
+    private Integer state;
+    /**
      * 二级按钮
      */
     @ApiModelProperty(value = "二级按钮")
@@ -133,5 +137,13 @@ public class SysMenuAndButton {
 
     public void setChildrenList(List<SysPermissionVO> childrenList) {
         this.childrenList = childrenList;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

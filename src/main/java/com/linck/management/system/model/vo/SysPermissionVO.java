@@ -58,6 +58,10 @@ public class SysPermissionVO {
     @ApiModelProperty(value = "排序")
     private Integer sort;
     /**
+     * 状态 1-启用 0-禁用
+     */
+    private Integer state;
+    /**
      * 权限集合
      */
     @ApiModelProperty(value = "权限集合")
@@ -135,6 +139,14 @@ public class SysPermissionVO {
         this.childrenList = childrenList;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "SysPermissionVO{" +
@@ -146,6 +158,7 @@ public class SysPermissionVO {
                 ", icon='" + icon + '\'' +
                 ", url='" + url + '\'' +
                 ", sort=" + sort +
+                ", state=" + state +
                 ", childrenList=" + childrenList +
                 '}';
     }

@@ -58,7 +58,7 @@ public class SysPermission extends Model<SysPermission> {
     /**
      * 状态 1-启用 0-禁用
      */
-    private Boolean state;
+    private Integer state;
 
     /**
      * 排序
@@ -131,11 +131,11 @@ public class SysPermission extends Model<SysPermission> {
         this.url = url;
     }
 
-    public Boolean getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
