@@ -90,20 +90,18 @@ public class UserController {
         sysPermissions.forEach(sysPermission -> {
             // 封住一级折叠菜单
             if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
-                SysPermissionVO sysPermissionVO = new SysPermissionVO();
-                BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
-                menuAndButton.setMenu(sysPermissionVO);
+                BeanUtils.copyProperties(sysPermission, menuAndButton);
                 result.add(menuAndButton);
                 // 封装二级按钮
             } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON.getType())) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
-                Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getMenu().getId().equals(sysPermissionVO.getPid())).findFirst();
-                if (optional.get().getButtons() == null) {
-                    optional.get().setButtons(new ArrayList<>());
+                Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
+                if (optional.get().getChildrenList() == null) {
+                    optional.get().setChildrenList(new ArrayList<>());
                 }
-                optional.get().getButtons().add(sysPermissionVO);
+                optional.get().getChildrenList().add(sysPermissionVO);
             }
         });
         return CommonResult.success(result);

@@ -61,7 +61,7 @@ public class SysPermissionVO {
      * 权限集合
      */
     @ApiModelProperty(value = "权限集合")
-    public List<SysPermissionVO> permissions;
+    public List<SysPermissionVO> childrenList;
 
     public Long getId() {
         return id;
@@ -127,12 +127,12 @@ public class SysPermissionVO {
         this.sort = sort;
     }
 
-    public List<SysPermissionVO> getPermissions() {
-        return permissions;
+    public List<SysPermissionVO> getChildrenList() {
+        return childrenList;
     }
 
-    public void setPermissions(List<SysPermissionVO> permissions) {
-        this.permissions = permissions;
+    public void setChildrenList(List<SysPermissionVO> childrenList) {
+        this.childrenList = childrenList;
     }
 
     @Override
@@ -146,6 +146,7 @@ public class SysPermissionVO {
                 ", icon='" + icon + '\'' +
                 ", url='" + url + '\'' +
                 ", sort=" + sort +
+                ", childrenList=" + childrenList +
                 '}';
     }
 }

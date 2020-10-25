@@ -40,32 +40,30 @@ public class SysPermissionController {
         sysPermissions.forEach(sysPermission -> {
             // 封住一级折叠菜单
             if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
-                SysPermissionVO sysPermissionVO = new SysPermissionVO();
-                BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
-                menuAndButton.setMenu(sysPermissionVO);
+                BeanUtils.copyProperties(sysPermission, menuAndButton);
                 result.add(menuAndButton);
                 // 封装二级按钮
             } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON.getType())) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
-                Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getMenu().getId().equals(sysPermissionVO.getPid())).findFirst();
-                if (optional.get().getButtons() == null) {
-                    optional.get().setButtons(new ArrayList<>());
+                Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
+                if (optional.get().getChildrenList() == null) {
+                    optional.get().setChildrenList(new ArrayList<>());
                 }
-                optional.get().getButtons().add(sysPermissionVO);
+                optional.get().getChildrenList().add(sysPermissionVO);
                 // 封装权限
             } else if (sysPermission.getType().equals(SysPermissionTypeEnum.PERMISSION.getType())) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 Optional<SysPermission> button = sysPermissions.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
                 Optional<SysPermission> menu = sysPermissions.stream().filter(t -> t.getId().equals(button.get().getPid())).findFirst();
-                Optional<SysMenuAndButton> resultMenu = result.stream().filter(t -> t.getMenu().getId().equals(menu.get().getId())).findFirst();
-                Optional<SysPermissionVO> resultButton = resultMenu.get().getButtons().stream().filter(t -> t.getId().equals(button.get().getId())).findFirst();
-                if (resultButton.get().getPermissions() == null) {
-                    resultButton.get().setPermissions(new ArrayList<>());
+                Optional<SysMenuAndButton> resultMenu = result.stream().filter(t -> t.getId().equals(menu.get().getId())).findFirst();
+                Optional<SysPermissionVO> resultButton = resultMenu.get().getChildrenList().stream().filter(t -> t.getId().equals(button.get().getId())).findFirst();
+                if (resultButton.get().getChildrenList() == null) {
+                    resultButton.get().setChildrenList(new ArrayList<>());
                 }
-                resultButton.get().getPermissions().add(sysPermissionVO);
+                resultButton.get().getChildrenList().add(sysPermissionVO);
             }
         });
         return result;
