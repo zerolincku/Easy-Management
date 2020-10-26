@@ -1,5 +1,6 @@
 package com.linck.management.system.controller;
 
+import com.linck.management.common.api.CommonResult;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +36,7 @@ public class SysPermissionController {
 
     @ApiOperation("查询所有权限")
     @PostMapping("list")
-    public List<SysMenuAndButton> list() {
+    public CommonResult<List<SysMenuAndButton>> list() {
         List<SysPermission> sysPermissions = sysPermissionService.listAll();
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
@@ -66,6 +68,13 @@ public class SysPermissionController {
                 resultButton.get().getChildrenList().add(sysPermissionVO);
             }
         });
-        return result;
+        return CommonResult.success(result);
+    }
+
+    @ApiOperation("新增权限")
+    @PostMapping("add")
+    public CommonResult<Long> add(@RequestBody SysPermission sysPermission) {
+        sysPermissionService.save(sysPermission);
+        return CommonResult.success(sysPermission.getId());
     }
 }
