@@ -1,6 +1,8 @@
 package com.linck.management.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.constant.StateEnum;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,10 +74,28 @@ public class SysPermissionController {
         return CommonResult.success(result);
     }
 
+    @ApiOperation("所有一级菜单")
+    @PostMapping("allMenu")
+    public CommonResult<List<SysPermissionVO>> allMenu() {
+        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().eq("type", SysPermissionTypeEnum.MENU.getType()).eq("state", StateEnum.ENABLE.getState()));
+        // FIXME
+        return null;
+    }
+
     @ApiOperation("新增权限")
     @PostMapping("add")
     public CommonResult<Long> add(@RequestBody SysPermission sysPermission) {
+        sysPermission.setCreateTime(new Date());
         sysPermissionService.save(sysPermission);
         return CommonResult.success(sysPermission.getId());
     }
+
+    @ApiOperation("更新权限")
+    @PostMapping("update")
+    public CommonResult<Long> update(@RequestBody SysPermission sysPermission) {
+        sysPermission.setUpdateTime(new Date());
+        sysPermissionService.updateById(sysPermission);
+        return CommonResult.success(sysPermission.getId());
+    }
+
 }
