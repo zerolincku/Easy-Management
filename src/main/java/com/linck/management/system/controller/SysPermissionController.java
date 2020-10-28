@@ -83,7 +83,7 @@ public class SysPermissionController {
     @PostMapping("remove")
     public CommonResult remove(@RequestBody SysPermissionDTO sysPermissionDTO) {
         sysPermissionService.removeById(sysPermissionDTO.getId());
-        sysPermissionService.removeById(new QueryWrapper<SysPermission>().eq("pid", sysPermissionDTO.getId()));
+        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", sysPermissionDTO.getId()));
         return CommonResult.success(null);
     }
 }
