@@ -79,4 +79,11 @@ public class SysPermissionController {
         return CommonResult.success(sysPermission.getId());
     }
 
+    @ApiOperation("删除权限")
+    @PostMapping("delete")
+    public CommonResult delete(@RequestBody SysPermissionDTO sysPermissionDTO) {
+        sysPermissionService.removeById(sysPermissionDTO.getId());
+        sysPermissionService.removeById(new QueryWrapper<SysPermission>().eq("pid", sysPermissionDTO.getId()));
+        return CommonResult.success(null);
+    }
 }
