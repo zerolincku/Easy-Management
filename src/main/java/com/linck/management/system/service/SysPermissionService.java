@@ -2,6 +2,7 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.linck.management.system.entity.SysPermission;
+import com.linck.management.system.model.vo.SysMenuAndButton;
 
 import java.util.List;
 
@@ -29,5 +30,15 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return
      */
     List<SysPermission> listAll();
+
+    /**
+     * 查询所有菜单和按钮
+     */
+    List<SysMenuAndButton> allMenuAndButton();
+
+    /**
+     * 查询用户菜单和按钮
+     */
+    List<SysMenuAndButton> getMenuAndButtonByUserId(Long userId);
 
 }
