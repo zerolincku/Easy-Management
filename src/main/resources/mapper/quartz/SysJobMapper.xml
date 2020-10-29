@@ -4,16 +4,55 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.linck.management.quartz.entity.SysJob">
-        <id column="id" property="id" />
-        <result column="job_class" property="jobClass" />
-        <result column="name" property="name" />
-        <result column="description" property="description" />
-        <result column="cron" property="cron" />
-        <result column="state" property="state" />
-        <result column="trigger_name" property="triggerName" />
-        <result column="trigger_group" property="triggerGroup" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="job_class" property="jobClass"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="cron" property="cron"/>
+        <result column="state" property="state"/>
+        <result column="trigger_name" property="triggerName"/>
+        <result column="trigger_group" property="triggerGroup"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <sql id="field">
+        id,job_class,name,description,cron,state,trigger_name,trigger_group,create_time,update_time
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="com.linck.management.quartz.model.dto.SysJobDTO">
+        SELECT
+        id,
+        job_class,
+        name,
+        description,
+        cron,
+        state,
+        trigger_name,
+        trigger_group,
+        create_time,
+        update_time
+        FROM
+        sys_job
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="jobClass != null and jobClass != ''">
+                AND job_class = #{jobClass}
+            </if>
+            <if test="name != null and name != ''">
+                AND name = #{name}
+            </if>
+            <if test="state != null">
+                AND state = #{state}
+            </if>
+            <if test="triggerName != null and triggerName != ''">
+                AND trigger_name = #{triggerName}
+            </if>
+            <if test="triggerGroup != null and triggerGroup != ''">
+                AND trigger_group = #{triggerGroup}
+            </if>
+        </where>
+    </select>
 </mapper>
