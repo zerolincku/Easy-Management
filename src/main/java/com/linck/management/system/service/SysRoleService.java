@@ -1,11 +1,14 @@
 package com.linck.management.system.service;
 
-import com.linck.management.system.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.linck.management.common.model.Page;
+import com.linck.management.system.entity.SysRole;
+
+import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author linck
@@ -13,4 +16,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysRoleService extends IService<SysRole> {
 
+    /**
+     * 分页查询角色
+     *
+     * @param page
+     * @return
+     */
+    List<SysRole> list(Page page);
 }
