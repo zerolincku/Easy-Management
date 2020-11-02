@@ -38,10 +38,8 @@ public class SysJobController {
         if (sysJobDTO == null) {
             sysJobDTO = new SysJobDTO();
         }
-        if (sysJobDTO.getPageNum() == null || sysJobDTO.getPageSize() == null) {
-            sysJobDTO.setPageNum(1);
-            sysJobDTO.setPageSize(10);
-        }
+        // 如果没有分页参数，初始化参数
+        sysJobDTO.ifNotPageSetDefault();
         List<SysJob> list = sysJobService.list(sysJobDTO);
         return CommonResult.success(list);
     }

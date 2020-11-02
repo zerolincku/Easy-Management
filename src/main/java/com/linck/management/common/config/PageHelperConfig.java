@@ -26,10 +26,6 @@ public class PageHelperConfig {
         properties.setProperty("reasonable", "true");
         // 方言设置
         properties.setProperty("helperDialect", "mysql");
-        // 开启参数化
-        properties.setProperty("supportMethodsArguments", "true");
-        // 参数映射
-        properties.setProperty("params", "pageNum=pageNum;pageSize=pageSize;");
         pageHelper.setProperties(properties);
         return pageHelper;
     }
