@@ -1,7 +1,6 @@
 package com.linck.management.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
 import com.linck.management.system.mapper.SysRoleMapper;
@@ -33,7 +32,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public List<SysRole> selectByPage(Page page) {
-        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        // PageHelper.startPage(page.getPageNum(), page.getPageSize());
         return roleMapper.selectList(null);
     }
 }
