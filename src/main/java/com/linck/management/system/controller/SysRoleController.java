@@ -36,7 +36,7 @@ public class SysRoleController {
 
     @ApiOperation("查询所有用户")
     @PostMapping("list")
-    public CommonResult<ListWithPage> list(@RequestBody Page page) {
+    public CommonResult<ListWithPage> list(@RequestBody(required = false) Page page) {
         // 如果没有分页参数，初始化参数
         page.ifNotPageSetDefault();
         List<SysRole> list = sysRoleService.selectByPage(page);

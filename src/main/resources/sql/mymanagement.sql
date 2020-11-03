@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 21/10/2020 23:34:44
+ Date: 03/11/2020 21:33:21
 */
 
 SET NAMES utf8mb4;
@@ -27,19 +27,23 @@ CREATE TABLE `sys_job`  (
   `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'job名字',
   `description` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '描述',
   `cron` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'cron',
-  `state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '启用状态(1-启用 0-禁用)',
+  `state` tinyint(3) NOT NULL DEFAULT 0 COMMENT '启用状态(1-启用 0-禁用)',
   `trigger_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '触发器name',
   `trigger_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '触发器组',
   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unique_job_class`(`job_class`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
 -- ----------------------------
 INSERT INTO `sys_job` VALUES (1, 'com.linck.management.quartz.job.TestJob', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15', '2020-10-14 22:39:15');
+INSERT INTO `sys_job` VALUES (2, 'com.linck.management.quartz.job.Test1Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15', '2020-10-14 22:39:15');
+INSERT INTO `sys_job` VALUES (3, 'com.linck.management.quartz.job.Test2Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15', '2020-10-14 22:39:15');
+INSERT INTO `sys_job` VALUES (4, 'com.linck.management.quartz.job.Test3Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15', '2020-10-14 22:39:15');
+INSERT INTO `sys_job` VALUES (5, 'com.linck.management.quartz.job.Test4Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15', '2020-10-14 22:39:15');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -58,17 +62,20 @@ CREATE TABLE `sys_permission`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES (1, 0, '用户管理', NULL, 1, NULL, NULL, 1, 0, '2020-08-09 23:49:49', '2020-08-09 23:49:49');
-INSERT INTO `sys_permission` VALUES (2, 1, '用户列表', NULL, 2, NULL, NULL, 1, 0, '2020-08-09 23:49:55', '2020-08-09 23:49:55');
+INSERT INTO `sys_permission` VALUES (1, 0, '用户管理', NULL, 1, 'el-icon-user', NULL, 1, 0, '2020-08-09 23:49:49', '2020-11-01 14:22:56');
+INSERT INTO `sys_permission` VALUES (2, 1, '用户列表', NULL, 2, NULL, '/first', 1, 0, '2020-08-09 23:49:55', '2020-08-09 23:49:55');
 INSERT INTO `sys_permission` VALUES (3, 2, '产看用户', 'user:view', 3, NULL, NULL, 1, 0, '2020-08-10 18:56:46', '2020-08-10 18:56:46');
 INSERT INTO `sys_permission` VALUES (4, 2, '新增用户', 'user:add', 3, NULL, NULL, 1, 0, '2020-08-10 18:57:49', '2020-08-10 18:57:49');
 INSERT INTO `sys_permission` VALUES (5, 2, '删除用户', 'user:delete', 3, NULL, NULL, 1, 0, '2020-08-10 18:58:07', '2020-08-10 18:58:07');
 INSERT INTO `sys_permission` VALUES (6, 2, '修改用户', 'user:update', 3, NULL, NULL, 1, 0, '2020-08-10 18:58:27', '2020-08-10 18:58:27');
+INSERT INTO `sys_permission` VALUES (7, 0, '系统管理', NULL, 1, 'el-icon-setting', NULL, 1, 11, '2020-10-22 22:47:17', '2020-10-28 23:30:55');
+INSERT INTO `sys_permission` VALUES (8, 7, '角色管理', NULL, 2, NULL, '/role', 1, 0, '2020-10-22 22:47:46', '2020-11-01 20:36:02');
+INSERT INTO `sys_permission` VALUES (9, 7, '权限管理', NULL, 2, NULL, '/syspermission', 1, 1, '2020-10-22 22:48:09', '2020-11-01 20:35:56');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -76,18 +83,41 @@ INSERT INTO `sys_permission` VALUES (6, 2, '修改用户', 'user:update', 3, NUL
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `name` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '角色名称',
-  `description` char(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '描述',
+  `value` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '英文值',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文名称',
+  `description` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '描述',
   `state` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态 1-启用 0-禁用',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统角色' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, 'ROLE_ADMIN', '系统管理员', 1, '2020-08-09 23:40:11', '2020-08-09 23:40:11');
+INSERT INTO `sys_role` VALUES (1, 'ROLE_ADMIN', '系统管理员', '系统管理员', 1, '2020-08-09 23:40:11', '2020-08-09 23:40:11');
+INSERT INTO `sys_role` VALUES (2, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:19:49', '2020-11-01 21:19:49');
+INSERT INTO `sys_role` VALUES (3, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:35', '2020-11-01 21:20:35');
+INSERT INTO `sys_role` VALUES (4, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:37', '2020-11-01 21:20:37');
+INSERT INTO `sys_role` VALUES (5, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:37', '2020-11-01 21:20:37');
+INSERT INTO `sys_role` VALUES (6, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:37', '2020-11-01 21:20:37');
+INSERT INTO `sys_role` VALUES (7, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:38', '2020-11-01 21:20:38');
+INSERT INTO `sys_role` VALUES (8, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:38', '2020-11-01 21:20:38');
+INSERT INTO `sys_role` VALUES (9, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:39', '2020-11-01 21:20:39');
+INSERT INTO `sys_role` VALUES (10, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:39', '2020-11-01 21:20:39');
+INSERT INTO `sys_role` VALUES (11, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:40', '2020-11-01 21:20:40');
+INSERT INTO `sys_role` VALUES (12, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:40', '2020-11-01 21:20:40');
+INSERT INTO `sys_role` VALUES (13, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:41', '2020-11-01 21:20:41');
+INSERT INTO `sys_role` VALUES (14, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:41', '2020-11-01 21:20:41');
+INSERT INTO `sys_role` VALUES (15, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:41', '2020-11-01 21:20:41');
+INSERT INTO `sys_role` VALUES (16, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:42', '2020-11-01 21:20:42');
+INSERT INTO `sys_role` VALUES (17, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:42', '2020-11-01 21:20:42');
+INSERT INTO `sys_role` VALUES (18, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:43', '2020-11-01 21:20:43');
+INSERT INTO `sys_role` VALUES (19, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:43', '2020-11-01 21:20:43');
+INSERT INTO `sys_role` VALUES (20, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:43', '2020-11-01 21:20:43');
+INSERT INTO `sys_role` VALUES (21, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:44', '2020-11-01 21:20:44');
+INSERT INTO `sys_role` VALUES (22, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:44', '2020-11-01 21:20:44');
+INSERT INTO `sys_role` VALUES (23, 'ROLE_USER', '用户', '用户', 1, '2020-11-01 21:20:45', '2020-11-01 21:20:45');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -98,7 +128,7 @@ CREATE TABLE `sys_role_permission`  (
   `r_id` bigint(20) UNSIGNED NOT NULL COMMENT '角色id',
   `p_id` bigint(20) UNSIGNED NOT NULL COMMENT '权限id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_permission
@@ -109,6 +139,9 @@ INSERT INTO `sys_role_permission` VALUES (3, 1, 3);
 INSERT INTO `sys_role_permission` VALUES (4, 1, 4);
 INSERT INTO `sys_role_permission` VALUES (5, 1, 5);
 INSERT INTO `sys_role_permission` VALUES (6, 1, 6);
+INSERT INTO `sys_role_permission` VALUES (7, 1, 7);
+INSERT INTO `sys_role_permission` VALUES (8, 1, 8);
+INSERT INTO `sys_role_permission` VALUES (9, 1, 9);
 
 -- ----------------------------
 -- Table structure for sys_user
