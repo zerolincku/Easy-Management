@@ -31,4 +31,11 @@ public class Page {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+    public void ifNotPageSetDefault() {
+        if (pageNum == null || pageSize == null) {
+            pageNum = 1;
+            pageSize = 10;
+        }
+    }
 }

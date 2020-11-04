@@ -22,5 +22,5 @@ public interface SysRoleService extends IService<SysRole> {
      * @param page
      * @return
      */
-    List<SysRole> list(Page page);
+    List<SysRole> selectByPage(Page page);
 }

@@ -31,7 +31,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return
      */
     @Override
-    public List<SysRole> list(Page page) {
-        return roleMapper.list(page);
+    public List<SysRole> selectByPage(Page page) {
+        // PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        return roleMapper.selectList(null);
     }
 }

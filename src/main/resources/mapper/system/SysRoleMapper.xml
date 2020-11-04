@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysRole">
         <id column="id" property="id"/>
+        <result column="value" property="value"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
         <result column="state" property="state"/>
@@ -12,7 +13,4 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <select id="list" resultMap="BaseResultMap" parameterType="com.linck.management.common.model.Page">
-        select * from sys_role
-    </select>
 </mapper>

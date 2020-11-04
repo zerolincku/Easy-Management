@@ -1,7 +1,8 @@
 package com.linck.management.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
 import com.linck.management.system.service.SysRoleService;
@@ -35,8 +36,14 @@ public class SysRoleController {
 
     @ApiOperation("查询所有用户")
     @PostMapping("list")
-    public CommonResult<List<SysRole>> list(@RequestBody Page page) {
-        List<SysRole> result = sysRoleService.list(new QueryWrapper<SysRole>());
+    public CommonResult<ListWithPage> list(@RequestBody(required = false) Page page) {
+        // 如果没有分页参数，初始化参数
+        page.ifNotPageSetDefault();
+        List<SysRole> list = sysRoleService.selectByPage(page);
+        PageInfo pageInfo = new PageInfo(list);
+        ListWithPage<List> result = new ListWithPage<>();
+        result.setList(list);
+        result.setTotal(pageInfo.getTotal());
         return CommonResult.success(result);
     }
 }

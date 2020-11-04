@@ -1,14 +1,15 @@
 package com.linck.management.system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author linck
@@ -24,10 +25,12 @@ public class SysRole extends Model<SysRole> {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 角色名称
-     */
+
     private String name;
+    /**
+     * 内容
+     */
+    private String value;
 
     /**
      * 描述
@@ -56,13 +59,15 @@ public class SysRole extends Model<SysRole> {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
+
     public String getDescription() {
         return description;
     }
@@ -70,6 +75,7 @@ public class SysRole extends Model<SysRole> {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Integer getState() {
         return state;
     }
@@ -77,6 +83,7 @@ public class SysRole extends Model<SysRole> {
     public void setState(Integer state) {
         this.state = state;
     }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -84,12 +91,21 @@ public class SysRole extends Model<SysRole> {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     public Date getUpdateTime() {
         return updateTime;
     }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -100,12 +116,13 @@ public class SysRole extends Model<SysRole> {
     @Override
     public String toString() {
         return "SysRole{" +
-            "id=" + id +
-            ", name=" + name +
-            ", description=" + description +
-            ", state=" + state +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                ", description='" + description + '\'' +
+                ", state=" + state +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

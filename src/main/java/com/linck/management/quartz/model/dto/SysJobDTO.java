@@ -38,6 +38,13 @@ public class SysJobDTO {
 
     private Integer pageSize;
 
+    public void ifNotPageSetDefault() {
+        if (pageNum == null || pageSize == null) {
+            pageNum = 1;
+            pageSize = 10;
+        }
+    }
+
     public Long getId() {
         return id;
     }
