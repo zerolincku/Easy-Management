@@ -1,53 +1,44 @@
 package com.linck.management.system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author linck
- * @since 2020-08-09
+ * @since 2020-11-04
  */
+@ApiModel(value = "SysUser对象", description = "")
 public class SysUser extends Model<SysUser> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 账号
-     */
+    @ApiModelProperty(value = "账号")
     private String account;
 
-    /**
-     * 密码
-     */
+    @ApiModelProperty(value = "密码")
     private String pwd;
 
-
-    /**
-     * 状态 1-启用 0-禁用
-     */
+    @ApiModelProperty(value = "状态 1-启用 0-禁用")
     private Integer state;
 
-    /**
-     * 创建时间
-     */
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
     public Long getId() {
@@ -57,6 +48,7 @@ public class SysUser extends Model<SysUser> {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getAccount() {
         return account;
     }
@@ -64,6 +56,7 @@ public class SysUser extends Model<SysUser> {
     public void setAccount(String account) {
         this.account = account;
     }
+
     public String getPwd() {
         return pwd;
     }
@@ -71,6 +64,7 @@ public class SysUser extends Model<SysUser> {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
     public Integer getState() {
         return state;
     }
@@ -78,6 +72,7 @@ public class SysUser extends Model<SysUser> {
     public void setState(Integer state) {
         this.state = state;
     }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -85,6 +80,7 @@ public class SysUser extends Model<SysUser> {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -101,12 +97,12 @@ public class SysUser extends Model<SysUser> {
     @Override
     public String toString() {
         return "SysUser{" +
-            "id=" + id +
-            ", account=" + account +
-            ", pwd=" + pwd +
-            ", state=" + state +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", account=" + account +
+                ", pwd=" + pwd +
+                ", state=" + state +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

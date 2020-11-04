@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
@@ -11,26 +13,21 @@ import java.io.Serializable;
  * </p>
  *
  * @author linck
- * @since 2020-08-09
+ * @since 2020-11-04
  */
+@ApiModel(value="SysRolePermission对象", description="")
 public class SysRolePermission extends Model<SysRolePermission> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 角色id
-     */
+    @ApiModelProperty(value = "角色id")
     private Long rId;
 
-    /**
-     * 权限id
-     */
+    @ApiModelProperty(value = "权限id")
     private Long pId;
 
     public Long getId() {

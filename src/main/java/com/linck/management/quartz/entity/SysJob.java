@@ -3,6 +3,8 @@ package com.linck.management.quartz.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,61 +15,42 @@ import java.util.Date;
  * </p>
  *
  * @author linck
- * @since 2020-10-13
+ * @since 2020-11-04
  */
+@ApiModel(value = "SysJob对象", description = "")
 public class SysJob extends Model<SysJob> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * job类路径
-     */
+    @ApiModelProperty(value = "job类路径")
     private String jobClass;
 
-    /**
-     * job名字
-     */
+    @ApiModelProperty(value = "job名字")
     private String name;
 
-    /**
-     * 描述
-     */
+    @ApiModelProperty(value = "描述")
     private String description;
 
-    /**
-     * cron
-     */
+    @ApiModelProperty(value = "cron")
     private String cron;
 
-    /**
-     * 启用状态(1-启用 0-禁用)
-     */
+    @ApiModelProperty(value = "启用状态(1-启用 0-禁用)")
     private Integer state;
 
-    /**
-     * 触发器name
-     */
+    @ApiModelProperty(value = "触发器name")
     private String triggerName;
 
-    /**
-     * 触发器组
-     */
+    @ApiModelProperty(value = "触发器组")
     private String triggerGroup;
 
-    /**
-     * 创建时间
-     */
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
     public Long getId() {
