@@ -3,6 +3,7 @@ package com.linck.management.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.CommonResult;
 import com.linck.management.common.constant.StateEnum;
+import com.linck.management.common.model.IdModel;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.model.dto.SysPermissionDTO;
@@ -81,9 +82,9 @@ public class SysPermissionController {
 
     @ApiOperation("删除权限")
     @PostMapping("remove")
-    public CommonResult remove(@RequestBody SysPermissionDTO sysPermissionDTO) {
-        sysPermissionService.removeById(sysPermissionDTO.getId());
-        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", sysPermissionDTO.getId()));
+    public CommonResult remove(@RequestBody IdModel idModel) {
+        sysPermissionService.removeById(idModel.getId());
+        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idModel.getId()));
         return CommonResult.success(null);
     }
 }

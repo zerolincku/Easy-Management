@@ -2,6 +2,7 @@ package com.linck.management.system.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.model.IdModel;
 import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
@@ -34,7 +35,7 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
-    @ApiOperation("查询所有用户")
+    @ApiOperation("查询角色列表")
     @PostMapping("list")
     public CommonResult<ListWithPage> list(@RequestBody(required = false) Page page) {
         // 如果没有分页参数，初始化参数
@@ -46,4 +47,27 @@ public class SysRoleController {
         result.setTotal(pageInfo.getTotal());
         return CommonResult.success(result);
     }
+
+    @ApiOperation("修改角色")
+    @PostMapping("update")
+    public CommonResult update(@RequestBody SysRole sysRole) {
+        sysRole.setCreateTime(null);
+        sysRoleService.updateById(sysRole);
+        return CommonResult.success(null);
+    }
+
+    @ApiOperation("新增角色")
+    @PostMapping("add")
+    public CommonResult add(@RequestBody SysRole sysRole) {
+        sysRoleService.save(sysRole);
+        return CommonResult.success(null);
+    }
+
+    @ApiOperation("删除角色")
+    @PostMapping("remove")
+    public CommonResult remove(@RequestBody IdModel idModel) {
+        sysRoleService.removeById(idModel.getId());
+        return CommonResult.success(null);
+    }
+
 }
