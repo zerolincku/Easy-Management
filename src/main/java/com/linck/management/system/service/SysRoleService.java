@@ -1,20 +1,27 @@
 package com.linck.management.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
+import com.linck.management.system.mapper.SysRoleMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * <p>
- * 服务类
+ * 服务实现类
  * </p>
  *
  * @author linck
  * @since 2020-08-09
  */
-public interface SysRoleService extends IService<SysRole> {
+@Service
+public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
+
+    @Autowired
+    private SysRoleMapper roleMapper;
 
     /**
      * 分页查询角色
@@ -22,5 +29,8 @@ public interface SysRoleService extends IService<SysRole> {
      * @param page
      * @return
      */
-    List<SysRole> selectByPage(Page page);
+    public List<SysRole> selectByPage(Page page) {
+        // PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        return roleMapper.selectList(null);
+    }
 }

@@ -140,7 +140,6 @@ public class CodeGenerator {
     }
 
     /**
-     *
      * 生成器核心部分
      *
      * @param serviceNameStartWithI 是否前缀I
@@ -165,10 +164,13 @@ public class CodeGenerator {
                                     String packageName,
                                     String... tableNames) {
         GlobalConfig config = new GlobalConfig();
+        // 开启swagger模式
+        config.setSwagger2(true);
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         // 数据库类型 这里使用 mysql
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
+
                 .setUsername(username)
                 .setPassword(password)
                 // 驱动名称  这里使用mysql
@@ -220,7 +222,9 @@ public class CodeGenerator {
         if (!serviceNameStartWithI) {
             // Service 层的 通用格式后缀
             config.setServiceName("%sService");
+            // config.setServiceImplName("%sService");
         }
+
         // 实体类包名
         PackageConfig packageConfig = new PackageConfig().setParent(packageName).setEntity("entity");
         TemplateConfig templateConfig = new TemplateConfig().setXml(null);
@@ -228,6 +232,9 @@ public class CodeGenerator {
         if (!createController) {
             templateConfig.setController(null);
         }
+        // 不生产ServiceImpl
+        templateConfig.setServiceImpl(null);
+        templateConfig.setService("/templates/service.java");
         // 整合起来运行
         new AutoGenerator()
                 .setGlobalConfig(config)
