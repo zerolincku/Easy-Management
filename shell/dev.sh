@@ -4,7 +4,7 @@ File="/opt/management/management-0.0.1.jar"
 BakFile="/opt/management/management-0.0.1.jar.bak"
 
 # 如果路径不存在，创建目录
-if [ ! -d "$Path"]; then
+if [ ! -d "$Path" ]; then
 mkdir "$Path"
 fi
 
