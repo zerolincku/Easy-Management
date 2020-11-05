@@ -12,9 +12,9 @@ fi
 if [ -f "$File" ]; then
     # 备份文件如果存在，删除备份文件
     if [ -f "$BakFile" ]; then
-        rm -f "$BakFlie"
+        rm -f "$BakFile"
     fi
-    mv "$File" "$BakFlie"
+    mv "$File" "$BakFile"
 fi
 cp target/management-0.0.1.jar "$Path"
 systemctl restart mymanagement
