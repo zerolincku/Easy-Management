@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('测试') {
+        stage('编译测试') {
             steps {
                 sh 'mvn -B -Pdev clean test'
             }
         }
-        stage('编译') {
+        stage('打包') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev package'
             }
