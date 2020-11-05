@@ -16,3 +16,5 @@ if [ ! -f "$File" ]; then
     fi
     mv "$File" "$BakFlie"
 fi
+cp target/management-0.0.1.jar "$Path"
+systemctl restart mymanagement
