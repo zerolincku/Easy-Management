@@ -9,9 +9,9 @@ mkdir "$Path"
 fi
 
 # 判断文件是否存在
-if [ ! -f "$File" ]; then
+if [ -f "$File" ]; then
     # 备份文件如果存在，删除备份文件
-    if [ ! -f "$BakFile" ]; then
+    if [ -f "$BakFile" ]; then
         rm -f "$BakFlie"
     fi
     mv "$File" "$BakFlie"
