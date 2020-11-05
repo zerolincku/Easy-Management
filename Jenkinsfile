@@ -6,6 +6,7 @@ pipeline {
                 sh 'mvn -B -Pdev clean test'
             }
         }
+        
         stage('打包') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev package'
