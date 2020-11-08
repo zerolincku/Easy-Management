@@ -2,6 +2,7 @@ package com.linck.management.system.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,6 +67,12 @@ public class SysPermissionVO {
      */
     @ApiModelProperty(value = "权限集合")
     public List<SysPermissionVO> childrenList;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -147,19 +154,20 @@ public class SysPermissionVO {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "SysPermissionVO{" +
-                "id=" + id +
-                ", pid=" + pid +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", type=" + type +
-                ", icon='" + icon + '\'' +
-                ", url='" + url + '\'' +
-                ", sort=" + sort +
-                ", state=" + state +
-                ", childrenList=" + childrenList +
-                '}';
+    public Date getCreateTime() {
+        return createTime;
     }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.linck.management.system.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,6 +67,12 @@ public class SysMenuAndButton {
      */
     @ApiModelProperty(value = "二级按钮")
     public List<SysPermissionVO> childrenList;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -145,5 +152,21 @@ public class SysMenuAndButton {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
