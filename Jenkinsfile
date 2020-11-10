@@ -27,14 +27,18 @@ pipeline {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
                 type: 'MARKDOWN',
-                atAll: false
+                text: {
+                    '# 构建信息'
+                }
             )
         }
         failure {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
                 type: 'MARKDOWN',
-                atAll: false
+                text: {
+                    '# 构建信息'
+                }
             )
         }
     }
