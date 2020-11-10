@@ -26,15 +26,15 @@ pipeline {
         success {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
-                type: 'LINK',
-                atAll: false,
+                type: 'MARKDOWN',
+                atAll: false
             )
         }
         failure {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
-                type: 'LINK',
-                atAll: false,
+                type: 'MARKDOWN',
+                atAll: false
             )
         }
     }
