@@ -29,10 +29,10 @@ pipeline {
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
-                    displayName,
-                    number,
+                    currentBuild.projectName,
+                    currentBuild.number,
                     currentBuild.result,
-                    durationString
+                    currentBuild.durationString
                 ]
             )
         }
@@ -42,10 +42,10 @@ pipeline {
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
-                    displayName,
-                    number,
+                    currentBuild.projectName,
+                    currentBuild.number,
                     currentBuild.result,
-                    durationString
+                    currentBuild.durationString
                 ]
             )
         }
