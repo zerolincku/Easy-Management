@@ -29,7 +29,8 @@ pipeline {
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
-                    '### ' + currentBuild.displayName,
+                    '### ' + currentBuild.fullProjectName,
+                    '#### ' + currentBuild.displayName,
                     '* ' + currentBuild.result,
                     '* ' + currentBuild.description
                 ]
@@ -41,7 +42,8 @@ pipeline {
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
-                    '### ' + currentBuild.displayName,
+                    '### ' + currentBuild.fullProjectName,
+                    '#### ' + currentBuild.displayName,
                     '* ' + currentBuild.result,
                     '* ' + currentBuild.description
                 ]
