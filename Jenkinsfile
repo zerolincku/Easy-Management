@@ -27,9 +27,9 @@ pipeline {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
                 type: 'ACTION_CARD',
-                title: '构建成功',
+                title: currentBuild.result,
                 text: [
-                    '#### 构建信息'
+                    currentBuild.result
                 ]
             )
         }
@@ -37,9 +37,9 @@ pipeline {
             dingtalk (
                 robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
                 type: 'ACTION_CARD',
-                title: '构建失败',
+                title: currentBuild.result,
                 text: [
-                    '#### 构建信息'
+                    currentBuild.result
                 ]
             )
         }
