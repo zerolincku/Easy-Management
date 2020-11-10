@@ -32,7 +32,8 @@ pipeline {
                     '### ' + currentBuild.fullProjectName,
                     '* 运行：' + currentBuild.displayName,
                     '* 结果：' + currentBuild.result,
-                    '* 描述：' + currentBuild.description
+                    '* 描述：' + currentBuild.description,
+                    '* 耗时：' + currentBuild.durationString
                 ]
             )
         }
@@ -45,7 +46,8 @@ pipeline {
                     '### ' + currentBuild.fullProjectName,
                     '* 运行：' + currentBuild.displayName,
                     '* 结果：' + currentBuild.result,
-                    '* 描述：' + currentBuild.description
+                    '* 描述：' + currentBuild.description,
+                    '* 耗时：' + currentBuild.durationString
                 ]
             )
         }
