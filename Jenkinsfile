@@ -30,9 +30,9 @@ pipeline {
                 title: currentBuild.result,
                 text: [
                     '### ' + currentBuild.fullProjectName,
-                    '#### ' + currentBuild.displayName,
-                    '* ' + currentBuild.result,
-                    '* ' + currentBuild.description
+                    '* 运行：' + currentBuild.displayName,
+                    '* 结果：' + currentBuild.result,
+                    '* 描述：' + currentBuild.description
                 ]
             )
         }
@@ -43,9 +43,9 @@ pipeline {
                 title: currentBuild.result,
                 text: [
                     '### ' + currentBuild.fullProjectName,
-                    '#### ' + currentBuild.displayName,
-                    '* ' + currentBuild.result,
-                    '* ' + currentBuild.description
+                    '* 运行：' + currentBuild.displayName,
+                    '* 结果：' + currentBuild.result,
+                    '* 描述：' + currentBuild.description
                 ]
             )
         }
