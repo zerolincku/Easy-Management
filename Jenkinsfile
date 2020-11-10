@@ -6,7 +6,6 @@ pipeline {
                 sh 'mvn -B -Pdev clean test'
             }
         }
-        
         stage('打包') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev package'
@@ -20,6 +19,7 @@ pipeline {
         stage('制品') {
             steps {
                 archiveArtifacts artifacts: 'target/management-0.0.1.jar', followSymlinks: false
+                dingtalk()
             }
         }
     }
