@@ -21,10 +21,21 @@ pipeline {
                 archiveArtifacts artifacts: 'target/management-0.0.1.jar', followSymlinks: false
             }
         }
-        stage('推送消息') {
-            steps {
-                dingtalk()
-            }
+    }
+    post {
+        success {
+            dingtalk (
+                robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
+                type: 'LINK',
+                atAll: false,
+            )
+        }
+        failure {
+            dingtalk (
+                robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
+                type: 'LINK',
+                atAll: false,
+            )
         }
     }
 }
