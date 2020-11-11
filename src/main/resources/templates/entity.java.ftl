@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 </#if>
 
 /**
- * ${table.comment!}
+ * ${table.comment!}Entity实体类
  * @author ${author}
  * @create ${date}
  */
