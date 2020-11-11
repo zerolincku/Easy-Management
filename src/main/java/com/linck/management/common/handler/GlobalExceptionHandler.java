@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 
 /**
  * @program: MyManagement
- * @description
+ * @description 全局异常捕获
  * @author: linck
  * @create: 2020-08-09 19:46
  **/

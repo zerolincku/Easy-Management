@@ -2,7 +2,7 @@ package com.linck.management.common.model;
 
 /**
  * @program: management
- * @description
+ * @description List包含总条数信息
  * @author: linck
  * @create: 2020-11-02 22:35
  **/

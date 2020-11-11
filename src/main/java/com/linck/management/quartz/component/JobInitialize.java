@@ -17,8 +17,8 @@ import java.util.Set;
 
 /**
  * @author lck
+ * @description 扫描Job
  * @date 2020/10/13 18:23
- * @description
  */
 @Component
 @Order(1)

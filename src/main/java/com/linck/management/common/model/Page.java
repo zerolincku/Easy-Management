@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @program: management
- * @description
+ * @description 分页参数
  * @author: linck
  * @create: 2020-11-01 21:28
  **/

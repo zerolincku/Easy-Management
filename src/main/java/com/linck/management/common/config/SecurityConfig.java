@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * @program: MyManagement
- * @description
+ * @description Spring Security配置
  * @author: linck
  * @create: 2020-08-09 23:57
  **/

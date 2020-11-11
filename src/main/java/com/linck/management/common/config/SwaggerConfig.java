@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * @program: MyManagement
- * @description
+ * @description Swagger配置
  * @author: linck
  * @create: 2020-08-09 17:33
  **/

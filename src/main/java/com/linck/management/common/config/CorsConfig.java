@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @program: management
- * @description
+ * @description 跨域配置
  * @author: linck
  * @create: 2020-10-07 22:06
  **/

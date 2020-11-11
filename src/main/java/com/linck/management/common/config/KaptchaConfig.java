@@ -10,7 +10,7 @@ import java.util.Properties;
 
 /**
  * @program: management
- * @description
+ * @description 验证码配置
  * @author: linck
  * @create: 2020-10-03 15:29
  **/

@@ -15,7 +15,7 @@ import java.util.jar.JarFile;
 
 /**
  * @program: management
- * @description
+ * @description Class工具
  * @author: linck
  * @create: 2020-10-13 21:49
  **/
