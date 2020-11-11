@@ -235,6 +235,8 @@ public class CodeGenerator {
         // 不生产ServiceImpl
         templateConfig.setServiceImpl(null);
         templateConfig.setService("/templates/service.java");
+        templateConfig.setEntity("/templates/entity.java");
+        templateConfig.setMapper("/templates/mapper.java");
         // 整合起来运行
         new AutoGenerator()
                 .setGlobalConfig(config)
