@@ -2,8 +2,8 @@ package com.linck.management.system.controller;
 
 import com.linck.management.common.api.CommonResult;
 import com.linck.management.system.entity.SysUser;
-import com.linck.management.system.model.dto.LoginUserDTO;
-import com.linck.management.system.model.dto.SysUserDetails;
+import com.linck.management.system.model.dto.SysUserDTO;
+import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
@@ -48,7 +48,7 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public CommonResult login(@RequestBody @Validated LoginUserDTO userDetail, HttpServletRequest request) {
+    public CommonResult login(@RequestBody @Validated SysUserDTO userDetail, HttpServletRequest request) {
         /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
             return CommonResult.validateFailed("验证码错误");
         }*/
@@ -63,7 +63,7 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public CommonResult register(@RequestBody @Validated LoginUserDTO userDetail) {
+    public CommonResult register(@RequestBody @Validated SysUserDTO userDetail) {
         SysUser sysUser = sysUserService.register(userDetail);
         if (sysUser == null) {
             return CommonResult.failed("该用户名已经被注册");

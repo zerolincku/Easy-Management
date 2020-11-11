@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
  * @author: linck
  * @create: 2020-08-09 17:45
  **/
-public class LoginUserDTO {
+public class SysUserDTO {
 
     @ApiModelProperty(value = "账号", required = true)
     @NotBlank(message = "账户不能为空")

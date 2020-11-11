@@ -6,7 +6,7 @@ import com.linck.management.common.component.RestAuthenticationEntryPoint;
 import com.linck.management.common.component.RestfulAccessDeniedHandler;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
-import com.linck.management.system.model.dto.SysUserDetails;
+import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import org.slf4j.Logger;

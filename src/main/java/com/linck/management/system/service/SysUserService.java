@@ -6,7 +6,7 @@ import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
-import com.linck.management.system.model.dto.LoginUserDTO;
+import com.linck.management.system.model.dto.SysUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -49,7 +49,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      * @param loginUser
      * @return 生成JWT的Token
      */
-    public String login(LoginUserDTO loginUser) {
+    public String login(SysUserDTO loginUser) {
         String token = null;
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getAccount());
@@ -71,7 +71,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      * @param loginUser
      * @return
      */
-    public SysUser register(LoginUserDTO loginUser) {
+    public SysUser register(SysUserDTO loginUser) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(loginUser, sysUser);
         // 查询是否有相同用户名的用户

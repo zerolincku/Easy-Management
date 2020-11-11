@@ -1,4 +1,4 @@
-package com.linck.management.system.model.dto;
+package com.linck.management.common.model;
 
 import com.linck.management.common.constant.StateEnum;
 import com.linck.management.system.entity.SysPermission;
@@ -22,6 +22,14 @@ public class SysUserDetails implements UserDetails {
     private SysUser sysUser;
 
     private List<SysPermission> permissionList;
+
+    /**
+     * 获取当前登录用户信息
+     * @return
+     */
+    public SysUser getSysUser(){
+        return sysUser;
+    }
 
     public SysUserDetails(SysUser sysUser, List<SysPermission> permissionList) {
         this.sysUser = sysUser;
@@ -64,14 +72,6 @@ public class SysUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return sysUser.getState().equals(StateEnum.ENABLE.getState());
-    }
-
-    /**
-     * 获取当前登录用户信息
-     * @return
-     */
-    public SysUser getSysUser(){
-        return sysUser;
     }
 
 }
