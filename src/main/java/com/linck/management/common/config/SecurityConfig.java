@@ -38,7 +38,7 @@ import java.util.List;
  **/
 @Configuration
 @EnableWebSecurity
-//启用注解安全认证
+// 启用注解安全认证
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

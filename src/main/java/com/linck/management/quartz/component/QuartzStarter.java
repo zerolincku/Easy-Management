@@ -25,7 +25,7 @@ public class QuartzStarter {
     @PostConstruct
     public void init(){
         log.debug("QuartzConfig PostConstruct Init");
-        //JobUtils.createJobByCron(scheduler,"testJob","Test", "0 */1 * * * ?",TestJob.class);
+        // JobUtils.createJobByCron(scheduler,"testJob","Test", "0 */1 * * * ?",TestJob.class);
     }
 
 }

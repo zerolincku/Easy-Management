@@ -19,5 +19,5 @@ public interface SysJobMapper extends BaseMapper<SysJob> {
     /**
      * 条件检索，返回集合
      */
-    public List<SysJob> list(SysJobDTO sysJobDTO);
+    List<SysJob> list(SysJobDTO sysJobDTO);
 }

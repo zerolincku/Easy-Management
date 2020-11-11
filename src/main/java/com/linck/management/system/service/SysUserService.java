@@ -78,12 +78,12 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     public SysUser register(LoginUserDTO loginUser) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(loginUser, sysUser);
-        //查询是否有相同用户名的用户
+        // 查询是否有相同用户名的用户
         int count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
         if (count > 0) {
             return null;
         }
-        //将密码进行加密操作
+        // 将密码进行加密操作
         String encodePassword = passwordEncoder.encode(sysUser.getPwd());
         sysUser.setPwd(encodePassword);
         sysUserMapper.insert(sysUser);

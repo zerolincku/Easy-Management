@@ -15,7 +15,7 @@ public enum StateEnum {
     /**
      * 禁用
      */
-    DISENABLE(0);
+    DISABLE(0);
 
     private Integer state;
 

@@ -59,7 +59,7 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
         List<SysPermission> sysPermissions = listAll();
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
-            // 封住一级折叠菜单
+            // 封装一级折叠菜单
             if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
                 BeanUtils.copyProperties(sysPermission, menuAndButton);
@@ -99,7 +99,7 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
         // 封装菜单和按钮返回前端
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
-            // 封住一级折叠菜单
+            // 封装一级折叠菜单
             if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
                 BeanUtils.copyProperties(sysPermission, menuAndButton);

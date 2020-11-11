@@ -12,59 +12,39 @@ import java.util.List;
  * @create: 2020-10-21 23:43
  **/
 public class SysMenuAndButton {
-    /**
-     * 主键id
-     */
+    
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    /**
-     * 父级权限id
-     */
+    
     @ApiModelProperty(value = "父级菜单id")
     private Long pid;
 
-    /**
-     * 名称
-     */
+    
     @ApiModelProperty(value = "名称")
     private String name;
 
-    /**
-     * 内容
-     */
+    
     @ApiModelProperty(value = "内容")
     private String value;
 
-    /**
-     * 类型 1-菜单 2-按钮 3-权限
-     */
+    
     @ApiModelProperty(value = "类型1-菜单 2-按钮 3-权限")
     private Integer type;
 
-    /**
-     * 图标
-     */
+    
     @ApiModelProperty(value = "图标")
     private String icon;
 
-    /**
-     * 前端路由
-     */
+    
     @ApiModelProperty(value = "前端路由")
     private String url;
-    /**
-     * 排序
-     */
+    
     @ApiModelProperty(value = "排序")
     private Integer sort;
-    /**
-     * 状态 1-启用 0-禁用
-     */
+    
     private Integer state;
-    /**
-     * 二级按钮
-     */
+    
     @ApiModelProperty(value = "二级按钮")
     public List<SysPermissionVO> childrenList;
 
