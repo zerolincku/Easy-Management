@@ -6,7 +6,7 @@ import ${superMapperClassPackage};
 /**
  * ${table.comment!}
  * @author ${author}
- * @since ${date}
+ * @create ${date}
  */
 <#if kotlin>
 interface ${table.mapperName} : ${superMapperClass}<${entity}>

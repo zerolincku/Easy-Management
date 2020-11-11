@@ -3,7 +3,7 @@ package com.linck.management.common.model;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-11-02 22:35
  **/
 public class ListWithPage<T> {

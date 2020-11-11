@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * @program: MyManagement
  * @description 代码生成器
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 09:43
  **/
 public class CodeGenerator {

@@ -2,7 +2,7 @@ package com.linck.management.common.api;
 
 
 /**
- * @author: Linck
+ * @author: linck
  * 枚举了一些常用API操作码
  * Created by macro on 2019/4/19.
  */

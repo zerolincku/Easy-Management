@@ -16,7 +16,7 @@ import java.util.StringJoiner;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 19:46
  **/
 @RestControllerAdvice

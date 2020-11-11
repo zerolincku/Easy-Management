@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * ${table.comment!} 服务类
  * @author ${author}
- * @since ${date}
+ * @create ${date}
  */
 @Service
 <#if kotlin>

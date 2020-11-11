@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-10 19:08
  **/
 public class SysPermissionVO {

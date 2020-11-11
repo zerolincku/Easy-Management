@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-27 21:49
  **/
 public class SysPermissionDTO {

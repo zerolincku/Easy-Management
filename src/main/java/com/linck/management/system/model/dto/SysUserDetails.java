@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-10 00:14
  **/
 public class SysUserDetails implements UserDetails {

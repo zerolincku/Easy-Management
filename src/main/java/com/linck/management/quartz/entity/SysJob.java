@@ -10,12 +10,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- *
- * </p>
  *
  * @author linck
- * @since 2020-11-04
+ * @create 2020-11-04
  */
 @ApiModel(value = "SysJob对象", description = "")
 public class SysJob extends Model<SysJob> {

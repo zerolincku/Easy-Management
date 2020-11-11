@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-09-16 23:18
  **/
 public class JobUtils {

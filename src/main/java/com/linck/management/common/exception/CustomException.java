@@ -5,7 +5,7 @@ import com.linck.management.common.api.ResultCodeEnum;
 /**
  * @program: management
  * @description 自定义运行时异常
- * @author: Linck
+ * @author: linck
  * @create: 2020-09-12 10:22
  **/
 public class CustomException extends RuntimeException{

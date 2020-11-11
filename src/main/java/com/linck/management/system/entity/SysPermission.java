@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @author linck
- * @since 2020-11-04
+ * @create 2020-11-04
  */
 @ApiModel(value = "SysPermission对象", description = "")
 public class SysPermission extends Model<SysPermission> {

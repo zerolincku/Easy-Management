@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * @program: management
  * @description PageHelper配置
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-29 23:01
  **/
 @Configuration

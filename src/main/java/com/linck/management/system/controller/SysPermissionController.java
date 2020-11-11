@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-23 23:39
  **/
 @Api(tags = "系统权限")

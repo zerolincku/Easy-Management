@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @program: MyManagement
  * @description 访问接口无权限时，自定义返回结果
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 23:24
  **/
 @Component

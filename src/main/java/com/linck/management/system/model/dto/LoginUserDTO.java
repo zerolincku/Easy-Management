@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 17:45
  **/
 public class LoginUserDTO {

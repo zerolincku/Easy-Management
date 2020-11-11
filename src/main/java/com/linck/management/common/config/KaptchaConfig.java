@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-03 15:29
  **/
 @Configuration

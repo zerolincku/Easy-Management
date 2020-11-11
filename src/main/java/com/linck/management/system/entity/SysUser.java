@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @author linck
- * @since 2020-11-04
+ * @create 2020-11-04
  */
 @ApiModel(value = "SysUser对象", description = "")
 public class SysUser extends Model<SysUser> {

@@ -3,7 +3,7 @@ package com.linck.management.system.contants;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-10 19:11
  **/
 public enum SysPermissionTypeEnum {

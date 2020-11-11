@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-29 21:40
  **/
 public class SysJobDTO {

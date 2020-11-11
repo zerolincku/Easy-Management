@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 /**
  * @program: management
  * @description 定时任务启动器
- * @author: Linck
+ * @author: linck
  * @create: 2020-09-17 21:50
  **/
 @Component

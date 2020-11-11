@@ -3,7 +3,7 @@ package com.linck.management.common.constant;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 23:26
  **/
 public interface Constans {

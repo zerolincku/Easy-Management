@@ -1,7 +1,7 @@
 package com.linck.management.common.api;
 
 /**
- * @author: Linck
+ * @author: linck
  * 通用返回对象
  * Created by macro on 2019/4/19.
  */

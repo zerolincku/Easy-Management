@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-29 21:35
  **/
 @Api(tags = "Job管理")

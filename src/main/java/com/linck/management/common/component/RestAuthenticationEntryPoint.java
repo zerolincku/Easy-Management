@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @program: MyManagement
  * @description 未登录或者token失效访问接口时，自定义的返回结果
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 23:31
  **/
 @Component

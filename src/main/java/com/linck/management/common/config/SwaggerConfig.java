@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @program: MyManagement
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-08-09 17:33
  **/
 @Configuration

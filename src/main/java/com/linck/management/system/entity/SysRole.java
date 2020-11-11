@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 系统角色
  * @author linck
- * @since 2020-11-04
+ * @create 2020-11-04
  */
 @ApiModel(value = "SysRole对象", description = "系统角色")
 public class SysRole extends Model<SysRole> {

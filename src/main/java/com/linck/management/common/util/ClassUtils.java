@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-13 21:49
  **/
 public final class ClassUtils {

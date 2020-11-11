@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author linck
- * @since 2020-11-04
+ * @create 2020-11-04
  */
 @ApiModel(value="SysUserRole对象", description="")
 public class SysUserRole extends Model<SysUserRole> {

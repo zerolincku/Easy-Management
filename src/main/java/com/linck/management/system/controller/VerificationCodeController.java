@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-03 15:32
  **/
 @Api(tags = "验证码控制器")

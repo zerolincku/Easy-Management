@@ -7,7 +7,7 @@ import org.quartz.JobExecutionException;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-10-13 21:44
  **/
 public class TestJob implements Job {

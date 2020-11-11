@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-11-01 21:28
  **/
 public class Page {

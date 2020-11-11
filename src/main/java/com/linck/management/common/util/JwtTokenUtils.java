@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @program: mall
  * @description JwtToken生成的工具类
- * @author: Linck
+ * @author: linck
  * @create: 2020-07-12 17:28
  **/
 @Component
