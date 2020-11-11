@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
  * @author linck
  * @since 2020-10-13
  */

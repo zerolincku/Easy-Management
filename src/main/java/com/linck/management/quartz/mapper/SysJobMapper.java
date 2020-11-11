@@ -7,10 +7,6 @@ import com.linck.management.quartz.model.dto.SysJobDTO;
 import java.util.List;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
- *
  * @author linck
  * @since 2020-10-13
  */

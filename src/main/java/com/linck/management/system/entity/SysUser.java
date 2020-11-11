@@ -10,10 +10,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- *
- * </p>
- *
  * @author linck
  * @since 2020-11-04
  */

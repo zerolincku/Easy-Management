@@ -22,10 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
  * @author linck
  * @since 2020-08-09
  */

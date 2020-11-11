@@ -8,10 +8,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author linck
  * @since 2020-11-04
  */

@@ -6,10 +6,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
- *
  * @author linck
  * @since 2020-08-09
  */

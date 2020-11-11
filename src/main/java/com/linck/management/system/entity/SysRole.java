@@ -10,10 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 系统角色
- * </p>
- *
  * @author linck
  * @since 2020-11-04
  */
