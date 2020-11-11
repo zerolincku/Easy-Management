@@ -5,7 +5,7 @@ import com.linck.management.system.entity.SysRole;
 
 /**
  * @author linck
- * @since 2020-08-09
+ * @create 2020-08-09
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 

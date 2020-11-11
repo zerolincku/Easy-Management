@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author linck
- * @since 2020-10-13
+ * @create 2020-10-13
  */
 public interface SysJobMapper extends BaseMapper<SysJob> {
 
