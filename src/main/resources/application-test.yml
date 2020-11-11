@@ -34,4 +34,4 @@ jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: jhi40S8232amR #JWT加解密使用的密钥
   expiration: 86400 #JWT的超期限时间(60*60*24)s
-  tokenHead: Linck  #JWT负载中拿到开头
+  tokenHead: Bearar  #JWT负载中拿到开头
