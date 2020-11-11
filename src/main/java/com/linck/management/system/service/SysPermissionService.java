@@ -2,6 +2,7 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.linck.management.common.model.StateModel;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.mapper.SysPermissionMapper;
@@ -40,19 +41,24 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     }
 
     /**
-     * 查询所有权限列表
+     * 查询权限列表
      *
      * @return
      */
-    public List<SysPermission> listAll() {
-        return sysPermissionMapper.selectList(new QueryWrapper<SysPermission>().orderByAsc("type", "sort"));
+    public List<SysPermission> listAll(StateModel stateModel) {
+        QueryWrapper<SysPermission> wrapper = new QueryWrapper<>();
+        if (stateModel.getState() != null) {
+            wrapper.eq("state", stateModel.getState());
+        }
+        wrapper.orderByAsc("type", "sort");
+        return sysPermissionMapper.selectList(wrapper);
     }
 
     /**
-     * 查询所有菜单和按钮
+     * 查询菜单和按钮
      */
-    public List<SysMenuAndButton> allMenuAndButton() {
-        List<SysPermission> sysPermissions = listAll();
+    public List<SysMenuAndButton> allMenuAndButton(StateModel stateModel) {
+        List<SysPermission> sysPermissions = listAll(stateModel);
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
             // 封装一级折叠菜单

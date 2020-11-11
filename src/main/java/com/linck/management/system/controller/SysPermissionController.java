@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.constant.StateEnum;
 import com.linck.management.common.model.IdModel;
+import com.linck.management.common.model.StateModel;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.model.dto.SysPermissionDTO;
@@ -40,10 +41,10 @@ public class SysPermissionController {
     private SysPermissionService sysPermissionService;
 
 
-    @ApiOperation("查询所有权限")
+    @ApiOperation("查询权限列表(嵌套封装)")
     @PostMapping("list")
-    public Result<List<SysMenuAndButton>> list() {
-        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton();
+    public Result<List<SysMenuAndButton>> list(@RequestBody StateModel stateModel) {
+        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton(stateModel);
         return Result.success(result);
     }
 
