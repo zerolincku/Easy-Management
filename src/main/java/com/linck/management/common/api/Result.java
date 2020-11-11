@@ -4,15 +4,15 @@ package com.linck.management.common.api;
  * @author: linck
  * 通用返回对象
  */
-public class CommonResult<T> {
+public class Result<T> {
     private long code;
     private String message;
     private T data;
 
-    protected CommonResult() {
+    protected Result() {
     }
 
-    protected CommonResult(long code, String message, T data) {
+    protected Result(long code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -23,8 +23,8 @@ public class CommonResult<T> {
      *
      * @param data 获取的数据
      */
-    public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<T>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), data);
+    public static <T> Result<T> success(T data) {
+        return new Result<T>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), data);
     }
 
     /**
@@ -33,37 +33,37 @@ public class CommonResult<T> {
      * @param data 获取的数据
      * @param  message 提示信息
      */
-    public static <T> CommonResult<T> success(T data, String message) {
-        return new CommonResult<T>(ResultCodeEnum.SUCCESS.getCode(), message, data);
+    public static <T> Result<T> success(T data, String message) {
+        return new Result<T>(ResultCodeEnum.SUCCESS.getCode(), message, data);
     }
 
     /**
      * 失败返回结果
      * @param errorCode 错误码
      */
-    public static <T> CommonResult<T> failed(IErrorCode errorCode) {
-        return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> Result<T> failed(IErrorCode errorCode) {
+        return new Result<T>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
     /**
      * 失败返回结果
      * @param message 提示信息
      */
-    public static <T> CommonResult<T> failed(String message) {
-        return new CommonResult<T>(ResultCodeEnum.FAILED.getCode(), message, null);
+    public static <T> Result<T> failed(String message) {
+        return new Result<T>(ResultCodeEnum.FAILED.getCode(), message, null);
     }
 
     /**
      * 失败返回结果
      */
-    public static <T> CommonResult<T> failed() {
+    public static <T> Result<T> failed() {
         return failed(ResultCodeEnum.FAILED);
     }
 
     /**
      * 参数验证失败返回结果
      */
-    public static <T> CommonResult<T> validateFailed() {
+    public static <T> Result<T> validateFailed() {
         return failed(ResultCodeEnum.VALIDATE_FAILED);
     }
 
@@ -71,22 +71,22 @@ public class CommonResult<T> {
      * 参数验证失败返回结果
      * @param message 提示信息
      */
-    public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<T>(ResultCodeEnum.VALIDATE_FAILED.getCode(), message, null);
+    public static <T> Result<T> validateFailed(String message) {
+        return new Result<T>(ResultCodeEnum.VALIDATE_FAILED.getCode(), message, null);
     }
 
     /**
      * 未登录返回结果
      */
-    public static <T> CommonResult<T> unauthorized(T data) {
-        return new CommonResult<T>(ResultCodeEnum.UNAUTHORIZED.getCode(), ResultCodeEnum.UNAUTHORIZED.getMessage(), data);
+    public static <T> Result<T> unauthorized(T data) {
+        return new Result<T>(ResultCodeEnum.UNAUTHORIZED.getCode(), ResultCodeEnum.UNAUTHORIZED.getMessage(), data);
     }
 
     /**
      * 未授权返回结果
      */
-    public static <T> CommonResult<T> forbidden(T data) {
-        return new CommonResult<T>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
+    public static <T> Result<T> forbidden(T data) {
+        return new Result<T>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
     }
 
     public long getCode() {

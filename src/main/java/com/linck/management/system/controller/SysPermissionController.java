@@ -1,7 +1,7 @@
 package com.linck.management.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.api.Result;
 import com.linck.management.common.constant.StateEnum;
 import com.linck.management.common.model.IdModel;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
@@ -42,49 +42,49 @@ public class SysPermissionController {
 
     @ApiOperation("查询所有权限")
     @PostMapping("list")
-    public CommonResult<List<SysMenuAndButton>> list() {
+    public Result<List<SysMenuAndButton>> list() {
         List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton();
-        return CommonResult.success(result);
+        return Result.success(result);
     }
 
     @ApiOperation("所有菜单和按钮")
     @PostMapping("allMenuAndButton")
-    public CommonResult<Map<String, List<SysPermission>>> allMenuAndButton() {
+    public Result<Map<String, List<SysPermission>>> allMenuAndButton() {
         List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("state", StateEnum.ENABLE.getState()));
         List<SysPermission> menus = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.MENU.getType())).collect(Collectors.toList());
         List<SysPermission> buttons = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.BUTTON.getType())).collect(Collectors.toList());
         Map<String, List<SysPermission>> result = new HashMap<>();
         result.put("menus", menus);
         result.put("buttons", buttons);
-        return CommonResult.success(result);
+        return Result.success(result);
     }
 
     @ApiOperation("新增权限")
     @PostMapping("add")
-    public CommonResult<Long> add(@RequestBody @Validated SysPermissionDTO permissionDTO) {
+    public Result<Long> add(@RequestBody @Validated SysPermissionDTO permissionDTO) {
         permissionDTO.setId(null);
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDTO, sysPermission);
         sysPermission.setCreateTime(new Date());
         sysPermissionService.save(sysPermission);
-        return CommonResult.success(sysPermission.getId());
+        return Result.success(sysPermission.getId());
     }
 
     @ApiOperation("更新权限")
     @PostMapping("update")
-    public CommonResult<Long> update(@RequestBody @Validated SysPermissionDTO permissionDTO) {
+    public Result<Long> update(@RequestBody @Validated SysPermissionDTO permissionDTO) {
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDTO, sysPermission);
         sysPermission.setUpdateTime(new Date());
         sysPermissionService.updateById(sysPermission);
-        return CommonResult.success(sysPermission.getId());
+        return Result.success(sysPermission.getId());
     }
 
     @ApiOperation("删除权限")
     @PostMapping("remove")
-    public CommonResult remove(@RequestBody IdModel idModel) {
+    public Result remove(@RequestBody IdModel idModel) {
         sysPermissionService.removeById(idModel.getId());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idModel.getId()));
-        return CommonResult.success(null);
+        return Result.success(null);
     }
 }

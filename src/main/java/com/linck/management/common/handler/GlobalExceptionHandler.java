@@ -1,6 +1,6 @@
 package com.linck.management.common.handler;
 
-import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.api.Result;
 import com.linck.management.common.api.ResultCodeEnum;
 import com.linck.management.common.exception.CustomException;
 import org.slf4j.Logger;
@@ -28,9 +28,9 @@ public class GlobalExceptionHandler {
      * 捕获自定义异常
      */
     @ExceptionHandler(value = CustomException.class)
-    public CommonResult processException(CustomException e) {
+    public Result processException(CustomException e) {
         log.error("位置:{} -> 错误信息:{}", e.getMethod() ,e.getLocalizedMessage());
-        return CommonResult.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
+        return Result.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
     }
 
     /**
@@ -39,23 +39,22 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public CommonResult ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
+    public Result ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
         // 将所有的错误提示使用"，"拼接起来并返回
         StringJoiner sj = new StringJoiner("，");
         e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
-
-        return CommonResult.failed(sj.toString());
+        return Result.validateFailed(sj.toString());
     }
 
     /**
      * get参数验证异常,会抛出一个ConstraintViolationException
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public CommonResult constraintViolationExceptionHandler(ConstraintViolationException e) {
+    public Result constraintViolationExceptionHandler(ConstraintViolationException e) {
         StringJoiner sj = new StringJoiner("，");
         e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
 
-        return CommonResult.failed(sj.toString());
+        return Result.validateFailed(sj.toString());
     }
 
 }

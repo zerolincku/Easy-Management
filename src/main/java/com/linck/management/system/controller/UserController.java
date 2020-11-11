@@ -1,6 +1,6 @@
 package com.linck.management.system.controller;
 
-import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.api.Result;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.common.model.SysUserDetails;
@@ -48,41 +48,41 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public CommonResult login(@RequestBody @Validated SysUserDTO userDetail, HttpServletRequest request) {
+    public Result login(@RequestBody @Validated SysUserDTO userDetail, HttpServletRequest request) {
         /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
             return CommonResult.validateFailed("验证码错误");
         }*/
         String token = sysUserService.login(userDetail);
         if (token == null) {
-            return CommonResult.validateFailed("用户名或密码错误");
+            return Result.validateFailed("用户名或密码错误");
         }
         Map<String, String> tokenMap = new HashMap<>(2);
         tokenMap.put("token", tokenHead + " " + token);
-        return CommonResult.success(tokenMap);
+        return Result.success(tokenMap);
     }
 
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public CommonResult register(@RequestBody @Validated SysUserDTO userDetail) {
+    public Result register(@RequestBody @Validated SysUserDTO userDetail) {
         SysUser sysUser = sysUserService.register(userDetail);
         if (sysUser == null) {
-            return CommonResult.failed("该用户名已经被注册");
+            return Result.failed("该用户名已经被注册");
         }
         sysUser.setPwd(null);
-        return CommonResult.success(sysUser);
+        return Result.success(sysUser);
     }
 
     // 示例：需要权限user:view进行访问
     // @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户菜单和按钮")
     @PostMapping("/query/menu")
-    public CommonResult<List<SysMenuAndButton>> queryPermission() {
+    public Result<List<SysMenuAndButton>> queryPermission() {
         // 从SecurityContextHolder获取当前用户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
         SysUser sysUser = sysUserDetails.getSysUser();
         List<SysMenuAndButton> result = sysPermissionService.getMenuAndButtonByUserId(sysUser.getId());
-        return CommonResult.success(result);
+        return Result.success(result);
     }
 
 }

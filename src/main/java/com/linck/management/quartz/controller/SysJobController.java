@@ -1,7 +1,7 @@
 package com.linck.management.quartz.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.linck.management.common.api.CommonResult;
+import com.linck.management.common.api.Result;
 import com.linck.management.common.model.ListWithPage;
 import com.linck.management.quartz.entity.SysJob;
 import com.linck.management.quartz.model.dto.SysJobDTO;
@@ -36,7 +36,7 @@ public class SysJobController {
 
     @ApiOperation("job列表")
     @PostMapping("list")
-    public CommonResult<ListWithPage> list(@RequestBody(required = false) SysJobDTO sysJobDTO) {
+    public Result<ListWithPage> list(@RequestBody(required = false) SysJobDTO sysJobDTO) {
         if (sysJobDTO == null) {
             sysJobDTO = new SysJobDTO();
         }
@@ -47,7 +47,7 @@ public class SysJobController {
         ListWithPage<List> result = new ListWithPage<>();
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
-        return CommonResult.success(result);
+        return Result.success(result);
     }
 
 }

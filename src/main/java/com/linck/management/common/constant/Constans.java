@@ -8,8 +8,8 @@ package com.linck.management.common.constant;
  **/
 public interface Constans {
 
-    String CHARACTER_ENCODING = "utf-8";
+    String UTF_8 = "utf-8";
 
-    String CONTENT_TYPE_APPLICATION_JSON = "application/json";
+    String APPLICATION_JSON = "application/json";
 
 }
