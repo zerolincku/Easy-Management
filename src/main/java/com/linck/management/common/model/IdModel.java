@@ -2,6 +2,8 @@ package com.linck.management.common.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @program: management
  * @description
@@ -11,6 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class IdModel {
 
     @ApiModelProperty("主键id")
+    @NotNull(message = "id不能为空")
     private Long id;
 
     public Long getId() {

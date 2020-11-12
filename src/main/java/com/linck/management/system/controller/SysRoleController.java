@@ -6,12 +6,14 @@ import com.linck.management.common.model.IdModel;
 import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
+import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,9 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @Autowired
+    private SysPermissionService sysPermissionService;
+
     @ApiOperation("查询角色列表")
     @PostMapping("list")
     public Result<ListWithPage> list(@RequestBody(required = false) Page page) {
@@ -46,6 +51,13 @@ public class SysRoleController {
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
         return Result.success(result);
+    }
+
+    @ApiOperation("查询角色权限id集合")
+    @PostMapping("permissionIdList")
+    public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
+        // FIXME 完成这个方法和保存角色权限接口
+        return null;
     }
 
     @ApiOperation("修改角色")
@@ -65,7 +77,7 @@ public class SysRoleController {
 
     @ApiOperation("删除角色")
     @PostMapping("remove")
-    public Result remove(@RequestBody IdModel idModel) {
+    public Result remove(@RequestBody @Validated IdModel idModel) {
         sysRoleService.removeById(idModel.getId());
         return Result.success(null);
     }

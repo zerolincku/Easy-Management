@@ -83,7 +83,7 @@ public class SysPermissionController {
 
     @ApiOperation("删除权限")
     @PostMapping("remove")
-    public Result remove(@RequestBody IdModel idModel) {
+    public Result remove(@RequestBody @Validated IdModel idModel) {
         sysPermissionService.removeById(idModel.getId());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idModel.getId()));
         return Result.success(null);
