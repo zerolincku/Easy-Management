@@ -4,9 +4,18 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysRolePermission">
-        <id column="id" property="id" />
-        <result column="r_id" property="rId" />
-        <result column="p_id" property="pId" />
+        <id column="id" property="id"/>
+        <result column="r_id" property="rId"/>
+        <result column="p_id" property="pId"/>
     </resultMap>
 
+    <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into sys_role_permission (r_id,p_id) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.rId},
+            #{item.pId}
+            )
+        </foreach>
+    </insert>
 </mapper>

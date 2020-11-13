@@ -1,12 +1,16 @@
 package com.linck.management.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.IdModel;
 import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.Page;
 import com.linck.management.system.entity.SysRole;
+import com.linck.management.system.entity.SysRolePermission;
+import com.linck.management.system.model.dto.RolePermissionDTO;
 import com.linck.management.system.service.SysPermissionService;
+import com.linck.management.system.service.SysRolePermissionService;
 import com.linck.management.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @program: management
@@ -40,6 +45,9 @@ public class SysRoleController {
     @Autowired
     private SysPermissionService sysPermissionService;
 
+    @Autowired
+    private SysRolePermissionService sysRolePermissionService;
+
     @ApiOperation("查询角色列表")
     @PostMapping("list")
     public Result<ListWithPage> list(@RequestBody(required = false) Page page) {
@@ -56,8 +64,15 @@ public class SysRoleController {
     @ApiOperation("查询角色权限id集合")
     @PostMapping("permissionIdList")
     public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
-        // FIXME 完成这个方法和保存角色权限接口
-        return null;
+        List<SysRolePermission> sysRolePermissionList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", idModel.getId()));
+        List<Long> permissionIdList = sysRolePermissionList.stream().map(t -> t.getpId()).collect(Collectors.toList());
+        return Result.success(permissionIdList);
+    }
+
+    @ApiOperation("保存角色权限映射")
+    @PostMapping("saveSolePermission")
+    public Result saveSolePermission(@RequestBody @Validated RolePermissionDTO rolePermissionDTO) {
+        return sysRoleService.saveSolePermission(rolePermissionDTO);
     }
 
     @ApiOperation("修改角色")
