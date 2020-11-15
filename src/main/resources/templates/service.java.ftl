@@ -6,15 +6,15 @@ import ${package.Mapper}.${table.mapperName};
 import org.springframework.stereotype.Service;
 
 /**
-* ${table.comment!}Service
-* @author ${author}
-* @create ${date}
-*/
+ * ${table.comment!}Service
+ * @author ${author}
+ * @create ${date}
+ */
 @Service
 <#if kotlin>
-    interface ${table.serviceName} : ${superServiceClass}<${entity}>
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
-    public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>  {
+public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>  {
 
-    }
+}
 </#if>
