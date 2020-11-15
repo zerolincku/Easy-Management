@@ -35,7 +35,7 @@ public class Page {
     public void ifNotPageSetDefault() {
         if (pageNum == null || pageSize == null) {
             pageNum = 1;
-            pageSize = 10;
+            pageSize = 20;
         }
     }
 }

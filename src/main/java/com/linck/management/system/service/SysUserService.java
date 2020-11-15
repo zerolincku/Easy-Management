@@ -2,11 +2,13 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
 import com.linck.management.system.model.dto.SysUserDTO;
+import com.linck.management.system.model.dto.SysUserSearchDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author linck
@@ -85,5 +89,16 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         sysUserMapper.insert(sysUser);
         log.debug("注册用户成功");
         return sysUser;
+    }
+
+    /**
+     * 分页查询用户
+     *
+     * @param sysUserSearchDTO
+     * @return
+     */
+    public List<SysUser> selectList(SysUserSearchDTO sysUserSearchDTO) {
+        PageHelper.startPage(sysUserSearchDTO.getPageNum(), sysUserSearchDTO.getPageSize());
+        return sysUserMapper.listWithSearch(sysUserSearchDTO);
     }
 }

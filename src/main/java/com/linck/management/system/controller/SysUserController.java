@@ -1,9 +1,13 @@
 package com.linck.management.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.model.IdModel;
+import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.model.dto.SysUserDTO;
+import com.linck.management.system.model.dto.SysUserSearchDTO;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
@@ -33,12 +37,12 @@ import java.util.Map;
  * @author: linck
  * @create: 2020-08-09 17:43
  **/
-@Api(tags = "系统用户控制器")
+@Api(tags = "系统用户")
 @RestController
 @RequestMapping("/sys/user")
-public class UserController {
+public class SysUserController {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private static final Logger log = LoggerFactory.getLogger(SysUserController.class);
 
     @Autowired
     private SysPermissionService sysPermissionService;
@@ -83,6 +87,46 @@ public class UserController {
         SysUser sysUser = sysUserDetails.getSysUser();
         List<SysMenuAndButton> result = sysPermissionService.getMenuAndButtonByUserId(sysUser.getId());
         return Result.success(result);
+    }
+
+    // FIXME 这里和下面没写
+    @PreAuthorize("hasAuthority('role:view')")
+    @ApiOperation("查询用户列表")
+    @PostMapping("list")
+    public Result<ListWithPage> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
+        // 如果没有分页参数，初始化参数
+        sysUserSearchDTO.ifNotPageSetDefault();
+        List<SysUser> list = sysUserService.selectList(sysUserSearchDTO);
+        PageInfo pageInfo = new PageInfo(list);
+        ListWithPage<List> result = new ListWithPage<>();
+        result.setList(list);
+        result.setTotal(pageInfo.getTotal());
+        return Result.success(result);
+    }
+
+    @PreAuthorize("hasAuthority('role:update')")
+    @ApiOperation("修改用户")
+    @PostMapping("update")
+    public Result update(@RequestBody SysUser sysUser) {
+        sysUser.setCreateTime(null);
+        sysUserService.updateById(sysUser);
+        return Result.success("");
+    }
+
+    @PreAuthorize("hasAuthority('role:add')")
+    @ApiOperation("新增用户")
+    @PostMapping("add")
+    public Result add(@RequestBody SysUser sysUser) {
+        sysUserService.save(sysUser);
+        return Result.success(sysUser.getId());
+    }
+
+    @PreAuthorize("hasAuthority('role:remove')")
+    @ApiOperation("删除用户")
+    @PostMapping("remove")
+    public Result remove(@RequestBody @Validated IdModel idModel) {
+        sysUserService.removeById(idModel.getId());
+        return Result.success("");
     }
 
 }

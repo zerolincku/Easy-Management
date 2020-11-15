@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author: linck
  * @create: 2020-11-01 21:23
  **/
-@Api(tags = "角色管理")
+@Api(tags = "系统角色")
 @RestController
 @RequestMapping("sysRole")
 public class SysRoleController {
@@ -85,7 +85,7 @@ public class SysRoleController {
     public Result update(@RequestBody SysRole sysRole) {
         sysRole.setCreateTime(null);
         sysRoleService.updateById(sysRole);
-        return Result.success(null);
+        return Result.success("");
     }
 
     @PreAuthorize("hasAuthority('role:add')")
@@ -103,7 +103,7 @@ public class SysRoleController {
     @PostMapping("remove")
     public Result remove(@RequestBody @Validated IdModel idModel) {
         sysRoleService.removeById(idModel.getId());
-        return Result.success(null);
+        return Result.success("");
     }
 
 }

@@ -12,4 +12,18 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <!-- 不返回密码 -->
+    <select id="listWithSearch" resultMap="BaseResultMap"
+            parameterType="com.linck.management.system.model.dto.SysUserSearchDTO">
+        select id, account, state,create_time, update_time from sys_user
+        <where>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
 </mapper>

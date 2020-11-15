@@ -90,6 +90,6 @@ public class SysPermissionController {
     public Result remove(@RequestBody @Validated IdModel idModel) {
         sysPermissionService.removeById(idModel.getId());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idModel.getId()));
-        return Result.success(null);
+        return Result.success("");
     }
 }

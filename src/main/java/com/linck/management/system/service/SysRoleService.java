@@ -75,6 +75,6 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
             return Result.failed("当前内容已经存在");
         }
         sysRoleMapper.insert(sysRole);
-        return Result.success(null);
+        return Result.success("");
     }
 }
