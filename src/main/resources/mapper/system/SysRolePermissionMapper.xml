@@ -9,6 +9,11 @@
         <result column="p_id" property="pId"/>
     </resultMap>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, r_id, p_id
+    </sql>
+
     <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="false">
         insert into sys_role_permission (r_id,p_id) values
         <foreach collection="list" item="item" index="index" separator=",">

@@ -4,9 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysUserRole">
-        <id column="id" property="id" />
-        <result column="u_id" property="uId" />
-        <result column="r_id" property="rId" />
+        <id column="id" property="id"/>
+        <result column="u_id" property="uId"/>
+        <result column="r_id" property="rId"/>
     </resultMap>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, u_id, r_id
+    </sql>
 </mapper>

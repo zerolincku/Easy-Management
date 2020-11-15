@@ -17,6 +17,11 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pid, name, value, type, icon, url, state, sort, create_time, update_time
+    </sql>
+
     <select id="listByUserId" parameterType="long" resultMap="BaseResultMap">
         select
             c.id as id,
