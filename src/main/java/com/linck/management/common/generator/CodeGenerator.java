@@ -267,11 +267,11 @@ public class CodeGenerator {
                 // 生成xml 位置
                 .xmlDir(mainDir + "resources")
                 // 包引用路径
-                .packageName("com.linck.management.quartz")
+                .packageName("com.linck.management.system")
                 .build();
 
         //根据表生成后台代码
-        codeGenerator.code("sys_job");
+        codeGenerator.code("sys_host");
 
     }
 }
