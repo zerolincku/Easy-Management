@@ -218,7 +218,9 @@ public class CodeGenerator {
                 // 是否使用缓存
                 .setEnableCache(false)
                 // 是否生成 xml 中的 基础 resultMap
-                .setBaseResultMap(true);
+                .setBaseResultMap(true)
+                // 是否生成 xml 中的 列 集合
+                .setBaseColumnList(true);
         if (!serviceNameStartWithI) {
             // Service 层的 通用格式后缀
             config.setServiceName("%sService");
