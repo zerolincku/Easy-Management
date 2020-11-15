@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,7 @@ public class SysRoleController {
     @Autowired
     private SysRolePermissionService sysRolePermissionService;
 
+    @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询角色列表")
     @PostMapping("list")
     public Result<ListWithPage> list(@RequestBody(required = false) Page page) {
@@ -61,6 +63,7 @@ public class SysRoleController {
         return Result.success(result);
     }
 
+    @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询角色权限id集合")
     @PostMapping("permissionIdList")
     public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
@@ -69,12 +72,14 @@ public class SysRoleController {
         return Result.success(permissionIdList);
     }
 
+    @PreAuthorize("hasAuthority('role:update')")
     @ApiOperation("保存角色权限映射")
     @PostMapping("saveSolePermission")
     public Result saveSolePermission(@RequestBody @Validated RolePermissionDTO rolePermissionDTO) {
         return sysRoleService.saveSolePermission(rolePermissionDTO);
     }
 
+    @PreAuthorize("hasAuthority('role:update')")
     @ApiOperation("修改角色")
     @PostMapping("update")
     public Result update(@RequestBody SysRole sysRole) {
@@ -83,13 +88,17 @@ public class SysRoleController {
         return Result.success(null);
     }
 
+    @PreAuthorize("hasAuthority('role:add')")
     @ApiOperation("新增角色")
     @PostMapping("add")
     public Result add(@RequestBody SysRole sysRole) {
-        sysRoleService.save(sysRole);
-        return Result.success(null);
+        if (sysRole.getValue() == null) {
+            return Result.failed("内容不能为空");
+        }
+        return sysRoleService.add(sysRole);
     }
 
+    @PreAuthorize("hasAuthority('role:remove')")
     @ApiOperation("删除角色")
     @PostMapping("remove")
     public Result remove(@RequestBody @Validated IdModel idModel) {

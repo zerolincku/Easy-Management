@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +41,7 @@ public class SysPermissionController {
     @Autowired
     private SysPermissionService sysPermissionService;
 
-
+    @PreAuthorize("hasAuthority('permission:view')")
     @ApiOperation("查询权限列表(嵌套封装)")
     @PostMapping("list")
     public Result<List<SysMenuAndButton>> list(@RequestBody StateModel stateModel) {
@@ -48,6 +49,7 @@ public class SysPermissionController {
         return Result.success(result);
     }
 
+    @PreAuthorize("hasAuthority('permission:view')")
     @ApiOperation("所有菜单和按钮")
     @PostMapping("allMenuAndButton")
     public Result<Map<String, List<SysPermission>>> allMenuAndButton() {
@@ -60,17 +62,18 @@ public class SysPermissionController {
         return Result.success(result);
     }
 
+    @PreAuthorize("hasAuthority('permission:add')")
     @ApiOperation("新增权限")
     @PostMapping("add")
-    public Result<Long> add(@RequestBody @Validated SysPermissionDTO permissionDTO) {
+    public Result add(@RequestBody @Validated SysPermissionDTO permissionDTO) {
         permissionDTO.setId(null);
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDTO, sysPermission);
         sysPermission.setCreateTime(new Date());
-        sysPermissionService.save(sysPermission);
-        return Result.success(sysPermission.getId());
+        return sysPermissionService.add(sysPermission);
     }
 
+    @PreAuthorize("hasAuthority('permission:update')")
     @ApiOperation("更新权限")
     @PostMapping("update")
     public Result<Long> update(@RequestBody @Validated SysPermissionDTO permissionDTO) {
@@ -81,6 +84,7 @@ public class SysPermissionController {
         return Result.success(sysPermission.getId());
     }
 
+    @PreAuthorize("hasAuthority('permission:remove')")
     @ApiOperation("删除权限")
     @PostMapping("remove")
     public Result remove(@RequestBody @Validated IdModel idModel) {

@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
 
     @Autowired
-    private SysRoleMapper roleMapper;
+    private SysRoleMapper sysRoleMapper;
 
     @Autowired
     private SysRolePermissionMapper sysRolePermissionMapper;
@@ -37,9 +37,15 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
      */
     public List<SysRole> selectByPage(Page page) {
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
-        return roleMapper.selectList(null);
+        return sysRoleMapper.selectList(null);
     }
 
+    /**
+     * 保存角色权限列表
+     *
+     * @param rolePermissionDTO
+     * @return
+     */
     public Result saveSolePermission(RolePermissionDTO rolePermissionDTO) {
         List<SysRolePermission> databaseList = sysRolePermissionMapper.selectList(new QueryWrapper<SysRolePermission>().eq("r_id", rolePermissionDTO.getRoleId()));
         List<Long> databasePermissionIdList = databaseList.stream().map(t -> t.getpId()).collect(Collectors.toList());
@@ -55,5 +61,20 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
             insertCount = sysRolePermissionMapper.insertList(insertList);
         }
         return Result.success(insertCount);
+    }
+
+    /**
+     * 新增角色
+     *
+     * @param sysRole
+     * @return
+     */
+    public Result add(SysRole sysRole) {
+        Integer count = sysRoleMapper.selectCount(new QueryWrapper<SysRole>().eq("value", sysRole.getValue()));
+        if (count > 0) {
+            return Result.failed("当前内容已经存在");
+        }
+        sysRoleMapper.insert(sysRole);
+        return Result.success(null);
     }
 }

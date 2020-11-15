@@ -1,9 +1,9 @@
 package com.linck.management.system.controller;
 
 import com.linck.management.common.api.Result;
+import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.model.dto.SysUserDTO;
-import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
@@ -72,8 +73,7 @@ public class UserController {
         return Result.success(sysUser);
     }
 
-    // 示例：需要权限user:view进行访问
-    // @PreAuthorize("hasAuthority('user:view')")
+    @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户菜单和按钮")
     @PostMapping("/query/menu")
     public Result<List<SysMenuAndButton>> queryPermission() {

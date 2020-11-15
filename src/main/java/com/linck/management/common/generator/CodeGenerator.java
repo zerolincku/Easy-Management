@@ -271,7 +271,7 @@ public class CodeGenerator {
                 .build();
 
         //根据表生成后台代码
-        codeGenerator.code("sys_host");
+        codeGenerator.code("");
 
     }
 }

@@ -2,6 +2,7 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.linck.management.common.api.Result;
 import com.linck.management.common.model.StateModel;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.entity.SysPermission;
@@ -118,5 +119,32 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
             }
         });
         return result;
+    }
+
+    /**
+     * 新增权限
+     *
+     * @param sysPermission
+     * @return
+     */
+    public Result add(SysPermission sysPermission) {
+        if (SysPermissionTypeEnum.MENU.getType().equals(sysPermission.getType())) {
+            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("name", sysPermission.getName()));
+            if (count > 0) {
+                return Result.failed("当前菜单名称已经存在");
+            }
+        } else if (SysPermissionTypeEnum.BUTTON.getType().equals(sysPermission.getType())) {
+            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("url", sysPermission.getUrl()));
+            if (count > 0) {
+                return Result.failed("当前按钮url已经存在");
+            }
+        } else if (SysPermissionTypeEnum.PERMISSION.getType().equals(sysPermission.getType())) {
+            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("value", sysPermission.getUrl()));
+            if (count > 0) {
+                return Result.failed("当前权限内容已经存在");
+            }
+        }
+        sysPermissionMapper.insert(sysPermission);
+        return Result.success(sysPermission.getId());
     }
 }
