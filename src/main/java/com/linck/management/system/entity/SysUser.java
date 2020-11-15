@@ -31,12 +31,6 @@ public class SysUser extends Model<SysUser> {
     @ApiModelProperty(value = "状态 1-启用 0-禁用")
     private Integer state;
 
-    @ApiModelProperty(value = "头像图片")
-    private String icon;
-
-    @ApiModelProperty(value = "图片资源hostId")
-    private Integer hostId;
-
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
@@ -73,22 +67,6 @@ public class SysUser extends Model<SysUser> {
 
     public void setState(Integer state) {
         this.state = state;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Integer getHostId() {
-        return hostId;
-    }
-
-    public void setHostId(Integer hostId) {
-        this.hostId = hostId;
     }
 
     public Date getCreateTime() {
