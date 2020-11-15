@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-11-13 23:15
  **/
 public class RolePermissionDTO {

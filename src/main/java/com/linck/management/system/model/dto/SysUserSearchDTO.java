@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @program: management
  * @description
- * @author: Linck
+ * @author: linck
  * @create: 2020-11-15 20:57
  **/
 public class SysUserSearchDTO extends Page {
