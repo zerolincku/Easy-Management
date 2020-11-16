@@ -89,7 +89,6 @@ public class SysUserController {
         return Result.success(result);
     }
 
-    // FIXME 这里和下面没写
     @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询用户列表")
     @PostMapping("list")
@@ -117,8 +116,7 @@ public class SysUserController {
     @ApiOperation("新增用户")
     @PostMapping("add")
     public Result add(@RequestBody SysUser sysUser) {
-        sysUserService.save(sysUser);
-        return Result.success(sysUser.getId());
+        return sysUserService.add(sysUser);
     }
 
     @PreAuthorize("hasAuthority('role:remove')")

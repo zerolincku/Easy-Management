@@ -3,6 +3,7 @@ package com.linck.management.system.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.linck.management.common.api.Result;
 import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.mapper.SysRoleMapper;
@@ -100,5 +101,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     public List<SysUser> selectList(SysUserSearchDTO sysUserSearchDTO) {
         PageHelper.startPage(sysUserSearchDTO.getPageNum(), sysUserSearchDTO.getPageSize());
         return sysUserMapper.listWithSearch(sysUserSearchDTO);
+    }
+
+    public Result add(SysUser sysUser) {
+        Integer count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
+        if (count > 0) {
+            return Result.failed("当前账户已经存在");
+        }
+        return Result.success(sysUserMapper.insert(sysUser));
     }
 }
