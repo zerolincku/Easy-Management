@@ -40,23 +40,23 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.PUT, responseMessageList())
                 .globalResponseMessage(RequestMethod.DELETE, responseMessageList())
                 .select()
-                //指定包下的controller生成API文档
+                // 指定包下的controller生成API文档
                 //.apis(RequestHandlerSelectors.basePackage("com.linck.mall.tiny.controller"))
-                //为有注解@Api的controller生成API文档
+                // 为有注解@Api的controller生成API文档
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                //为有注解@ApiOperation的方法生成API文档
+                // 为有注解@ApiOperation的方法生成API文档
                 //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
 
                 .build()
-                //添加登录认证
+                // 添加登录认证
                 .securitySchemes(securitySchems())
                 .securityContexts(securityContexts());
 
     }
 
     private List<ResponseMessage>  responseMessageList(){
-        //添加全局响应状态码
+        // 添加全局响应状态码
         List<ResponseMessage> responseMessageList = new ArrayList<>();
         Arrays.stream(ResultCodeEnum.values()).forEach(resultCodeEnum -> {
             responseMessageList.add(
@@ -69,19 +69,19 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                //标题
+                // 标题
                 .title("管理系统")
-                //描述
+                // 描述
                 .description("Management-Doc")
                 // 三个参数依次是姓名，个人网站，邮箱
                 .contact(new Contact("linck", "", "zerolinck@foxmail.com"))
-                //版本
+                // 版本
                 .version("1.0")
                 .build();
     }
 
     private List<ApiKey> securitySchems() {
-        //设置请求头信息
+        // 设置请求头信息
         List<ApiKey> result = new ArrayList<>();
         ApiKey apiKey = new ApiKey("Authorization", "Authorization", "header");
         result.add(apiKey);
@@ -89,7 +89,7 @@ public class SwaggerConfig {
     }
 
     private List<SecurityContext> securityContexts() {
-        //设置需要登录认证的路径
+        // 设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
         result.add(getContextByPath("/*"));
         return result;
