@@ -53,14 +53,10 @@ public class VerificationCodeController {
         log.debug(capText);
         // create the image with the text
         BufferedImage bi = captchaProducer.createImage(capText);
-        ServletOutputStream out = response.getOutputStream();
-        // write the data out
-        ImageIO.write(bi, "jpg", out);
-        try {
+        try(ServletOutputStream out = response.getOutputStream();){
+            // write the data out
+            ImageIO.write(bi, "jpg", out);
             out.flush();
-        } finally {
-            out.close();
         }
     }
-
 }
