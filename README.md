@@ -15,7 +15,6 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 | Hutool                 | 4.5.7         |
 | Junit                  | 4.13          |
 | Quartz                 | 2.3.2         |
-| guava                  | 29.0-jre      |
 | pagehelper             | 5.1.10        |
 
 前端项目：https://gitee.com/zerolinck/easy-management-ui

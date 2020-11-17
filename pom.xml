@@ -95,13 +95,6 @@
             <version>2.0.4</version>
         </dependency>
 
-        <!-- guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>29.0-jre</version>
-        </dependency>
-
         <!--Hutool Java工具包-->
         <dependency>
             <groupId>cn.hutool</groupId>

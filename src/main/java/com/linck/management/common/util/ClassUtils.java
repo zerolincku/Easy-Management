@@ -1,5 +1,6 @@
 package com.linck.management.common.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
@@ -72,17 +73,17 @@ public final class ClassUtils {
             String fileName = file.getName();
             if (file.isFile()) {
                 String className = fileName.substring(0, fileName.lastIndexOf("."));
-                if (!Strings.isNullOrEmpty(packageName)) {
+                if (!StrUtil.isBlank(packageName)) {
                     className = packageName + "." + className;
                 }
                 doAddClass(classSet, className);
             } else {
                 String subPackagePath = fileName;
-                if (!Strings.isNullOrEmpty(packagePath)) {
+                if (!StrUtil.isBlank(packagePath)) {
                     subPackagePath = packagePath + "/" + subPackagePath;
                 }
                 String subPackageName = fileName;
-                if (!Strings.isNullOrEmpty(packageName)) {
+                if (!StrUtil.isBlank(packageName)) {
                     subPackageName = packageName + "." + subPackageName;
                 }
                 addClass(classSet, subPackagePath, subPackageName);
