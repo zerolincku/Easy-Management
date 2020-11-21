@@ -29,17 +29,18 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CustomException.class)
     public Result processException(CustomException e) {
-        log.error("位置:{} -> 错误信息:{}", e.getMethod() ,e.getLocalizedMessage());
+        log.error("位置:{} -> 错误信息:{}", e.getMethod(), e.getLocalizedMessage());
         return Result.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
     }
 
     /**
      * Post参数验证异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
+    public Result ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         // 将所有的错误提示使用"，"拼接起来并返回
         StringJoiner sj = new StringJoiner("，");
         e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
@@ -55,6 +56,15 @@ public class GlobalExceptionHandler {
         e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
 
         return Result.validateFailed(sj.toString());
+    }
+
+    /**
+     * 捕获异常返回详细异常信息
+     */
+    @ExceptionHandler(Exception.class)
+    public Result exceptionHandler(Exception e) {
+        e.printStackTrace();
+        return Result.failed(e.getMessage());
     }
 
 }
