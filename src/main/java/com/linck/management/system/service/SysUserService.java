@@ -4,12 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.model.IdModel;
 import com.linck.management.common.util.JwtTokenUtils;
+import com.linck.management.system.entity.SysRole;
 import com.linck.management.system.entity.SysUser;
+import com.linck.management.system.entity.SysUserRole;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
+import com.linck.management.system.mapper.SysUserRoleMapper;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
+import com.linck.management.system.model.vo.UserRoleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -25,6 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author linck
@@ -45,6 +51,8 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     private SysUserMapper sysUserMapper;
     @Autowired
     private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
@@ -109,5 +117,18 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
             return Result.failed("当前账户已经存在");
         }
         return Result.success(sysUserMapper.insert(sysUser));
+    }
+
+    /**
+     * 查询用户角色
+     *
+     * @param model
+     * @return
+     */
+    public Result<List<UserRoleModel>> roleList(IdModel model) {
+        List<SysRole> sysRoles = sysRoleMapper.selectList(null);
+        List<SysUserRole> checkedRoleList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId()));
+        List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getName(), checkedRoleList.contains(t.getId()))).collect(Collectors.toList());
+        return Result.success(result);
     }
 }

@@ -9,6 +9,7 @@ import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
 import com.linck.management.system.model.vo.SysMenuAndButton;
+import com.linck.management.system.model.vo.UserRoleModel;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -89,7 +90,7 @@ public class SysUserController {
         return Result.success(result);
     }
 
-    @PreAuthorize("hasAuthority('role:view')")
+    @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户列表")
     @PostMapping("list")
     public Result<ListWithPage> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
@@ -103,7 +104,7 @@ public class SysUserController {
         return Result.success(result);
     }
 
-    @PreAuthorize("hasAuthority('role:update')")
+    @PreAuthorize("hasAuthority('user:update')")
     @ApiOperation("修改用户")
     @PostMapping("update")
     public Result update(@RequestBody SysUser sysUser) {
@@ -112,19 +113,26 @@ public class SysUserController {
         return Result.success("");
     }
 
-    @PreAuthorize("hasAuthority('role:add')")
+    @PreAuthorize("hasAuthority('user:add')")
     @ApiOperation("新增用户")
     @PostMapping("add")
     public Result add(@RequestBody SysUser sysUser) {
         return sysUserService.add(sysUser);
     }
 
-    @PreAuthorize("hasAuthority('role:remove')")
+    @PreAuthorize("hasAuthority('user:remove')")
     @ApiOperation("删除用户")
     @PostMapping("remove")
     public Result remove(@RequestBody @Validated IdModel idModel) {
         sysUserService.removeById(idModel.getId());
         return Result.success("");
+    }
+
+    @PreAuthorize("hasAuthority('user:view')")
+    @ApiOperation("查询用户角色列表")
+    @PostMapping("roleList")
+    public Result<List<UserRoleModel>> roleList(@RequestBody(required = false) IdModel model) {
+        return sysUserService.roleList(model);
     }
 
 }
