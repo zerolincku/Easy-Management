@@ -127,8 +127,8 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      */
     public Result<List<UserRoleModel>> roleList(IdModel model) {
         List<SysRole> sysRoles = sysRoleMapper.selectList(null);
-        List<SysUserRole> checkedRoleList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId()));
-        List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), checkedRoleList.contains(t.getId()))).collect(Collectors.toList());
+        List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(t -> t.getrId()).collect(Collectors.toList());
+        List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), roleIdList.contains(t.getId()))).collect(Collectors.toList());
         return Result.success(result);
     }
 }
