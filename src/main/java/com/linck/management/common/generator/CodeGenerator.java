@@ -203,7 +203,7 @@ public class CodeGenerator {
                 .setEntityLombokModel(useLombok)
                 // 下划线转驼峰
                 .setNaming(NamingStrategy.underline_to_camel)
-                //修改替换成你需要的表名，多个表名传数组
+                // 修改替换成你需要的表名，多个表名传数组
                 .setInclude(tableNames);
         // 使用 AR 模式
         config.setActiveRecord(true)
@@ -272,7 +272,7 @@ public class CodeGenerator {
                 .packageName("com.linck.management.system")
                 .build();
 
-        //根据表生成后台代码
+        // 根据表生成后台代码
         codeGenerator.code("");
 
     }

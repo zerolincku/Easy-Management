@@ -86,11 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 登录注册允许匿名访问
                 .antMatchers("/sys/user/login", "/sys/user/register", "/test/*")
                 .permitAll()
-                //.antMatchers("/**")//测试时全部允许访问
+                // 测试时全部允许访问
+                //.antMatchers("/**")
                 //.permitAll()
                 .anyRequest()
                 .authenticated()
-                //设置跨域, 如果不设置, 即使配置了filter, 也不会生效
+                // 设置跨域, 如果不设置, 即使配置了filter, 也不会生效
                 .and()
                 .cors();
         // 禁用缓存
