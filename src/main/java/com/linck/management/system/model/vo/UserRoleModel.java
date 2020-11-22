@@ -13,10 +13,13 @@ public class UserRoleModel {
     public UserRoleModel() {
     }
 
-    public UserRoleModel(String name, Boolean checked) {
+    public UserRoleModel(Long id, String name, Boolean checked) {
+        this.id = id;
         this.name = name;
         this.checked = checked;
     }
+
+    private Long id;
 
     @ApiModelProperty("名称")
     private String name;
