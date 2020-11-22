@@ -42,4 +42,12 @@ public class UserRoleModel {
     public void setChecked(Boolean checked) {
         this.checked = checked;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
