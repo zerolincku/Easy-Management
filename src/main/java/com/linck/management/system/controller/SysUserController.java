@@ -8,6 +8,7 @@ import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.entity.SysUser;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
+import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.model.vo.UserRoleModel;
 import com.linck.management.system.service.SysPermissionService;
@@ -131,8 +132,15 @@ public class SysUserController {
     @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户角色列表")
     @PostMapping("roleList")
-    public Result<List<UserRoleModel>> roleList(@RequestBody(required = false) IdModel model) {
+    public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdModel model) {
         return sysUserService.roleList(model);
+    }
+
+    @PreAuthorize("hasAuthority('user:update')")
+    @ApiOperation("保存用户角色列表")
+    @PostMapping("saveRoleList")
+    public Result saveRoleList(@RequestBody @Validated UserRoleSaveModel model) {
+        return sysUserService.saveRoleList(model);
     }
 
 }

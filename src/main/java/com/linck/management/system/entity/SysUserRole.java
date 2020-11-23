@@ -53,6 +53,15 @@ public class SysUserRole extends Model<SysUserRole> {
         return this.id;
     }
 
+    public SysUserRole() {
+    }
+
+    public SysUserRole(Long id, Long uId, Long rId) {
+        this.id = id;
+        this.uId = uId;
+        this.rId = rId;
+    }
+
     @Override
     public String toString() {
         return "SysUserRole{" +

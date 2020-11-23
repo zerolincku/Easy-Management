@@ -14,6 +14,7 @@ import com.linck.management.system.mapper.SysUserMapper;
 import com.linck.management.system.mapper.SysUserRoleMapper;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
+import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.vo.UserRoleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -130,5 +133,19 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(t -> t.getrId()).collect(Collectors.toList());
         List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), roleIdList.contains(t.getId()))).collect(Collectors.toList());
         return Result.success(result);
+    }
+
+    /**
+     * 保存用户角色
+     * @param model
+     * @return
+     */
+    public Result saveRoleList(UserRoleSaveModel model) {
+        List<Long> databaseRoleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(t -> t.getrId()).collect(Collectors.toList());
+        List<SysUserRole> addList = model.getRoleIdList().stream().filter(t -> !databaseRoleIdList.contains(t)).map(t -> new SysUserRole(null, model.getUserId(), t)).collect(Collectors.toList());
+        List<Long> deleteIdList = databaseRoleIdList.stream().filter(t -> !model.getRoleIdList().contains(t)).collect(Collectors.toList());
+        sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId()).in("r_id",deleteIdList));
+        Integer count = sysUserRoleMapper.insertList(addList);
+        return Result.success(count);
     }
 }
