@@ -29,8 +29,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -137,6 +135,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
     /**
      * 保存用户角色
+     *
      * @param model
      * @return
      */
@@ -144,8 +143,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         List<Long> databaseRoleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(t -> t.getrId()).collect(Collectors.toList());
         List<SysUserRole> addList = model.getRoleIdList().stream().filter(t -> !databaseRoleIdList.contains(t)).map(t -> new SysUserRole(null, model.getUserId(), t)).collect(Collectors.toList());
         List<Long> deleteIdList = databaseRoleIdList.stream().filter(t -> !model.getRoleIdList().contains(t)).collect(Collectors.toList());
-        sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId()).in("r_id",deleteIdList));
-        Integer count = sysUserRoleMapper.insertList(addList);
+        if (!deleteIdList.isEmpty()) {
+            sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId()).in("r_id", deleteIdList));
+        }
+        Integer count = 0;
+        if (!addList.isEmpty()) {
+            count = sysUserRoleMapper.insertList(addList);
+        }
         return Result.success(count);
     }
 }
