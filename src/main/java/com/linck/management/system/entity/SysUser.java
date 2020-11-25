@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,9 +25,13 @@ public class SysUser extends Model<SysUser> {
     private Long id;
 
     @ApiModelProperty(value = "账号")
+    @NotBlank(message = "账户不能为空")
+    @Length(min = 4, max = 32, message = "账户长度需要4-32个字符")
     private String account;
 
     @ApiModelProperty(value = "密码")
+    @NotBlank(message = "密码不能为空")
+    @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
     private String pwd;
 
     @ApiModelProperty(value = "状态 1-启用 0-禁用")

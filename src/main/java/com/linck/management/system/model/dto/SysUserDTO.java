@@ -15,12 +15,12 @@ public class SysUserDTO {
 
     @ApiModelProperty(value = "账号", required = true)
     @NotBlank(message = "账户不能为空")
-    @Length(min = 5, max = 32, message = "账户长度需要5-32个字符")
+    @Length(min = 4, max = 32, message = "账户长度需要4-32个字符")
     private String account;
 
     @ApiModelProperty(value = "密码", required = true)
     @NotBlank(message = "密码不能为空")
-    @Length(min = 6, max = 32, message = "密码长度需要6-32个字符")
+    @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
     private String password;
 
     @ApiModelProperty(value = "验证码-暂未使用", required = false)
