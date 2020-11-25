@@ -108,7 +108,7 @@ public class SysUserController {
     @PreAuthorize("hasAuthority('user:update')")
     @ApiOperation("修改用户")
     @PostMapping("update")
-    public Result update(@RequestBody @Validated SysUser sysUser) {
+    public Result update(@RequestBody SysUser sysUser) {
         sysUser.setCreateTime(null);
         sysUserService.updateById(sysUser);
         return Result.success("");
