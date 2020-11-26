@@ -36,10 +36,7 @@ public class SysJobController {
 
     @ApiOperation("job列表")
     @PostMapping("list")
-    public Result<ListWithPage> list(@RequestBody(required = false) SysJobDTO sysJobDTO) {
-        if (sysJobDTO == null) {
-            sysJobDTO = new SysJobDTO();
-        }
+    public Result<ListWithPage> list(@RequestBody SysJobDTO sysJobDTO) {
         // 如果没有分页参数，初始化参数
         sysJobDTO.ifNotPageSetDefault();
         List<SysJob> list = sysJobService.list(sysJobDTO);
@@ -48,6 +45,13 @@ public class SysJobController {
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
         return Result.success(result);
+    }
+
+    @ApiOperation("更新job")
+    @PostMapping("update")
+    public Result update(@RequestBody SysJob sysJob) {
+        sysJobService.updateById(sysJob);
+        return Result.success("");
     }
 
 }

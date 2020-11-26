@@ -68,7 +68,7 @@ public class SysRoleController {
     @PostMapping("permissionIdList")
     public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
         List<SysRolePermission> sysRolePermissionList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", idModel.getId()));
-        List<Long> permissionIdList = sysRolePermissionList.stream().map(t -> t.getpId()).collect(Collectors.toList());
+        List<Long> permissionIdList = sysRolePermissionList.stream().map(SysRolePermission::getpId).collect(Collectors.toList());
         return Result.success(permissionIdList);
     }
 

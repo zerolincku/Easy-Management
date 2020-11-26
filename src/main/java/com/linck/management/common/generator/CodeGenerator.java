@@ -136,7 +136,7 @@ public class CodeGenerator {
      * @param tableNames the table names
      */
     public void code(String... tableNames) {
-        codingMysql(false, false, false, this.dbUrl, this.userName, this.password, this.dir, this.xmlDir, this.packageName, tableNames);
+        codingMysql(false, false, true, this.dbUrl, this.userName, this.password, this.dir, this.xmlDir, this.packageName, tableNames);
     }
 
     /**
