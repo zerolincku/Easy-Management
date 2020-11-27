@@ -52,12 +52,12 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询角色列表")
     @PostMapping("list")
-    public Result<ListWithPage> list(@RequestBody(required = false) Page page) {
+    public Result<ListWithPage<SysRole>> list(@RequestBody(required = false) Page page) {
         // 如果没有分页参数，初始化参数
         page.ifNotPageSetDefault();
         List<SysRole> list = sysRoleService.selectByPage(page);
-        PageInfo pageInfo = new PageInfo(list);
-        ListWithPage<List> result = new ListWithPage<>();
+        PageInfo<SysRole> pageInfo = new PageInfo<>(list);
+        ListWithPage<SysRole> result = new ListWithPage<>();
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
         return Result.success(result);
@@ -68,7 +68,7 @@ public class SysRoleController {
     @PostMapping("permissionIdList")
     public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
         List<SysRolePermission> sysRolePermissionList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", idModel.getId()));
-        List<Long> permissionIdList = sysRolePermissionList.stream().map(SysRolePermission::getpId).collect(Collectors.toList());
+        List<Long> permissionIdList = sysRolePermissionList.stream().map(t -> t.getPId()).collect(Collectors.toList());
         return Result.success(permissionIdList);
     }
 

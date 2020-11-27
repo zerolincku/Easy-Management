@@ -48,11 +48,11 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
      */
     public Result saveSolePermission(RolePermissionDTO rolePermissionDTO) {
         List<SysRolePermission> databaseList = sysRolePermissionMapper.selectList(new QueryWrapper<SysRolePermission>().eq("r_id", rolePermissionDTO.getRoleId()));
-        List<Long> databasePermissionIdList = databaseList.stream().map(SysRolePermission::getpId).collect(Collectors.toList());
+        List<Long> databasePermissionIdList = databaseList.stream().map(t -> t.getPId()).collect(Collectors.toList());
         // 查找待删除的映射
-        List<Long> deleteIdList = databaseList.stream().filter(t -> !rolePermissionDTO.getPermissionIdList().contains(t.getpId())).map(t -> t.getId()).collect(Collectors.toList());
+        List<Long> deleteIdList = databaseList.stream().filter(t -> !rolePermissionDTO.getPermissionIdList().contains(t.getPId())).map(t -> t.getId()).collect(Collectors.toList());
         // 查找待添加的映射
-        List<SysRolePermission> insertList = rolePermissionDTO.getPermissionIdList().stream().filter(t -> !databasePermissionIdList.contains(t)).map(t -> new SysRolePermission(rolePermissionDTO.getRoleId(), t)).collect(Collectors.toList());
+        List<SysRolePermission> insertList = rolePermissionDTO.getPermissionIdList().stream().filter(t -> !databasePermissionIdList.contains(t)).map(t -> new SysRolePermission(null, rolePermissionDTO.getRoleId(), t)).collect(Collectors.toList());
         if (!deleteIdList.isEmpty()) {
             sysRolePermissionMapper.deleteBatchIds(deleteIdList);
         }

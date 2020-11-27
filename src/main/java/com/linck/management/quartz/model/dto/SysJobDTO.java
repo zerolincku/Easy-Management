@@ -1,6 +1,7 @@
 package com.linck.management.quartz.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @program: management
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author: linck
  * @create: 2020-10-29 21:40
  **/
+@Data
 public class SysJobDTO {
 
     @ApiModelProperty("主键id")
@@ -43,85 +45,5 @@ public class SysJobDTO {
             pageNum = 1;
             pageSize = 10;
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getJobClass() {
-        return jobClass;
-    }
-
-    public void setJobClass(String jobClass) {
-        this.jobClass = jobClass;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCron() {
-        return cron;
-    }
-
-    public void setCron(String cron) {
-        this.cron = cron;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public String getTriggerName() {
-        return triggerName;
-    }
-
-    public void setTriggerName(String triggerName) {
-        this.triggerName = triggerName;
-    }
-
-    public String getTriggerGroup() {
-        return triggerGroup;
-    }
-
-    public void setTriggerGroup(String triggerGroup) {
-        this.triggerGroup = triggerGroup;
-    }
-
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
     }
 }

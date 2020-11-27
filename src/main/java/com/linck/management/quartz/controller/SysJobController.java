@@ -36,12 +36,12 @@ public class SysJobController {
 
     @ApiOperation("job列表")
     @PostMapping("list")
-    public Result<ListWithPage> list(@RequestBody SysJobDTO sysJobDTO) {
+    public Result<ListWithPage<SysJob>> list(@RequestBody SysJobDTO sysJobDTO) {
         // 如果没有分页参数，初始化参数
         sysJobDTO.ifNotPageSetDefault();
         List<SysJob> list = sysJobService.list(sysJobDTO);
-        PageInfo pageInfo = new PageInfo(list);
-        ListWithPage<List> result = new ListWithPage<>();
+        PageInfo<SysJob> pageInfo = new PageInfo<>(list);
+        ListWithPage<SysJob> result = new ListWithPage<>();
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
         return Result.success(result);

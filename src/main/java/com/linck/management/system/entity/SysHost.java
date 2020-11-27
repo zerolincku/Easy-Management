@@ -5,8 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.util.Date;
  * @author linck
  * @create 2020-11-15
  */
+@Data
 @ApiModel(value = "SysHost对象", description = "host表")
-public class SysHost extends Model<SysHost> {
+public class SysHost {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,59 +37,4 @@ public class SysHost extends Model<SysHost> {
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "SysHost{" +
-                "id=" + id +
-                ", host=" + host +
-                ", description=" + description +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                "}";
-    }
 }

@@ -1,6 +1,7 @@
 package com.linck.management.system.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author: linck
  * @create: 2020-10-27 21:49
  **/
+@Data
 public class SysPermissionDTO {
 
     @ApiModelProperty("主键id")
@@ -43,75 +45,4 @@ public class SysPermissionDTO {
     @ApiModelProperty("排序")
     private Integer sort;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
 }

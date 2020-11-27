@@ -128,7 +128,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      */
     public Result<List<UserRoleModel>> roleList(IdModel model) {
         List<SysRole> sysRoles = sysRoleMapper.selectList(null);
-        List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(SysUserRole::getrId).collect(Collectors.toList());
+        List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(t -> t.getRId()).collect(Collectors.toList());
         List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), roleIdList.contains(t.getId()))).collect(Collectors.toList());
         return Result.success(result);
     }
@@ -140,7 +140,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      * @return
      */
     public Result saveRoleList(UserRoleSaveModel model) {
-        List<Long> databaseRoleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(SysUserRole::getrId).collect(Collectors.toList());
+        List<Long> databaseRoleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(t -> t.getRId()).collect(Collectors.toList());
         List<SysUserRole> addList = model.getRoleIdList().stream().filter(t -> !databaseRoleIdList.contains(t)).map(t -> new SysUserRole(null, model.getUserId(), t)).collect(Collectors.toList());
         List<Long> deleteIdList = databaseRoleIdList.stream().filter(t -> !model.getRoleIdList().contains(t)).collect(Collectors.toList());
         if (!deleteIdList.isEmpty()) {

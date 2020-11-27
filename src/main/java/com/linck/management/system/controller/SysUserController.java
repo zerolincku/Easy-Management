@@ -94,12 +94,12 @@ public class SysUserController {
     @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户列表")
     @PostMapping("list")
-    public Result<ListWithPage> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
+    public Result<ListWithPage<SysUser>> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
         // 如果没有分页参数，初始化参数
         sysUserSearchDTO.ifNotPageSetDefault();
         List<SysUser> list = sysUserService.selectList(sysUserSearchDTO);
-        PageInfo pageInfo = new PageInfo(list);
-        ListWithPage<List> result = new ListWithPage<>();
+        PageInfo<SysUser> pageInfo = new PageInfo<>(list);
+        ListWithPage<SysUser> result = new ListWithPage<>();
         result.setList(list);
         result.setTotal(pageInfo.getTotal());
         return Result.success(result);

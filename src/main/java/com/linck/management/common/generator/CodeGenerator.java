@@ -206,7 +206,7 @@ public class CodeGenerator {
                 // 修改替换成你需要的表名，多个表名传数组
                 .setInclude(tableNames);
         // 使用 AR 模式
-        config.setActiveRecord(true)
+        config.setActiveRecord(false)
                 // 设置头注释的 author
                 .setAuthor("linck")
                 // 项目输出路径
