@@ -8,8 +8,7 @@ import com.linck.management.quartz.model.dto.SysJobDTO;
 import com.linck.management.quartz.service.SysJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,12 +23,11 @@ import java.util.List;
  * @author: linck
  * @create: 2020-10-29 21:35
  **/
+@Slf4j
 @Api(tags = "Job管理")
 @RestController
 @RequestMapping("sysJob")
 public class SysJobController {
-
-    private static final Logger log = LoggerFactory.getLogger(SysJobController.class);
 
     @Autowired
     private SysJobService sysJobService;

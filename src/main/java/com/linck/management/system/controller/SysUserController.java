@@ -15,8 +15,7 @@ import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,12 +38,11 @@ import java.util.Map;
  * @author: linck
  * @create: 2020-08-09 17:43
  **/
+@Slf4j
 @Api(tags = "系统用户")
 @RestController
 @RequestMapping("/sys/user")
 public class SysUserController {
-
-    private static final Logger log = LoggerFactory.getLogger(SysUserController.class);
 
     @Autowired
     private SysPermissionService sysPermissionService;

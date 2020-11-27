@@ -1,16 +1,16 @@
 package com.linck.management.common.util;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.google.common.base.Strings;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -20,16 +20,14 @@ import java.util.jar.JarFile;
  * @author: linck
  * @create: 2020-10-13 21:49
  **/
+@Slf4j
 public final class ClassUtils {
-
-    private static final Logger log = LoggerFactory.getLogger(ClassUtils.class);
-
-    private ClassUtils() {}
-
+    private ClassUtils() {
+    }
 
     /**
      * 获取某个包下的所有类
-     * */
+     */
     public static Set<Class<?>> getClasses(String packageName) throws IOException {
         Set<Class<?>> classSet = new HashSet<>();
         Enumeration<?> urls = Thread.currentThread().getContextClassLoader().getResources(packageName.replace(".", "/"));

@@ -14,8 +14,7 @@ import com.linck.management.system.service.SysRolePermissionService;
 import com.linck.management.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -33,12 +32,11 @@ import java.util.stream.Collectors;
  * @author: linck
  * @create: 2020-11-01 21:23
  **/
+@Slf4j
 @Api(tags = "系统角色")
 @RestController
 @RequestMapping("sysRole")
 public class SysRoleController {
-
-    private static final Logger log = LoggerFactory.getLogger(SysRoleController.class);
 
     @Autowired
     private SysRoleService sysRoleService;

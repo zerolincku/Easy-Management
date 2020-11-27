@@ -3,8 +3,7 @@ package com.linck.management.common.handler;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.api.ResultCodeEnum;
 import com.linck.management.common.exception.CustomException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,11 +18,9 @@ import java.util.StringJoiner;
  * @author: linck
  * @create: 2020-08-09 19:46
  **/
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     /**
      * 捕获自定义异常
      */

@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.component.JwtAuthenticationTokenFilter;
 import com.linck.management.common.component.RestAuthenticationEntryPoint;
 import com.linck.management.common.component.RestfulAccessDeniedHandler;
+import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.entity.SysUser;
-import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,13 +35,12 @@ import java.util.List;
  * @author: linck
  * @create: 2020-08-09 23:57
  **/
+@Slf4j
 @Configuration
 @EnableWebSecurity
 // 启用注解安全认证
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     private SysPermissionService sysPermissionService;

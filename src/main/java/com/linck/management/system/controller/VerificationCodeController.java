@@ -4,8 +4,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 
 /**
@@ -24,12 +22,11 @@ import java.awt.image.BufferedImage;
  * @author: linck
  * @create: 2020-10-03 15:32
  **/
+@Slf4j
 @Api(tags = "验证码控制器")
 @Controller
 @RequestMapping("/verification")
 public class VerificationCodeController {
-
-    private static final Logger log = LoggerFactory.getLogger(VerificationCodeController.class);
 
     @Autowired
     private Producer captchaProducer;
@@ -53,7 +50,7 @@ public class VerificationCodeController {
         log.debug(capText);
         // create the image with the text
         BufferedImage bi = captchaProducer.createImage(capText);
-        try(ServletOutputStream out = response.getOutputStream();){
+        try (ServletOutputStream out = response.getOutputStream();) {
             // write the data out
             ImageIO.write(bi, "jpg", out);
             out.flush();

@@ -9,8 +9,7 @@ import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.mapper.SysPermissionMapper;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.model.vo.SysPermissionVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,9 @@ import java.util.Optional;
  * @author linck
  * @create 2020-08-09
  */
+@Slf4j
 @Service
 public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPermission> {
-
-    private static final Logger log = LoggerFactory.getLogger(SysPermissionService.class);
 
     @Autowired
     private SysPermissionMapper sysPermissionMapper;

@@ -16,8 +16,7 @@ import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.vo.UserRoleModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,11 +36,9 @@ import java.util.stream.Collectors;
  * @author linck
  * @create 2020-08-09
  */
+@Slf4j
 @Service
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
-
-    private static final Logger log = LoggerFactory.getLogger(SysUserService.class);
-
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
