@@ -29,7 +29,7 @@ public final class ClassUtils {
      * 获取某个包下的所有类
      */
     public static Set<Class<?>> getClasses(String packageName) throws IOException {
-        log.info("加载{}包下的类");
+        log.info("加载{}包下的类", packageName);
         Set<Class<?>> classSet = new HashSet<>();
         Enumeration<?> urls = Thread.currentThread().getContextClassLoader().getResources(packageName.replace(".", "/"));
         while (urls.hasMoreElements()) {
