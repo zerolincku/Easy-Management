@@ -1,5 +1,6 @@
 package com.linck.management.quartz.component;
 
+import cn.hutool.core.util.ClassUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.util.ClassUtils;
 import com.linck.management.quartz.entity.SysJob;
@@ -29,7 +30,8 @@ public class JobInitialize implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.debug("开始初始化job包下的class");
-        Set<Class<?>> classSet = ClassUtils.getClasses("com.linck.management.quartz.job");
+        // Set<Class<?>> classSet = ClassUtils.getClasses("com.linck.management.quartz.job");
+        Set<Class<?>> classSet = ClassUtil.scanPackage("com.linck.management.quartz.job");
         classSet.forEach(clazz -> {
             log.debug("加载类:{} {}", clazz.getName(), clazz.getSimpleName());
             Integer count = sysJobMapper.selectCount(new QueryWrapper<SysJob>().eq("job_class", clazz.getName()));
