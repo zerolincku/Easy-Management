@@ -2,7 +2,6 @@ package com.linck.management.quartz.component;
 
 import cn.hutool.core.util.ClassUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.linck.management.common.util.ClassUtils;
 import com.linck.management.quartz.entity.SysJob;
 import com.linck.management.quartz.mapper.SysJobMapper;
 import lombok.extern.slf4j.Slf4j;
