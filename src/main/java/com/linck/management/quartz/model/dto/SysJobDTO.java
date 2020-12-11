@@ -43,7 +43,7 @@ public class SysJobDTO {
     public void ifNotPageSetDefault() {
         if (pageNum == null || pageSize == null) {
             pageNum = 1;
-            pageSize = 10;
+            pageSize = 1000;
         }
     }
 }
