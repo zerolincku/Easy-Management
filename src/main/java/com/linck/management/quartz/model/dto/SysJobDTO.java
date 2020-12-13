@@ -33,8 +33,8 @@ public class SysJobDTO {
     @ApiModelProperty("触发器name)")
     private String triggerName;
 
-    @ApiModelProperty("触发器组")
-    private String triggerGroup;
+    @ApiModelProperty("组")
+    private String group;
 
     private Integer pageNum;
 

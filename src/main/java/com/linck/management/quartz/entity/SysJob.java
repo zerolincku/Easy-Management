@@ -40,8 +40,8 @@ public class SysJob {
     @ApiModelProperty(value = "触发器name")
     private String triggerName;
 
-    @ApiModelProperty(value = "触发器组")
-    private String triggerGroup;
+    @ApiModelProperty(value = "组")
+    private String group;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
