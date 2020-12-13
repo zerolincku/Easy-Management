@@ -48,6 +48,8 @@ public class SysJobController {
     @ApiOperation("更新job")
     @PostMapping("update")
     public Result update(@RequestBody SysJob sysJob) {
+        // 不允许修改jobClass
+        sysJob.setJobClass(null);
         sysJobService.updateById(sysJob);
         return Result.success("");
     }
