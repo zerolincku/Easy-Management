@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @Api(tags = "Job管理")
 @RestController
-@RequestMapping("sysJob")
+@RequestMapping("sys/job")
 public class SysJobController {
 
     @Autowired
