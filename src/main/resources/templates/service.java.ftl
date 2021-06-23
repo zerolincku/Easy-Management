@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
 /**
 * ${table.comment!}Service
