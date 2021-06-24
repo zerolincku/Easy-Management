@@ -41,7 +41,7 @@ public class SysJob {
     private String triggerName;
 
     @ApiModelProperty(value = "组")
-    private String group;
+    private String groupName;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;

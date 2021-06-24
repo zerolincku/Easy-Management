@@ -19,11 +19,11 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , job_class, name, description, cron, state, trigger_name, `group`, create_time, update_time
+        , job_class, name, description, cron, state, trigger_name, group_name, create_time, update_time
     </sql>
 
     <select id="list" resultMap="BaseResultMap" parameterType="com.linck.management.quartz.model.dto.SysJobDTO">
-        SELECT id, job_class, name, description, cron, state, trigger_name, `group`, create_time, update_time FROM
+        SELECT id, job_class, name, description, cron, state, trigger_name, group_name, create_time, update_time FROM
         sys_job
         <where>
             <if test="id != null">

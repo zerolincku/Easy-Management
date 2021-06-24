@@ -2,6 +2,7 @@ package com.linck.management.quartz.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.model.IdModel;
 import com.linck.management.common.model.ListWithPage;
 import com.linck.management.quartz.entity.SysJob;
 import com.linck.management.quartz.model.dto.SysJobDTO;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,12 +47,27 @@ public class SysJobController {
         return Result.success(result);
     }
 
+    @ApiOperation("新增job")
+    @PostMapping("add")
+    public Result add(@RequestBody SysJob sysJob) {
+        sysJob.setCreateTime(new Date());
+        sysJob.setUpdateTime(new Date());
+        sysJobService.save(sysJob);
+        return Result.success(sysJob.getId());
+    }
+
     @ApiOperation("更新job")
     @PostMapping("update")
     public Result update(@RequestBody SysJob sysJob) {
-        // 不允许修改jobClass
-        sysJob.setJobClass(null);
+        sysJob.setUpdateTime(new Date());
         sysJobService.updateById(sysJob);
+        return Result.success("");
+    }
+
+    @ApiOperation("删除job")
+    @PostMapping("remove")
+    public Result remove(@RequestBody IdModel idModel) {
+        sysJobService.removeById(idModel.getId());
         return Result.success("");
     }
 
