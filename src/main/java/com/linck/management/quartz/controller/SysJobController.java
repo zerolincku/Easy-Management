@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,7 @@ public class SysJobController {
 
     @ApiOperation("新增job")
     @PostMapping("add")
+    @PreAuthorize("hasAuthority('job:add')")
     public Result add(@RequestBody SysJob sysJob) {
         sysJob.setCreateTime(new Date());
         sysJob.setUpdateTime(new Date());
@@ -62,6 +64,7 @@ public class SysJobController {
 
     @ApiOperation("更新job")
     @PostMapping("update")
+    @PreAuthorize("hasAuthority('job:update')")
     public Result update(@RequestBody SysJob sysJob) {
         sysJob.setUpdateTime(new Date());
         sysJobService.updateById(sysJob);
@@ -70,6 +73,7 @@ public class SysJobController {
 
     @ApiOperation("删除job")
     @PostMapping("remove")
+    @PreAuthorize("hasAuthority('job:remove')")
     public Result remove(@RequestBody IdModel idModel) {
         sysJobService.removeById(idModel.getId());
         return Result.success("");
