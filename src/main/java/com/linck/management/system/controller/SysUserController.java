@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +51,8 @@ public class SysUserController {
     private SysUserService sysUserService;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
@@ -108,6 +111,9 @@ public class SysUserController {
     @PostMapping("update")
     public Result update(@RequestBody SysUser sysUser) {
         sysUser.setCreateTime(null);
+        // 将密码进行加密操作
+        String encodePassword = passwordEncoder.encode(sysUser.getPwd());
+        sysUser.setPwd(encodePassword);
         sysUserService.updateById(sysUser);
         return Result.success("");
     }

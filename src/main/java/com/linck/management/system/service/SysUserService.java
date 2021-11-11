@@ -114,6 +114,9 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         if (count > 0) {
             return Result.failed("当前账户已经存在");
         }
+        // 将密码进行加密操作
+        String encodePassword = passwordEncoder.encode(sysUser.getPwd());
+        sysUser.setPwd(encodePassword);
         return Result.success(sysUserMapper.insert(sysUser));
     }
 
