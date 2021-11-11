@@ -16,13 +16,14 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Component
 public class QuartzStarter {
+
     @Autowired
     private Scheduler scheduler;
 
     @PostConstruct
     public void init() {
-        log.debug("QuartzConfig PostConstruct Init");
-        // JobUtils.createJobByCron(scheduler,"testJob","Test", "0 */1 * * * ?",TestJob.class);
+        log.info("QuartzConfig PostConstruct Init");
+        // JobUtils.createJobByCron(scheduler, "TestJob", "Test", "0 */1 * * * ?", TestJob.class);
     }
 
 }

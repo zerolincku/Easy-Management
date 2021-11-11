@@ -10,6 +10,7 @@ import com.linck.management.quartz.service.SysJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,9 @@ import java.util.List;
 @RestController
 @RequestMapping("sys/job")
 public class SysJobController {
+
+    @Autowired
+    private Scheduler scheduler;
 
     @Autowired
     private SysJobService sysJobService;
@@ -68,6 +72,20 @@ public class SysJobController {
     @PostMapping("remove")
     public Result remove(@RequestBody IdModel idModel) {
         sysJobService.removeById(idModel.getId());
+        return Result.success("");
+    }
+
+    @ApiOperation("启动Job")
+    @PostMapping("start")
+    public Result start(@RequestBody IdModel idModel) {
+        sysJobService.start(idModel.getId());
+        return Result.success("");
+    }
+
+    @ApiOperation("停止Job")
+    @PostMapping("stop")
+    public Result stop(@RequestBody IdModel idModel) {
+        sysJobService.stop(idModel.getId());
         return Result.success("");
     }
 
