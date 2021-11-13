@@ -1,11 +1,16 @@
 package com.linck.management.quartz.component;
 
+import com.linck.management.common.constant.StateEnum;
+import com.linck.management.quartz.entity.SysJob;
+import com.linck.management.quartz.mapper.SysJobMapper;
+import com.linck.management.quartz.util.JobUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @program: management
@@ -19,11 +24,20 @@ public class QuartzStarter {
 
     @Autowired
     private Scheduler scheduler;
+    @Autowired
+    private SysJobMapper sysJobMapper;
 
     @PostConstruct
     public void init() {
-        log.info("QuartzConfig PostConstruct Init");
-        // JobUtils.createJobByCron(scheduler, "TestJob", "Test", "0 */1 * * * ?", TestJob.class);
+        if (log.isDebugEnabled()) {
+            log.debug("QuartzConfig PostConstruct Init");
+        }
+        List<SysJob> sysJobList = sysJobMapper.list(null);
+        sysJobList.forEach(sysJob -> {
+            if (StateEnum.ENABLE.getState().equals(sysJob.getState())) {
+                JobUtils.createJobByCron(scheduler, sysJob);
+            }
+        });
     }
 
 }

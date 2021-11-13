@@ -38,13 +38,7 @@ public class SysJobService extends ServiceImpl<SysJobMapper, SysJob> {
 
     public void start(Long id) {
         SysJob sysJob = sysJobMapper.selectById(id);
-        Class jobClass = null;
-        try {
-            jobClass = Class.forName(sysJob.getJobClass());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        JobUtils.createJobByCron(scheduler, sysJob.getName(), sysJob.getGroupName(), sysJob.getCron(), jobClass);
+        JobUtils.createJobByCron(scheduler, sysJob);
         sysJob.setState(StateEnum.ENABLE.getState());
         sysJobMapper.updateById(sysJob);
     }

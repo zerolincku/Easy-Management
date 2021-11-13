@@ -1,5 +1,6 @@
 package com.linck.management.quartz.util;
 
+import com.linck.management.quartz.entity.SysJob;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -34,6 +35,22 @@ public class JobUtils {
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(name, group).startAt(new Date(startAtTime)).build();
         createJob(scheduler, name, group, trigger, jobBean);
 
+    }
+
+    /**
+     * @param scheduler quartz调度器
+     * @param sysJob    Job实例
+     */
+    @SneakyThrows
+    public static void createJobByCron(Scheduler scheduler, SysJob sysJob) {
+        Class jobClass;
+        try {
+            jobClass = Class.forName(sysJob.getJobClass());
+        } catch (ClassNotFoundException e) {
+            log.error("获取 Job Class 失败");
+            throw e;
+        }
+        createJobByCron(scheduler, sysJob.getName(), sysJob.getGroupName(), sysJob.getCron(), jobClass);
     }
 
     /**

@@ -29,7 +29,6 @@ public class JobInitialize implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.debug("开始初始化job包下的class");
-        // Set<Class<?>> classSet = ClassUtils.getClasses("com.linck.management.quartz.job");
         Set<Class<?>> classSet = ClassUtil.scanPackage("com.linck.management.quartz.job");
         classSet.forEach(clazz -> {
             log.debug("加载类:{} {}", clazz.getName(), clazz.getSimpleName());
