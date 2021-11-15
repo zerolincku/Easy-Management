@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.system.mapper.SysRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysRole">
+    <resultMap id="BaseResultMap" type="com.linck.management.system.model.entity.SysRole">
         <id column="id" property="id"/>
         <result column="value" property="value"/>
         <result column="name" property="name"/>
@@ -15,7 +15,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, value, name, description, state, create_time, update_time
+        id
+        , value, name, description, state, create_time, update_time
     </sql>
 
 </mapper>

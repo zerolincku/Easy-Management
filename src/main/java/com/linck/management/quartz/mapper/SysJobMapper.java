@@ -1,8 +1,8 @@
 package com.linck.management.quartz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.linck.management.quartz.entity.SysJob;
 import com.linck.management.quartz.model.dto.SysJobDTO;
+import com.linck.management.quartz.model.entity.SysJob;
 
 import java.util.List;
 

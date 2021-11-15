@@ -1,8 +1,8 @@
 package com.linck.management.quartz.component;
 
-import com.linck.management.common.constant.StateEnum;
-import com.linck.management.quartz.entity.SysJob;
+import com.linck.management.common.model.constant.StateEnum;
 import com.linck.management.quartz.mapper.SysJobMapper;
+import com.linck.management.quartz.model.entity.SysJob;
 import com.linck.management.quartz.util.JobUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;

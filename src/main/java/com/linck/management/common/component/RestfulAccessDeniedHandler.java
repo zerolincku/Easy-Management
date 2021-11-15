@@ -2,7 +2,7 @@ package com.linck.management.common.component;
 
 import cn.hutool.json.JSONUtil;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.constant.Constans;
+import com.linck.management.common.model.constant.Constans;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

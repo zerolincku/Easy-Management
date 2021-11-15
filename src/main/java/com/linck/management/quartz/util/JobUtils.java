@@ -1,6 +1,6 @@
 package com.linck.management.quartz.util;
 
-import com.linck.management.quartz.entity.SysJob;
+import com.linck.management.quartz.model.entity.SysJob;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;

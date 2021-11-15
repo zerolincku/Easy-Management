@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.system.mapper.SysHostMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysHost">
+    <resultMap id="BaseResultMap" type="com.linck.management.system.model.entity.SysHost">
         <id column="id" property="id"/>
         <result column="host" property="host"/>
         <result column="description" property="description"/>
@@ -13,7 +13,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, host, description, create_time, update_time
+        id
+        , host, description, create_time, update_time
     </sql>
 
 </mapper>

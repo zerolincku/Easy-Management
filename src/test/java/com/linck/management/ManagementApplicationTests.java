@@ -1,8 +1,8 @@
 package com.linck.management;
 
 
-import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.mapper.SysPermissionMapper;
+import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.service.SysUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.system.mapper.SysRolePermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysRolePermission">
+    <resultMap id="BaseResultMap" type="com.linck.management.system.model.entity.SysRolePermission">
         <id column="id" property="id"/>
         <result column="r_id" property="rId"/>
         <result column="p_id" property="pId"/>
@@ -11,7 +11,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, r_id, p_id
+        id
+        , r_id, p_id
     </sql>
 
     <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="false">

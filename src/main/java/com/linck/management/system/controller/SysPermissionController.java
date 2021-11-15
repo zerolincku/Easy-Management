@@ -2,12 +2,12 @@ package com.linck.management.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.constant.StateEnum;
 import com.linck.management.common.model.IdModel;
 import com.linck.management.common.model.StateModel;
+import com.linck.management.common.model.constant.StateEnum;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
-import com.linck.management.system.entity.SysPermission;
 import com.linck.management.system.model.dto.SysPermissionDTO;
+import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
 import io.swagger.annotations.Api;

@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.system.mapper.SysPermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysPermission">
+    <resultMap id="BaseResultMap" type="com.linck.management.system.model.entity.SysPermission">
         <id column="id" property="id"/>
         <result column="pid" property="pid"/>
         <result column="name" property="name"/>
@@ -19,15 +19,15 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pid, name, value, type, icon, url, state, sort, create_time, update_time
+        id
+        , pid, name, value, type, icon, url, state, sort, create_time, update_time
     </sql>
 
     <select id="listByUserId" parameterType="long" resultMap="BaseResultMap">
-        select
-            c.id as id,
-            c.pid as pid,
-            c.name as name,
-            c.value as value,
+        select c.id   as id,
+               c.pid  as pid,
+               c.name as name,
+               c.value as value,
             c.type as type,
             c.icon as icon,
             c.url as url,
@@ -37,16 +37,17 @@
             c.update_time as update_time
         from
             sys_user as a
-            LEFT JOIN sys_user_role as ab ON a.id = ab.u_id
+            LEFT JOIN sys_user_role as ab
+        ON a.id = ab.u_id
             LEFT JOIN sys_role as b ON ab.r_id = b.id
             LEFT JOIN sys_role_permission as bc ON b.id = bc.r_id
             LEFT JOIN sys_permission as c ON bc.p_id = c.id
         WHERE
             a.state = 1
-            AND b.state = 1
-            AND c.state = 1
-            AND a.id = #{id}
+          AND b.state = 1
+          AND c.state = 1
+          AND a.id = #{id}
         ORDER BY
-            c.type,c.sort
+            c.type, c.sort
     </select>
 </mapper>

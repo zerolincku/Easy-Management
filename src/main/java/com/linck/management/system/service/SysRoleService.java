@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.Page;
-import com.linck.management.system.entity.SysRole;
-import com.linck.management.system.entity.SysRolePermission;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysRolePermissionMapper;
 import com.linck.management.system.model.dto.RolePermissionDTO;
+import com.linck.management.system.model.entity.SysRole;
+import com.linck.management.system.model.entity.SysRolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

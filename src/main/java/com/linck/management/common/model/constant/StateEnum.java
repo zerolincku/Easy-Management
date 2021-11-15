@@ -1,4 +1,4 @@
-package com.linck.management.common.constant;
+package com.linck.management.common.model.constant;
 
 /**
  * @program: MyManagement
@@ -19,7 +19,7 @@ public enum StateEnum {
 
     private Integer state;
 
-    StateEnum(Integer state){
+    StateEnum(Integer state) {
         this.state = state;
     }
 

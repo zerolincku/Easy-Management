@@ -2,10 +2,10 @@ package com.linck.management.quartz.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
-import com.linck.management.common.constant.StateEnum;
-import com.linck.management.quartz.entity.SysJob;
+import com.linck.management.common.model.constant.StateEnum;
 import com.linck.management.quartz.mapper.SysJobMapper;
 import com.linck.management.quartz.model.dto.SysJobDTO;
+import com.linck.management.quartz.model.entity.SysJob;
 import com.linck.management.quartz.util.JobUtils;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;

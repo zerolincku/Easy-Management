@@ -3,17 +3,18 @@
 <mapper namespace="com.linck.management.system.mapper.SysJobLogMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysJobLog">
-        <id column="id" property="id" />
-        <result column="msg" property="msg" />
-        <result column="result" property="result" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+    <resultMap id="BaseResultMap" type="com.linck.management.quartz.model.entity.SysJobLog">
+        <id column="id" property="id"/>
+        <result column="msg" property="msg"/>
+        <result column="result" property="result"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, msg, result, create_time, update_time
+        id
+        , msg, result, create_time, update_time
     </sql>
 
 </mapper>

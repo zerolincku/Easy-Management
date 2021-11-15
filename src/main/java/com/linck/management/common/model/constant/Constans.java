@@ -1,4 +1,4 @@
-package com.linck.management.common.constant;
+package com.linck.management.common.model.constant;
 
 /**
  * @program: MyManagement

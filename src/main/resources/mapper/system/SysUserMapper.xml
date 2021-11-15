@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.system.mapper.SysUserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.system.entity.SysUser">
+    <resultMap id="BaseResultMap" type="com.linck.management.system.model.entity.SysUser">
         <id column="id" property="id"/>
         <result column="account" property="account"/>
         <result column="pwd" property="pwd"/>
@@ -14,7 +14,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, account, pwd, state, create_time, update_time
+        id
+        , account, pwd, state, create_time, update_time
     </sql>
 
     <!-- 不返回密码 -->

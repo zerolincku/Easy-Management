@@ -3,7 +3,7 @@
 <mapper namespace="com.linck.management.quartz.mapper.SysJobMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.linck.management.quartz.entity.SysJob">
+    <resultMap id="BaseResultMap" type="com.linck.management.quartz.model.entity.SysJob">
         <id column="id" property="id"/>
         <result column="job_class" property="jobClass"/>
         <result column="name" property="name"/>

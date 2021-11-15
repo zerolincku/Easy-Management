@@ -1,4 +1,4 @@
-package com.linck.management.quartz.entity;
+package com.linck.management.quartz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

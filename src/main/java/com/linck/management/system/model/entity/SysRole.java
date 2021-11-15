@@ -1,22 +1,22 @@
-package com.linck.management.system.entity;
+package com.linck.management.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
+ * 系统角色
+ *
  * @author linck
  * @create 2020-11-04
  */
 @Data
-@ApiModel(value = "SysUser对象")
-public class SysUser {
+@ApiModel(value = "SysRole对象", description = "系统角色")
+public class SysRole {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,15 +24,14 @@ public class SysUser {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "账号")
-    @NotBlank(message = "账户不能为空")
-    @Length(min = 4, max = 32, message = "账户长度需要4-32个字符")
-    private String account;
+    @ApiModelProperty(value = "英文值")
+    private String value;
 
-    @ApiModelProperty(value = "密码")
-    @NotBlank(message = "密码不能为空")
-    @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
-    private String pwd;
+    @ApiModelProperty(value = "中文名称")
+    private String name;
+
+    @ApiModelProperty(value = "描述")
+    private String description;
 
     @ApiModelProperty(value = "状态 1-启用 0-禁用")
     private Integer state;

@@ -1,8 +1,8 @@
 package com.linck.management.common.model;
 
-import com.linck.management.common.constant.StateEnum;
-import com.linck.management.system.entity.SysPermission;
-import com.linck.management.system.entity.SysUser;
+import com.linck.management.common.model.constant.StateEnum;
+import com.linck.management.system.model.entity.SysPermission;
+import com.linck.management.system.model.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,9 +25,10 @@ public class SysUserDetails implements UserDetails {
 
     /**
      * 获取当前登录用户信息
+     *
      * @return
      */
-    public SysUser getSysUser(){
+    public SysUser getSysUser() {
         return sysUser;
     }
 

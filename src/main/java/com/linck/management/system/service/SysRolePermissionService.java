@@ -1,8 +1,8 @@
 package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.linck.management.system.entity.SysRolePermission;
 import com.linck.management.system.mapper.SysRolePermissionMapper;
+import com.linck.management.system.model.entity.SysRolePermission;
 import org.springframework.stereotype.Service;
 
 /**
