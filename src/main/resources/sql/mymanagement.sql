@@ -1,6 +1,4 @@
 /*
- Navicat Premium Data Transfer
-
  Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 50729
@@ -260,6 +258,20 @@ CREATE TABLE `sys_user_role`
 -- ----------------------------
 INSERT INTO `sys_user_role`
 VALUES (1, 1, 1);
+
+-- ----------------------------
+-- Table structure for sys_job_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_job_log`;
+CREATE TABLE `sys_job_log`
+(
+    `id`          bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `msg`         varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '描述',
+    `result`      tinyint(4) NOT NULL DEFAULT 1 COMMENT '结果 1-成功 0-失败',
+    `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '创建时间',
+    `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 SET
 FOREIGN_KEY_CHECKS = 1;

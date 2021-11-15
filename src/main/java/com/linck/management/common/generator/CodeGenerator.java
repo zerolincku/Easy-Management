@@ -253,7 +253,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         // maven 工程 main 包的全路径
-        final String mainDir = "E:\\Workspaces\\IDEA\\Easy-Management\\src\\main\\";
+        final String mainDir = "./src/main/";
 
         CodeGenerator.ConfigBuilder builder = new CodeGenerator.ConfigBuilder();
 
