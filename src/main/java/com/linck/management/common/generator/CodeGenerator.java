@@ -273,7 +273,7 @@ public class CodeGenerator {
                 .build();
 
         // 根据表生成后台代码
-        codeGenerator.code("");
+        codeGenerator.code("sys_job_log");
 
     }
 }
