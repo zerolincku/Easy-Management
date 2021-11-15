@@ -1,4 +1,4 @@
-package com.linck.management.quartz.util;
+package com.linck.management.quartz.job;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;

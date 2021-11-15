@@ -1,6 +1,5 @@
 package com.linck.management.quartz.job;
 
-import com.linck.management.quartz.util.AbstractJob;
 import lombok.extern.slf4j.Slf4j;
 
 /**
