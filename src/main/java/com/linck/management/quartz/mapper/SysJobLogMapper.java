@@ -1,4 +1,4 @@
-package com.linck.management.system.mapper;
+package com.linck.management.quartz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.linck.management.quartz.model.entity.SysJobLog;

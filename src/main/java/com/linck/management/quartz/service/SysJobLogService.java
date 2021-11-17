@@ -1,8 +1,8 @@
-package com.linck.management.system.service;
+package com.linck.management.quartz.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.linck.management.quartz.mapper.SysJobLogMapper;
 import com.linck.management.quartz.model.entity.SysJobLog;
-import com.linck.management.system.mapper.SysJobLogMapper;
 import org.springframework.stereotype.Service;
 
 /**
