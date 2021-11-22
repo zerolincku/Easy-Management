@@ -29,6 +29,9 @@ public class SysJobLog implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty(value = "job的Id")
+    private Long jobId;
+
     @ApiModelProperty(value = "描述")
     private String msg;
 

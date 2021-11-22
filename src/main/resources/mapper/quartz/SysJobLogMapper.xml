@@ -26,6 +26,9 @@
             <if test="id != null">
                 AND id = #{id}
             </if>
+            <if test="jobId != null">
+                AND job_id = #{jobId}
+            </if>
             <if test="msg != null and msg != ''">
                 AND msg like #{msg}
             </if>

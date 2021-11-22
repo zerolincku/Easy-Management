@@ -16,6 +16,9 @@ public class SysJobLogDTO extends PageDTO {
     @ApiModelProperty(value = "主键id")
     private Long id;
 
+    @ApiModelProperty(value = "job的Id")
+    private Long jobId;
+
     @ApiModelProperty(value = "描述")
     private String msg;
 

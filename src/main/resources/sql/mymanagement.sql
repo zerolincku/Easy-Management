@@ -265,7 +265,8 @@ VALUES (1, 1, 1);
 DROP TABLE IF EXISTS `sys_job_log`;
 CREATE TABLE `sys_job_log`
 (
-    `id`          bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `id`          bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `job_id`      bigint(20) UNSIGNED NOT NULL COMMENT 'JobId',
     `msg`         varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '描述',
     `result`      tinyint(4) NOT NULL DEFAULT 1 COMMENT '结果 1-成功 0-失败',
     `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '创建时间',
