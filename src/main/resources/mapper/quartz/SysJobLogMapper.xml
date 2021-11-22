@@ -14,7 +14,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , msg, result, create_time, update_time
+        , job_id ,msg, result, spend_time, create_time
     </sql>
 
     <select id="list" resultMap="BaseResultMap" parameterType="com.linck.management.quartz.model.dto.SysJobLogDTO">

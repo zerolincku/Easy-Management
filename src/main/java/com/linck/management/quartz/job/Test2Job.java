@@ -11,8 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Test2Job extends AbstractJob {
     @Override
-    public void run() {
+    public String run() {
+        log.info("Test2Job 执行");
         int a = 1 / 0;
-        log.info("Test2Job 执行 {}");
+        return "成功";
     }
 }

@@ -38,11 +38,10 @@ public class SysJobLog implements Serializable {
     @ApiModelProperty(value = "结果 1-成功 0-失败")
     private Integer result;
 
+    @ApiModelProperty(value = "运行花费时间")
+    private Integer spendTime;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
-
 
 }

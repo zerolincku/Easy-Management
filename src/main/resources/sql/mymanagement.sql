@@ -269,8 +269,8 @@ CREATE TABLE `sys_job_log`
     `job_id`      bigint(20) UNSIGNED NOT NULL COMMENT 'JobId',
     `msg`         varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '描述',
     `result`      tinyint(4) NOT NULL DEFAULT 1 COMMENT '结果 1-成功 0-失败',
+    `spend_time`  int(20) NOT NULL COMMENT '运行花费时间',
     `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '创建时间',
-    `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
