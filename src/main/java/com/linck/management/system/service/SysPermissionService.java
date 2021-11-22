@@ -3,7 +3,7 @@ package com.linck.management.system.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.StateModel;
+import com.linck.management.common.model.dto.StateDTO;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.mapper.SysPermissionMapper;
 import com.linck.management.system.model.entity.SysPermission;
@@ -44,10 +44,10 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
      *
      * @return
      */
-    public List<SysPermission> listAll(StateModel stateModel) {
+    public List<SysPermission> listAll(StateDTO stateDTO) {
         QueryWrapper<SysPermission> wrapper = new QueryWrapper<>();
-        if (stateModel.getState() != null) {
-            wrapper.eq("state", stateModel.getState());
+        if (stateDTO.getState() != null) {
+            wrapper.eq("state", stateDTO.getState());
         }
         wrapper.orderByAsc("type", "sort");
         return sysPermissionMapper.selectList(wrapper);
@@ -56,8 +56,8 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     /**
      * 查询菜单和按钮
      */
-    public List<SysMenuAndButton> allMenuAndButton(StateModel stateModel) {
-        List<SysPermission> sysPermissions = listAll(stateModel);
+    public List<SysMenuAndButton> allMenuAndButton(StateDTO stateDTO) {
+        List<SysPermission> sysPermissions = listAll(stateDTO);
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
             // 封装一级折叠菜单

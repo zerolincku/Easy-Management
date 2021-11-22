@@ -1,11 +1,14 @@
 package com.linck.management.common.model.constant;
 
+import lombok.Getter;
+
 /**
  * @program: MyManagement
  * @description 通用状态枚举
  * @author: linck
  * @create: 2020-08-09 17:20
  **/
+@Getter
 public enum StateEnum {
 
     /**
@@ -17,13 +20,9 @@ public enum StateEnum {
      */
     DISABLE(0);
 
-    private Integer state;
+    private Integer value;
 
-    StateEnum(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
+    StateEnum(Integer value) {
+        this.value = value;
     }
 }

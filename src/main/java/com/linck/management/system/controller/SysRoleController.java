@@ -3,9 +3,9 @@ package com.linck.management.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.IdModel;
-import com.linck.management.common.model.ListWithPage;
-import com.linck.management.common.model.Page;
+import com.linck.management.common.model.dto.IdDTO;
+import com.linck.management.common.model.dto.PageDTO;
+import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.system.model.dto.RolePermissionDTO;
 import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysRolePermission;
@@ -50,10 +50,8 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询角色列表")
     @PostMapping("list")
-    public Result<ListWithPage<SysRole>> list(@RequestBody(required = false) Page page) {
-        // 如果没有分页参数，初始化参数
-        page.ifNotPageSetDefault();
-        List<SysRole> list = sysRoleService.selectByPage(page);
+    public Result<ListWithPage<SysRole>> list(@RequestBody(required = false) PageDTO pageDTO) {
+        List<SysRole> list = sysRoleService.selectByPage(pageDTO);
         PageInfo<SysRole> pageInfo = new PageInfo<>(list);
         ListWithPage<SysRole> result = new ListWithPage<>();
         result.setList(list);
@@ -64,8 +62,8 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('role:view')")
     @ApiOperation("查询角色权限id集合")
     @PostMapping("permissionIdList")
-    public Result<List<Long>> permissionIdList(@RequestBody @Validated IdModel idModel) {
-        List<SysRolePermission> sysRolePermissionList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", idModel.getId()));
+    public Result<List<Long>> permissionIdList(@RequestBody @Validated IdDTO idDTO) {
+        List<SysRolePermission> sysRolePermissionList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", idDTO.getId()));
         List<Long> permissionIdList = sysRolePermissionList.stream().map(t -> t.getPId()).collect(Collectors.toList());
         return Result.success(permissionIdList);
     }
@@ -99,8 +97,8 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('role:remove')")
     @ApiOperation("删除角色")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdModel idModel) {
-        sysRoleService.removeById(idModel.getId());
+    public Result remove(@RequestBody @Validated IdDTO idDTO) {
+        sysRoleService.removeById(idDTO.getId());
         return Result.success("");
     }
 

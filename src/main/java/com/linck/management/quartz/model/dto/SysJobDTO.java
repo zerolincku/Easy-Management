@@ -1,5 +1,6 @@
 package com.linck.management.quartz.model.dto;
 
+import com.linck.management.common.model.dto.PageDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
  * @create: 2020-10-29 21:40
  **/
 @Data
-public class SysJobDTO {
+public class SysJobDTO extends PageDTO {
 
     @ApiModelProperty("主键id")
     private Long id;
@@ -36,14 +37,4 @@ public class SysJobDTO {
     @ApiModelProperty("组")
     private String group;
 
-    private Integer pageNum;
-
-    private Integer pageSize;
-
-    public void ifNotPageSetDefault() {
-        if (pageNum == null || pageSize == null) {
-            pageNum = 1;
-            pageSize = 1000;
-        }
-    }
 }

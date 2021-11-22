@@ -17,4 +17,21 @@
         , msg, result, create_time, update_time
     </sql>
 
+    <select id="list" resultMap="BaseResultMap" parameterType="com.linck.management.quartz.model.dto.SysJobLogDTO">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        sys_job
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="msg != null and msg != ''">
+                AND msg like #{msg}
+            </if>
+            <if test="result != null and result != ''">
+                AND result = #{result}
+            </if>
+        </where>
+    </select>
 </mapper>

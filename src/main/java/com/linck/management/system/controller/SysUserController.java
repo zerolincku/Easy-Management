@@ -2,9 +2,9 @@ package com.linck.management.system.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.IdModel;
-import com.linck.management.common.model.ListWithPage;
 import com.linck.management.common.model.SysUserDetails;
+import com.linck.management.common.model.dto.IdDTO;
+import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.system.model.dto.SysUserDTO;
 import com.linck.management.system.model.dto.SysUserSearchDTO;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
@@ -96,8 +96,6 @@ public class SysUserController {
     @ApiOperation("查询用户列表")
     @PostMapping("list")
     public Result<ListWithPage<SysUser>> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
-        // 如果没有分页参数，初始化参数
-        sysUserSearchDTO.ifNotPageSetDefault();
         List<SysUser> list = sysUserService.selectList(sysUserSearchDTO);
         PageInfo<SysUser> pageInfo = new PageInfo<>(list);
         ListWithPage<SysUser> result = new ListWithPage<>();
@@ -128,15 +126,15 @@ public class SysUserController {
     @PreAuthorize("hasAuthority('user:remove')")
     @ApiOperation("删除用户")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdModel idModel) {
-        sysUserService.removeById(idModel.getId());
+    public Result remove(@RequestBody @Validated IdDTO idDTO) {
+        sysUserService.removeById(idDTO.getId());
         return Result.success("");
     }
 
     @PreAuthorize("hasAuthority('user:view')")
     @ApiOperation("查询用户角色列表")
     @PostMapping("roleList")
-    public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdModel model) {
+    public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdDTO model) {
         return sysUserService.roleList(model);
     }
 

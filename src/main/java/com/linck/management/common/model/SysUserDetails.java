@@ -72,7 +72,7 @@ public class SysUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return sysUser.getState().equals(StateEnum.ENABLE.getState());
+        return sysUser.getState().equals(StateEnum.ENABLE.getValue());
     }
 
 }

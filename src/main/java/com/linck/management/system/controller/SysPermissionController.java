@@ -2,9 +2,9 @@ package com.linck.management.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.IdModel;
-import com.linck.management.common.model.StateModel;
 import com.linck.management.common.model.constant.StateEnum;
+import com.linck.management.common.model.dto.IdDTO;
+import com.linck.management.common.model.dto.StateDTO;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.model.dto.SysPermissionDTO;
 import com.linck.management.system.model.entity.SysPermission;
@@ -44,8 +44,8 @@ public class SysPermissionController {
     @PreAuthorize("hasAuthority('permission:view')")
     @ApiOperation("查询权限列表(嵌套封装)")
     @PostMapping("list")
-    public Result<List<SysMenuAndButton>> list(@RequestBody StateModel stateModel) {
-        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton(stateModel);
+    public Result<List<SysMenuAndButton>> list(@RequestBody StateDTO stateDTO) {
+        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton(stateDTO);
         return Result.success(result);
     }
 
@@ -53,7 +53,7 @@ public class SysPermissionController {
     @ApiOperation("所有菜单和按钮")
     @PostMapping("allMenuAndButton")
     public Result<Map<String, List<SysPermission>>> allMenuAndButton() {
-        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("state", StateEnum.ENABLE.getState()));
+        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("state", StateEnum.ENABLE.getValue()));
         List<SysPermission> menus = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.MENU.getType())).collect(Collectors.toList());
         List<SysPermission> buttons = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.BUTTON.getType())).collect(Collectors.toList());
         Map<String, List<SysPermission>> result = new HashMap<>();
@@ -87,9 +87,9 @@ public class SysPermissionController {
     @PreAuthorize("hasAuthority('permission:remove')")
     @ApiOperation("删除权限")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdModel idModel) {
-        sysPermissionService.removeById(idModel.getId());
-        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idModel.getId()));
+    public Result remove(@RequestBody @Validated IdDTO idDTO) {
+        sysPermissionService.removeById(idDTO.getId());
+        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDTO.getId()));
         return Result.success("");
     }
 }

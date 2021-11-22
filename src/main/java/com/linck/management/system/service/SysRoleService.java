@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.Page;
+import com.linck.management.common.model.dto.PageDTO;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysRolePermissionMapper;
 import com.linck.management.system.model.dto.RolePermissionDTO;
@@ -32,11 +32,11 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
     /**
      * 分页查询角色
      *
-     * @param page
+     * @param pageDTO
      * @return
      */
-    public List<SysRole> selectByPage(Page page) {
-        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+    public List<SysRole> selectByPage(PageDTO pageDTO) {
+        PageHelper.startPage(pageDTO.getPageNum(), pageDTO.getPageSize());
         return sysRoleMapper.selectList(null);
     }
 

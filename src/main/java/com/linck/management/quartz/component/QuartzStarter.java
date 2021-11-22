@@ -34,7 +34,7 @@ public class QuartzStarter {
         }
         List<SysJob> sysJobList = sysJobMapper.list(null);
         sysJobList.forEach(sysJob -> {
-            if (StateEnum.ENABLE.getState().equals(sysJob.getState())) {
+            if (StateEnum.ENABLE.getValue().equals(sysJob.getState())) {
                 JobUtils.createJobByCron(scheduler, sysJob);
             }
         });

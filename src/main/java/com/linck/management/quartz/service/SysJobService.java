@@ -39,7 +39,7 @@ public class SysJobService extends ServiceImpl<SysJobMapper, SysJob> {
     public void start(Long id) {
         SysJob sysJob = sysJobMapper.selectById(id);
         JobUtils.createJobByCron(scheduler, sysJob);
-        sysJob.setState(StateEnum.ENABLE.getState());
+        sysJob.setState(StateEnum.ENABLE.getValue());
         sysJobMapper.updateById(sysJob);
     }
 
@@ -52,7 +52,7 @@ public class SysJobService extends ServiceImpl<SysJobMapper, SysJob> {
             e.printStackTrace();
         }
         JobUtils.stopJob(scheduler, jobClass);
-        sysJob.setState(StateEnum.DISABLE.getState());
+        sysJob.setState(StateEnum.DISABLE.getValue());
         sysJobMapper.updateById(sysJob);
     }
 }

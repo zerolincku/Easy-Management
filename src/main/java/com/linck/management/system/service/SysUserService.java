@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.IdModel;
+import com.linck.management.common.model.dto.IdDTO;
 import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
@@ -126,7 +126,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      * @param model
      * @return
      */
-    public Result<List<UserRoleModel>> roleList(IdModel model) {
+    public Result<List<UserRoleModel>> roleList(IdDTO model) {
         List<SysRole> sysRoles = sysRoleMapper.selectList(null);
         List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(t -> t.getRId()).collect(Collectors.toList());
         List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), roleIdList.contains(t.getId()))).collect(Collectors.toList());

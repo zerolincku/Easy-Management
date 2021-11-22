@@ -1,5 +1,6 @@
-package com.linck.management.common.model;
+package com.linck.management.common.model.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +13,11 @@ import java.util.List;
  **/
 @Data
 public class ListWithPage<T> {
+
+    @ApiModelProperty("总条数")
     private Long total;
+
+    @ApiModelProperty("数据列表")
     private List<T> list;
+
 }
