@@ -1,6 +1,7 @@
 package com.linck.management.quartz.job;
 
 import com.linck.management.common.util.SpringContextHolder;
+import com.linck.management.quartz.component.JobInitialize;
 import com.linck.management.quartz.mapper.SysJobLogMapper;
 import com.linck.management.quartz.model.entity.SysJobLog;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,6 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 public abstract class AbstractJob implements Job {
-
-    private static Long jobId;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -39,7 +38,7 @@ public abstract class AbstractJob implements Job {
     public SysJobLog before(JobExecutionContext jobExecutionContext) {
         log.info("before");
         SysJobLog sysJobLog = new SysJobLog();
-        sysJobLog.setJobId(jobId);
+        sysJobLog.setJobId(JobInitialize.getJobId(this.getClass()));
         sysJobLog.setResult(1);
         sysJobLog.setSpendTime((int) System.currentTimeMillis());
         return sysJobLog;
@@ -51,10 +50,6 @@ public abstract class AbstractJob implements Job {
         sysJobLog.setCreateTime(LocalDateTime.now());
         SysJobLogMapper sysJobLogMapper = SpringContextHolder.getBean(SysJobLogMapper.class);
         sysJobLogMapper.insert(sysJobLog);
-    }
-
-    public static void setJobId(Long jobId) {
-        AbstractJob.jobId = jobId;
     }
 
     public abstract String run() throws Exception;

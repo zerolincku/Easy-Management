@@ -2,6 +2,7 @@ package com.linck.management.quartz.component;
 
 import cn.hutool.core.util.ClassUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.linck.management.quartz.job.AbstractJob;
 import com.linck.management.quartz.mapper.SysJobMapper;
 import com.linck.management.quartz.model.entity.SysJob;
 import lombok.SneakyThrows;
@@ -13,9 +14,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -29,6 +31,8 @@ import java.util.Set;
 public class JobInitialize implements ApplicationRunner {
     @Autowired
     private SysJobMapper sysJobMapper;
+
+    private static Map<Class<? extends AbstractJob>, Long> jobIdMap = new HashMap<>();
 
     @Override
     @SneakyThrows
@@ -48,9 +52,12 @@ public class JobInitialize implements ApplicationRunner {
                     sysJob.setUpdateTime(new Date());
                     sysJobMapper.insert(sysJob);
                 }
-                Method setJobIdMethod = clazz.getSuperclass().getDeclaredMethod("setJobId", Long.class);
-                setJobIdMethod.invoke(null, sysJob.getId());
+                jobIdMap.put((Class<? extends AbstractJob>) clazz, sysJob.getId());
             }
         }
+    }
+
+    public static Long getJobId(Class<? extends AbstractJob> clazz) {
+        return jobIdMap.get(clazz);
     }
 }
