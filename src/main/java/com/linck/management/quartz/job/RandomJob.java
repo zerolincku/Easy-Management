@@ -11,7 +11,7 @@ import java.util.Random;
  * @create: 2020-10-13 21:44
  **/
 @Slf4j
-public class Test3Job extends AbstractJob {
+public class RandomJob extends AbstractJob {
 
     /**
      * 模拟长时间运行和出错

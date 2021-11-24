@@ -9,10 +9,11 @@ import lombok.extern.slf4j.Slf4j;
  * @create: 2020-10-13 21:44
  **/
 @Slf4j
-public class TestJob extends AbstractJob {
+public class ExceptionJob extends AbstractJob {
     @Override
     public String run() {
-        log.info("TestJob 执行");
+        log.info("Test2Job 执行");
+        int a = 1 / 0;
         return "成功";
     }
 }

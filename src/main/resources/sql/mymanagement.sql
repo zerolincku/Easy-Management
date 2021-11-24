@@ -55,25 +55,6 @@ CREATE TABLE `sys_job`
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sys_job
--- ----------------------------
-INSERT INTO `sys_job`
-VALUES (1, 'com.linck.management.quartz.job.TestJob', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15',
-        '2020-10-14 22:39:15');
-INSERT INTO `sys_job`
-VALUES (2, 'com.linck.management.quartz.job.Test1Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15',
-        '2020-10-14 22:39:15');
-INSERT INTO `sys_job`
-VALUES (3, 'com.linck.management.quartz.job.Test2Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15',
-        '2020-10-14 22:39:15');
-INSERT INTO `sys_job`
-VALUES (4, 'com.linck.management.quartz.job.Test3Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15',
-        '2020-10-14 22:39:15');
-INSERT INTO `sys_job`
-VALUES (5, 'com.linck.management.quartz.job.Test4Job', 'TestJob', NULL, NULL, 0, NULL, NULL, '2020-10-14 22:39:15',
-        '2020-10-14 22:39:15');
-
--- ----------------------------
 -- Table structure for sys_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_permission`;

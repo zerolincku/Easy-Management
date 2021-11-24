@@ -30,13 +30,15 @@ public abstract class AbstractJob implements Job {
                 msg.substring(0, 1024);
             }
             sysJobLog.setMsg(msg);
-            log.error("Job 运行出错 {}，", this.getClass(), e);
+            log.error("Job 运行出错 {}，", this.getClass().getName(), e);
         }
         after(sysJobLog);
     }
 
     public SysJobLog before(JobExecutionContext jobExecutionContext) {
-        log.info("before");
+        if (log.isDebugEnabled()) {
+            log.debug("{} before method execute", this.getClass().getName());
+        }
         SysJobLog sysJobLog = new SysJobLog();
         sysJobLog.setJobId(JobInitialize.getJobId(this.getClass()));
         sysJobLog.setResult(1);
@@ -45,7 +47,9 @@ public abstract class AbstractJob implements Job {
     }
 
     public void after(SysJobLog sysJobLog) {
-        log.info("after");
+        if (log.isDebugEnabled()) {
+            log.debug("{} after method execute", this.getClass().getName());
+        }
         sysJobLog.setSpendTime((int) (System.currentTimeMillis() - sysJobLog.getSpendTime()));
         sysJobLog.setCreateTime(LocalDateTime.now());
         SysJobLogMapper sysJobLogMapper = SpringContextHolder.getBean(SysJobLogMapper.class);
