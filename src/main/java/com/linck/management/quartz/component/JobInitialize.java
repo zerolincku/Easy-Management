@@ -48,6 +48,8 @@ public class JobInitialize implements ApplicationRunner {
                     sysJob = new SysJob();
                     sysJob.setJobClass(clazz.getName());
                     sysJob.setName(clazz.getSimpleName());
+                    sysJob.setCron("* */1 * * * ?");
+                    sysJob.setGroupName("default");
                     sysJob.setCreateTime(new Date());
                     sysJob.setUpdateTime(new Date());
                     sysJobMapper.insert(sysJob);
