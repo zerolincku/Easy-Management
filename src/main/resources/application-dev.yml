@@ -35,3 +35,7 @@ jwt:
   secret: jhi40S8232amR #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24*7)s
   tokenHead: Bearar  #JWT负载中拿到开头
+
+# mybatis handler 包路径
+mybatis-plus:
+  type-handlers-package: com.linck.management.common.handler.mybatis
