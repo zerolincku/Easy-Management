@@ -1,5 +1,8 @@
 package com.linck.management.system.model.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -39,8 +42,9 @@ public class SysPermissionDTO {
     @ApiModelProperty("前端路由")
     private String url;
 
-    @ApiModelProperty("状态 1-启用 0-禁用")
-    private Integer state;
+    @JsonDeserialize(using = StateDeserializer.class)
+    @ApiModelProperty("启用状态(1-启用 0-禁用)")
+    private StateEnum state;
 
     @ApiModelProperty("排序")
     private Integer sort;

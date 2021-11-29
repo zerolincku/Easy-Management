@@ -1,5 +1,8 @@
 package com.linck.management.system.model.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -45,7 +48,8 @@ public class SysPermissionVO {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
-    private Integer state;
+    @JsonDeserialize(using = StateDeserializer.class)
+    private StateEnum state;
 
     @ApiModelProperty(value = "权限集合")
     public List<SysPermissionVO> childrenList;

@@ -1,5 +1,8 @@
 package com.linck.management.common.model.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,6 +14,7 @@ import lombok.Data;
  **/
 @Data
 public class StateDTO {
+    @JsonDeserialize(using = StateDeserializer.class)
     @ApiModelProperty(value = "状态 1-启用 0-禁用")
-    private Integer state;
+    private StateEnum state;
 }

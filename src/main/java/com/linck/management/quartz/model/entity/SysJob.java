@@ -2,6 +2,9 @@ package com.linck.management.quartz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,8 +37,9 @@ public class SysJob {
     @ApiModelProperty(value = "cron")
     private String cron;
 
+    @JsonDeserialize(using = StateDeserializer.class)
     @ApiModelProperty(value = "启用状态(1-启用 0-禁用)")
-    private Integer state;
+    private StateEnum state;
 
     @ApiModelProperty(value = "触发器name")
     private String triggerName;
