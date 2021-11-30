@@ -9,7 +9,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author: linck
@@ -51,7 +51,7 @@ public abstract class AbstractJob implements Job {
             log.debug("{} after method execute", this.getClass().getName());
         }
         sysJobLog.setSpendTime((int) (System.currentTimeMillis() - sysJobLog.getSpendTime()));
-        sysJobLog.setCreateTime(LocalDateTime.now());
+        sysJobLog.setCreateTime(new Date());
         SysJobLogMapper sysJobLogMapper = SpringContextHolder.getBean(SysJobLogMapper.class);
         sysJobLogMapper.insert(sysJobLog);
     }

@@ -21,7 +21,7 @@
         SELECT
         <include refid="Base_Column_List"></include>
         FROM
-        sys_job
+        sys_job_log
         <where>
             <if test="id != null">
                 AND id = #{id}
