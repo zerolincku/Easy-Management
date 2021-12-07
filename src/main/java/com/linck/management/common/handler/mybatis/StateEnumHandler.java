@@ -12,8 +12,9 @@ import java.sql.SQLException;
 /**
  * @author: linck
  * @create: 2021-11-24
+ * @description StateEnum 与数据 state 字段转换处理器
  */
-public class StateHandler extends BaseTypeHandler<StateEnum> {
+public class StateEnumHandler extends BaseTypeHandler<StateEnum> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, StateEnum stateEnum, JdbcType jdbcType) throws SQLException {
         preparedStatement.setInt(i, stateEnum.getValue());

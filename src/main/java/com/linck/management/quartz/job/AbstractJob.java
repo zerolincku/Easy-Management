@@ -24,7 +24,7 @@ public abstract class AbstractJob implements Job {
         try {
             sysJobLog.setMsg(run());
         } catch (Exception e) {
-            sysJobLog.setResult(0);
+            sysJobLog.setResult(SysJobLog.ResultEnum.FAILURE);
             String msg = e.toString();
             if (msg.length() > 1024) {
                 msg.substring(0, 1024);
@@ -41,7 +41,7 @@ public abstract class AbstractJob implements Job {
         }
         SysJobLog sysJobLog = new SysJobLog();
         sysJobLog.setJobId(JobInitialize.getJobId(this.getClass()));
-        sysJobLog.setResult(1);
+        sysJobLog.setResult(SysJobLog.ResultEnum.SUCCESS);
         sysJobLog.setSpendTime((int) System.currentTimeMillis());
         return sysJobLog;
     }

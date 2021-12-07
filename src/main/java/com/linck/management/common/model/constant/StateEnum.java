@@ -19,13 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public enum StateEnum {
 
-    /**
-     * 启用
-     */
     ENABLE(1, "启用"),
-    /**
-     * 禁用
-     */
     DISABLE(0, "禁用");
 
     @JsonValue
@@ -40,7 +34,7 @@ public enum StateEnum {
                 return stateEnum;
             }
         }
-        log.warn("没有对应的 State，value: {}", value);
+        log.error("没有对应的 State，value: {}", value);
         throw new CustomException(ResultCodeEnum.NO_STATE_VALUE, "StateEnum.getStateEnum");
     }
 }

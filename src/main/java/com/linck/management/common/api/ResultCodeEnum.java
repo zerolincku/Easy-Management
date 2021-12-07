@@ -9,6 +9,7 @@ public enum ResultCodeEnum implements IErrorCode {
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),
     NO_STATE_VALUE(501, "没有对应的state"),
+    NO_RESULT_VALUE(502, "没有对应的result"),
     VALIDATE_FAILED(404, "参数检验失败"),
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限");
