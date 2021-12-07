@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -50,8 +50,8 @@ public class SysJobController {
     @PostMapping("add")
     @PreAuthorize("hasAuthority('job:add')")
     public Result add(@RequestBody SysJob sysJob) {
-        sysJob.setCreateTime(new Date());
-        sysJob.setUpdateTime(new Date());
+        sysJob.setCreateTime(LocalDateTime.now());
+        sysJob.setUpdateTime(LocalDateTime.now());
         sysJobService.save(sysJob);
         return Result.success(sysJob.getId());
     }
@@ -60,7 +60,7 @@ public class SysJobController {
     @PostMapping("update")
     @PreAuthorize("hasAuthority('job:update')")
     public Result update(@RequestBody SysJob sysJob) {
-        sysJob.setUpdateTime(new Date());
+        sysJob.setUpdateTime(LocalDateTime.now());
         sysJobService.updateById(sysJob);
         return Result.success("");
     }

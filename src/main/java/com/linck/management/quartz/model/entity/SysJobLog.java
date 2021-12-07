@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Entity
@@ -45,7 +45,7 @@ public class SysJobLog implements Serializable {
     private Integer spendTime;
 
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @Slf4j
     @Getter

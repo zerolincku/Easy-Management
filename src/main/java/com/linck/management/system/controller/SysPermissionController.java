@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +69,7 @@ public class SysPermissionController {
         permissionDTO.setId(null);
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDTO, sysPermission);
-        sysPermission.setCreateTime(new Date());
+        sysPermission.setCreateTime(LocalDateTime.now());
         return sysPermissionService.add(sysPermission);
     }
 
@@ -79,7 +79,7 @@ public class SysPermissionController {
     public Result<Long> update(@RequestBody @Validated SysPermissionDTO permissionDTO) {
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDTO, sysPermission);
-        sysPermission.setUpdateTime(new Date());
+        sysPermission.setUpdateTime(LocalDateTime.now());
         sysPermissionService.updateById(sysPermission);
         return Result.success(sysPermission.getId());
     }

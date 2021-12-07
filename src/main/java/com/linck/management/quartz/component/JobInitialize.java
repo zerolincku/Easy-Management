@@ -15,7 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Modifier;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -50,8 +50,8 @@ public class JobInitialize implements ApplicationRunner {
                     sysJob.setName(clazz.getSimpleName());
                     sysJob.setCron("* */1 * * * ?");
                     sysJob.setGroupName("default");
-                    sysJob.setCreateTime(new Date());
-                    sysJob.setUpdateTime(new Date());
+                    sysJob.setCreateTime(LocalDateTime.now());
+                    sysJob.setUpdateTime(LocalDateTime.now());
                     sysJobMapper.insert(sysJob);
                 }
                 jobIdMap.put((Class<? extends AbstractJob>) clazz, sysJob.getId());
