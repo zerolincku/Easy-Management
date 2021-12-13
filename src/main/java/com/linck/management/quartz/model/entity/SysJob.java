@@ -3,7 +3,7 @@ package com.linck.management.quartz.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.handler.jackson.StateDeserializer;
 import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

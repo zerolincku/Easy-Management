@@ -1,7 +1,6 @@
-package com.linck.management.common.config;
+package com.linck.management.common.handler.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.linck.management.common.model.constant.StateEnum;
@@ -15,7 +14,7 @@ import java.io.IOException;
  */
 public class StateDeserializer extends JsonDeserializer<StateEnum> {
     @Override
-    public StateEnum deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public StateEnum deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         return StateEnum.getStateEnum(jsonParser.getValueAsInt());
     }
 }

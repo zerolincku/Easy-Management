@@ -1,7 +1,7 @@
 package com.linck.management.common.model.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.linck.management.common.config.StateDeserializer;
+import com.linck.management.common.handler.jackson.StateDeserializer;
 import com.linck.management.common.model.constant.StateEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
