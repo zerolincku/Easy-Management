@@ -1,5 +1,6 @@
 package ${package.Entity};
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 <#list table.importPackages as pkg>
     import ${pkg};
 </#list>
@@ -90,6 +91,7 @@ import com.linck.management.common.model.constant.StateEnum;
     </#if>
 
     <#if field.propertyName == "state">
+        @JsonDeserialize(using = StateDeserializer.class)
         private StateEnum ${field.propertyName};
     <#else>
         private ${field.propertyType} ${field.propertyName};
