@@ -13,10 +13,11 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * @program: management
- * @description 定时任务启动器
  * @author: linck
  * @create: 2020-09-17 21:50
+ * @description 定时任务启动器
+ * <p>
+ * 遍历 SysJob 表下的 Job，依次启动所有是开启状态的 Job
  **/
 @Slf4j
 @Component

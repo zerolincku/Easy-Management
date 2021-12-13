@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 /**
  * @author: linck
  * @create: 2021-11-13
+ * @description Job 抽象类，系统所有的 Job 都需要继承此抽象类，并在 run 方法中实现业务逻辑
  */
 @Slf4j
 public abstract class AbstractJob implements Job {
@@ -35,6 +36,12 @@ public abstract class AbstractJob implements Job {
         after(sysJobLog);
     }
 
+    /**
+     * Job 前置处理器，记录 Job 的执行开始时间等数据
+     *
+     * @param jobExecutionContext
+     * @return
+     */
     public SysJobLog before(JobExecutionContext jobExecutionContext) {
         if (log.isDebugEnabled()) {
             log.debug("{} before method execute", this.getClass().getName());
@@ -46,6 +53,11 @@ public abstract class AbstractJob implements Job {
         return sysJobLog;
     }
 
+    /**
+     * Job 后置处理器，记录 Job 执行的时间/结果等数据
+     *
+     * @param sysJobLog
+     */
     public void after(SysJobLog sysJobLog) {
         if (log.isDebugEnabled()) {
             log.debug("{} after method execute", this.getClass().getName());
@@ -56,5 +68,11 @@ public abstract class AbstractJob implements Job {
         sysJobLogMapper.insert(sysJobLog);
     }
 
+    /**
+     * 业务逻辑在此方法实现
+     *
+     * @return 业务执行的结果
+     * @throws Exception
+     */
     public abstract String run() throws Exception;
 }

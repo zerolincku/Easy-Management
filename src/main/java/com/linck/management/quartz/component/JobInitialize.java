@@ -22,8 +22,10 @@ import java.util.Set;
 
 /**
  * @author lck
- * @description 扫描Job
  * @date 2020/10/13 18:23
+ * @description 扫描指定包下的所有 Job
+ * <p>
+ * 如果 Job 类，没有注册到 SysJob 表的话，会自动注册到该张表
  */
 @Slf4j
 @Component

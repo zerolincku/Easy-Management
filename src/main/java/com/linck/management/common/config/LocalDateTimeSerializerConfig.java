@@ -22,6 +22,7 @@ import java.util.Map;
 /**
  * @author: linck
  * @create: 2021-12-07
+ * @description Java8 时间类, Jackson 序列化配置类
  */
 @Configuration
 public class LocalDateTimeSerializerConfig {
@@ -29,7 +30,7 @@ public class LocalDateTimeSerializerConfig {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-    
+
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         Map<Class<?>, JsonSerializer<?>> serializers = new HashMap<>();
