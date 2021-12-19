@@ -68,25 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                // 允许对特定静态资源的GET请求无授权访问
+                // 允许GET请求无授权访问
                 .antMatchers(HttpMethod.GET,
-                        "/",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js",
-                        "/swagger-resources/**",
-                        "/v2/api-docs/**",
-                        "/verification/code"
+                        "/**"
                 )
                 .permitAll()
                 // 登录注册允许匿名访问
-                .antMatchers("/sys/user/login", "/sys/user/register", "/test/*")
+                .antMatchers("/sys/user/login", "/sys/user/register", "/test/**")
                 .permitAll()
-                // 测试时全部允许访问
-                //.antMatchers("/**")
-                //.permitAll()
                 .anyRequest()
                 .authenticated()
                 // 设置跨域, 如果不设置, 即使配置了filter, 也不会生效
