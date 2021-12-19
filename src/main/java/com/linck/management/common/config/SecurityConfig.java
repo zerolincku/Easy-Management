@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // 由于使用jwt，不需要csrf
+                // 由于使用jwt，不需要csrf检测
                 .csrf()
                 .disable()
                 // 基于token，所以不需要session
