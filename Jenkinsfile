@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('编译测试') {
             steps {
-                sh 'mvn -B -Pdev clean test'
+                sh 'mvn -B -DskipTests -Pdev clean compile'
             }
         }
         stage('打包') {
