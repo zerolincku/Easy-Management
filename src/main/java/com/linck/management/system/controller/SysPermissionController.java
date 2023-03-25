@@ -93,7 +93,7 @@ public class SysPermissionController {
      */
     @PreAuthorize("hasAuthority('permission:remove')")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdDto idDto) {
+    public Result<String> remove(@RequestBody @Validated IdDto idDto) {
         sysPermissionService.removeById(idDto.getId());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDto.getId()));
         return Result.success("");
