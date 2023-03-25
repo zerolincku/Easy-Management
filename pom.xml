@@ -117,13 +117,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.linck.perf</groupId>
-            <artifactId>api-perf-spring-boot-starter</artifactId>
-            <version>0.1</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
