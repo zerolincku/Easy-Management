@@ -2,21 +2,21 @@ package com.linck.management.common.api;
 
 
 /**
- * @author: linck
  * 枚举了一些常用API操作码
+ * @author linck
  */
 public enum ResultCodeEnum implements IErrorCode {
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),
-    NO_STATE_VALUE(501, "没有对应的state"),
+    NO_STATUS_VALUE(501, "没有对应的status"),
     NO_RESULT_VALUE(502, "没有对应的result"),
     VALIDATE_FAILED(404, "参数检验失败"),
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限");
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
-    private ResultCodeEnum(int code, String message) {
+    ResultCodeEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }

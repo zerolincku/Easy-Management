@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
 </#if>
-import com.linck.management.common.model.constant.StateEnum;
+import com.linck.management.common.model.enums.StatusEnum;
 
 /**
 * ${table.comment!}Entity
@@ -90,8 +90,7 @@ import com.linck.management.common.model.constant.StateEnum;
         @TableLogic
     </#if>
 
-    <#if field.propertyName == "state">
-        @JsonDeserialize(using = StateDeserializer.class)
+    <#if field.propertyName == "status">
         private StateEnum ${field.propertyName};
     <#else>
         private ${field.propertyType} ${field.propertyName};

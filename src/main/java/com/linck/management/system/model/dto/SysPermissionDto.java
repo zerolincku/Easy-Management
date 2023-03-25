@@ -1,16 +1,16 @@
-package com.linck.management.system.model.vo;
+package com.linck.management.system.model.dto;
 
 import com.linck.management.common.model.enums.StatusEnum;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author linck
  **/
 @Data
-public class SysPermissionVO {
+public class SysPermissionDto {
 
     /**
      * 主键id
@@ -18,13 +18,15 @@ public class SysPermissionVO {
     private Long id;
 
     /**
-     * 父级菜单id
+     * 父级权限id
      */
+    @NotNull(message = "父级权限不能为空")
     private Long pid;
 
     /**
      * 名称
      */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     /**
@@ -33,8 +35,9 @@ public class SysPermissionVO {
     private String value;
 
     /**
-     * 类型1-菜单 2-按钮 3-权限
+     * 类型 1-菜单 2-按钮 3-权限
      */
+    @NotNull(message = "类型不能为空")
     private Integer type;
 
     /**
@@ -48,25 +51,13 @@ public class SysPermissionVO {
     private String url;
 
     /**
-     * 排序
+     * 启用状态(1-启用 0-禁用)
      */
-    private Integer sort;
-
     private StatusEnum status;
 
     /**
-     * 权限集合
+     * 排序
      */
-    public List<SysPermissionVO> childrenList;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
+    private Integer sort;
 
 }

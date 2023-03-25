@@ -1,10 +1,7 @@
 package com.linck.management.system.contants;
 
 /**
- * @program: MyManagement
- * @description
- * @author: linck
- * @create: 2020-08-10 19:11
+ * @author linck
  **/
 public enum SysPermissionTypeEnum {
 
@@ -21,7 +18,7 @@ public enum SysPermissionTypeEnum {
      */
     PERMISSION(3);
 
-    private Integer type;
+    private final Integer type;
 
     SysPermissionTypeEnum(Integer type) {
         this.type = type;

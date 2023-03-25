@@ -29,7 +29,7 @@ class ManagementApplicationTests {
     @Test
     void addUserTest() {
         /*Random random = new Random();
-        LoginUserDTO user = new LoginUserDTO();
+        LoginUserDto user = new LoginUserDto();
         int successCount = 0;
         user.setVerificationCode("1");
         for (int i = 0; i < 10000; i++) {
@@ -58,7 +58,7 @@ class ManagementApplicationTests {
         for (int i = 0; i < 7; i++) {
             executor.submit(() -> {
                 Random random = new Random();
-                LoginUserDTO user = new LoginUserDTO();
+                LoginUserDto user = new LoginUserDto();
 
                 user.setVerificationCode("1");
                 for (int j = 0; j < 10000; j++) {
@@ -76,7 +76,7 @@ class ManagementApplicationTests {
             });
         }
         Random random = new Random();
-        LoginUserDTO user = new LoginUserDTO();
+        LoginUserDto user = new LoginUserDto();
 
         user.setVerificationCode("1");
         for (int j = 0; j < 30000; j++) {

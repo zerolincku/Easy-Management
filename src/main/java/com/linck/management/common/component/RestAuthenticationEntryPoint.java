@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @program: MyManagement
- * @description 未登录或者token失效访问接口时，自定义的返回结果
- * @author: linck
- * @create: 2020-08-09 23:31
+ * 未登录或者token失效访问接口时，自定义的返回结果
+ * @author linck
  **/
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {

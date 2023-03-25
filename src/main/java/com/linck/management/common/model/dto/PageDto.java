@@ -3,16 +3,20 @@ package com.linck.management.common.model.dto;
 import lombok.Setter;
 
 /**
- * @program: management
- * @description 分页参数
- * @author: linck
- * @create: 2020-11-01 21:28
+ * 分页参数
+ * @author linck
  **/
 @Setter
-public class PageDTO {
+public class PageDto {
 
+    /**
+     * 第几页
+     */
     private Integer pageNum;
 
+    /**
+     * 每页条数
+     */
     private Integer pageSize;
 
     public Integer getPageNum() {

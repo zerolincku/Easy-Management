@@ -3,7 +3,7 @@ package com.linck.management.system.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.dto.StateDTO;
+import com.linck.management.common.model.dto.StatusDto;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.mapper.SysPermissionMapper;
 import com.linck.management.system.model.entity.SysPermission;
@@ -31,9 +31,6 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
 
     /**
      * 根据UserId查询所有启用状态权限
-     *
-     * @param id
-     * @return
      */
     public List<SysPermission> listByUserId(Long id) {
         return sysPermissionMapper.listByUserId(id);
@@ -41,13 +38,11 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
 
     /**
      * 查询权限列表
-     *
-     * @return
      */
-    public List<SysPermission> listAll(StateDTO stateDTO) {
+    public List<SysPermission> listAll(StatusDto statusDto) {
         QueryWrapper<SysPermission> wrapper = new QueryWrapper<>();
-        if (stateDTO.getState() != null) {
-            wrapper.eq("state", stateDTO.getState());
+        if (statusDto.getStatus() != null) {
+            wrapper.eq("status", statusDto.getStatus());
         }
         wrapper.orderByAsc("type", "sort");
         return sysPermissionMapper.selectList(wrapper);
@@ -56,8 +51,8 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     /**
      * 查询菜单和按钮
      */
-    public List<SysMenuAndButton> allMenuAndButton(StateDTO stateDTO) {
-        List<SysPermission> sysPermissions = listAll(stateDTO);
+    public List<SysMenuAndButton> allMenuAndButton(StatusDto statusDto) {
+        List<SysPermission> sysPermissions = listAll(statusDto);
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
             // 封装一级折叠菜单
@@ -121,9 +116,6 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
 
     /**
      * 新增权限
-     *
-     * @param sysPermission
-     * @return
      */
     public Result add(SysPermission sysPermission) {
         if (SysPermissionTypeEnum.MENU.getType().equals(sysPermission.getType())) {

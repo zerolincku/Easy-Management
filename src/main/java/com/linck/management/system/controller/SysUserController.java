@@ -3,18 +3,16 @@ package com.linck.management.system.controller;
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.SysUserDetails;
-import com.linck.management.common.model.dto.IdDTO;
+import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.vo.ListWithPage;
-import com.linck.management.system.model.dto.SysUserDTO;
-import com.linck.management.system.model.dto.SysUserSearchDTO;
+import com.linck.management.system.model.dto.SysUserDto;
+import com.linck.management.system.model.dto.SysUserSearchDto;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.entity.SysUser;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.model.vo.UserRoleModel;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,13 +32,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: MyManagement
- * @description
- * @author: linck
- * @create: 2020-08-09 17:43
+ * 用户相关接口
+ * @author linck
  **/
 @Slf4j
-@Api(tags = "系统用户")
 @RestController
 @RequestMapping("/sys/user")
 public class SysUserController {
@@ -54,9 +49,12 @@ public class SysUserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @ApiOperation("用户登录")
+    /**
+     * 用户登录
+     * @return 返回 token
+     */
     @PostMapping("/login")
-    public Result login(@RequestBody @Validated SysUserDTO userDetail, HttpServletRequest request) {
+    public Result login(@RequestBody @Validated SysUserDto userDetail, HttpServletRequest request) {
         /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
             return CommonResult.validateFailed("验证码错误");
         }*/
@@ -69,9 +67,12 @@ public class SysUserController {
         return Result.success(tokenMap);
     }
 
-    @ApiOperation("用户注册")
+    /**
+     * 用户注册
+     * @return 用户信息
+     */
     @PostMapping("/register")
-    public Result register(@RequestBody @Validated SysUserDTO userDetail) {
+    public Result register(@RequestBody @Validated SysUserDto userDetail) {
         SysUser sysUser = sysUserService.register(userDetail);
         if (sysUser == null) {
             return Result.failed("该用户名已经被注册");
@@ -80,8 +81,11 @@ public class SysUserController {
         return Result.success(sysUser);
     }
 
+    /**
+     * 查询用户菜单和按钮
+     * @return 权限树
+     */
     @PreAuthorize("hasAuthority('user:view')")
-    @ApiOperation("查询用户菜单和按钮")
     @PostMapping("/query/menu")
     public Result<List<SysMenuAndButton>> queryPermission() {
         // 从SecurityContextHolder获取当前用户
@@ -92,11 +96,14 @@ public class SysUserController {
         return Result.success(result);
     }
 
+    /**
+     * 查询用户列表
+     * @return 用户列表
+     */
     @PreAuthorize("hasAuthority('user:view')")
-    @ApiOperation("查询用户列表")
     @PostMapping("list")
-    public Result<ListWithPage<SysUser>> list(@RequestBody(required = false) SysUserSearchDTO sysUserSearchDTO) {
-        List<SysUser> list = sysUserService.selectList(sysUserSearchDTO);
+    public Result<ListWithPage<SysUser>> list(@RequestBody(required = false) SysUserSearchDto sysUserSearchDto) {
+        List<SysUser> list = sysUserService.selectList(sysUserSearchDto);
         PageInfo<SysUser> pageInfo = new PageInfo<>(list);
         ListWithPage<SysUser> result = new ListWithPage<>();
         result.setList(list);
@@ -104,8 +111,10 @@ public class SysUserController {
         return Result.success(result);
     }
 
+    /**
+     * 修改用户
+     */
     @PreAuthorize("hasAuthority('user:update')")
-    @ApiOperation("修改用户")
     @PostMapping("update")
     public Result update(@RequestBody SysUser sysUser) {
         sysUser.setCreateTime(null);
@@ -116,30 +125,39 @@ public class SysUserController {
         return Result.success("");
     }
 
+    /**
+     * 新增用户
+     */
     @PreAuthorize("hasAuthority('user:add')")
-    @ApiOperation("新增用户")
     @PostMapping("add")
     public Result add(@RequestBody @Validated SysUser sysUser) {
         return sysUserService.add(sysUser);
     }
 
+    /**
+     * 删除用户
+     * @param idDto id集合
+     */
     @PreAuthorize("hasAuthority('user:remove')")
-    @ApiOperation("删除用户")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdDTO idDTO) {
-        sysUserService.removeById(idDTO.getId());
+    public Result remove(@RequestBody @Validated IdDto idDto) {
+        sysUserService.removeById(idDto.getId());
         return Result.success("");
     }
 
+    /**
+     * 查询用户角色列表
+     */
     @PreAuthorize("hasAuthority('user:view')")
-    @ApiOperation("查询用户角色列表")
     @PostMapping("roleList")
-    public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdDTO model) {
+    public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdDto model) {
         return sysUserService.roleList(model);
     }
 
+    /**
+     * 保存用户角色列表
+     */
     @PreAuthorize("hasAuthority('user:update')")
-    @ApiOperation("保存用户角色列表")
     @PostMapping("saveRoleList")
     public Result saveRoleList(@RequestBody @Validated UserRoleSaveModel model) {
         return sysUserService.saveRoleList(model);

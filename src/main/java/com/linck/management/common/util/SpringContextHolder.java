@@ -26,8 +26,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
+ * Spring 工具类
  * @author lengleng
- * @date 2019/2/1 Spring 工具类
+ * @date 2019/2/1
  */
 @Slf4j
 @Service
@@ -78,8 +79,6 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 
     /**
      * 发布事件
-     *
-     * @param event
      */
     public static void publishEvent(ApplicationEvent event) {
         if (applicationContext == null) {

@@ -30,10 +30,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.util.List;
 
 /**
- * @program: MyManagement
- * @description Spring Security配置
- * @author: linck
- * @create: 2020-08-09 23:57
+ * Spring Security配置
+ * @author linck
  **/
 @Slf4j
 @Configuration
@@ -53,9 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置拦截器保护请求
-     *
-     * @param httpSecurity
-     * @throws Exception
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -93,9 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置UserDetail服务
-     *
-     * @param auth
-     * @throws Exception
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

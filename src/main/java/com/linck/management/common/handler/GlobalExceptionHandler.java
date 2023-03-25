@@ -2,7 +2,7 @@ package com.linck.management.common.handler;
 
 import com.linck.management.common.api.Result;
 import com.linck.management.common.api.ResultCodeEnum;
-import com.linck.management.common.exception.CustomException;
+import com.linck.management.common.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,10 +13,8 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @program: MyManagement
- * @description 全局异常捕获
- * @author: linck
- * @create: 2020-08-09 19:46
+ * 全局异常捕获
+ * @author linck
  **/
 @Slf4j
 @RestControllerAdvice
@@ -24,20 +22,17 @@ public class GlobalExceptionHandler {
     /**
      * 捕获自定义异常
      */
-    @ExceptionHandler(value = CustomException.class)
-    public Result processException(CustomException e) {
+    @ExceptionHandler(value = BizException.class)
+    public Result<String> processException(BizException e) {
         log.error("位置:{} -> 错误信息:{}", e.getMethod(), e.getLocalizedMessage());
         return Result.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
     }
 
     /**
      * Post参数验证异常
-     *
-     * @param e
-     * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result ethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+    public Result<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         // 将所有的错误提示使用"，"拼接起来并返回
         StringJoiner sj = new StringJoiner("，");
         e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
@@ -48,7 +43,7 @@ public class GlobalExceptionHandler {
      * get参数验证异常,会抛出一个ConstraintViolationException
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Result constraintViolationExceptionHandler(ConstraintViolationException e) {
+    public Result<String> constraintViolationExceptionHandler(ConstraintViolationException e) {
         StringJoiner sj = new StringJoiner("，");
         e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
 
@@ -59,7 +54,7 @@ public class GlobalExceptionHandler {
      * 捕获异常返回详细异常信息
      */
     @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(Exception e) {
+    public Result<String> exceptionHandler(Exception e) {
         e.printStackTrace();
         return Result.failed(e.getMessage());
     }

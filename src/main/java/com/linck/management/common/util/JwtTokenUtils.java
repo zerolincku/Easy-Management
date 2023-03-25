@@ -13,10 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: mall
- * @description JwtToken生成的工具类
- * @author: linck
- * @create: 2020-07-12 17:28
+ * JwtToken生成的工具类
+ * @author linck
  **/
 @Slf4j
 @Component
@@ -30,9 +28,6 @@ public class JwtTokenUtils {
 
     /**
      * 负责生成JWT的token
-     *
-     * @param claims
-     * @return
      */
     private String generateToken(Map<String, Object> claims) {
         return Jwts.builder()
@@ -82,10 +77,6 @@ public class JwtTokenUtils {
 
     /**
      * 验证token是否还有效
-     *
-     * @param token
-     * @param userDetails
-     * @return
      */
     public boolean validateToken(String token, UserDetails userDetails) {
         String username = getUserNameFromToken(token);

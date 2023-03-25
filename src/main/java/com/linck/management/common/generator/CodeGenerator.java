@@ -15,10 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @program: MyManagement
- * @description 代码生成器
- * @author: linck
- * @create: 2020-08-09 09:43
+ * 代码生成器
+ * @author linck
  **/
 public class CodeGenerator {
 

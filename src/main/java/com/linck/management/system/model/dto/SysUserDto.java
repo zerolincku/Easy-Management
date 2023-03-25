@@ -1,31 +1,33 @@
 package com.linck.management.system.model.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
 /**
- * @program: MyManagement
- * @description
- * @author: linck
- * @create: 2020-08-09 17:45
+ * @author linck
  **/
 @Data
-public class SysUserDTO {
+public class SysUserDto {
 
-    @ApiModelProperty(value = "账号", required = true)
+    /**
+     * 账号
+     */
     @NotBlank(message = "账户不能为空")
     @Length(min = 4, max = 32, message = "账户长度需要4-32个字符")
     private String account;
 
-    @ApiModelProperty(value = "密码", required = true)
+    /**
+     * 密码
+     */
     @NotBlank(message = "密码不能为空")
     @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
     private String password;
 
-    @ApiModelProperty(value = "验证码-暂未使用", required = false)
+    /**
+     * 验证码-暂未使用
+     */
     // @NotBlank(message = "验证码不能为空")
     private String verificationCode;
 

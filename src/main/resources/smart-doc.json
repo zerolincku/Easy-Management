@@ -1,0 +1,17 @@
+{
+  "outPath": "target/doc",
+  "serverUrl": "http://localhost:8089",
+  "allInOne": true,
+  "projectName": "Easy Management",
+  "inlineEnum":true,
+  "requestHeaders": [{
+    "name": "token",
+    "type": "string",
+    "desc": "token请求头的值",
+    "value":"token请求头的值",
+    "required": true,
+    "since": "-",
+    "pathPatterns": "/**",
+    "excludePathPatterns":"/sys/user/login"
+  }]
+}

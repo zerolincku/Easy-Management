@@ -1,7 +1,7 @@
 package com.linck.management.quartz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.linck.management.quartz.model.dto.SysJobDTO;
+import com.linck.management.quartz.model.dto.SysJobDto;
 import com.linck.management.quartz.model.entity.SysJob;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +17,5 @@ public interface SysJobMapper extends BaseMapper<SysJob> {
     /**
      * 条件检索，返回集合
      */
-    List<SysJob> list(SysJobDTO sysJobDTO);
+    List<SysJob> list(SysJobDto sysJobDto);
 }

@@ -1,6 +1,6 @@
 package com.linck.management.common.model;
 
-import com.linck.management.common.model.constant.StateEnum;
+import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,21 +12,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @program: MyManagement
- * @description
- * @author: linck
- * @create: 2020-08-10 00:14
+ * @author linck
  **/
 public class SysUserDetails implements UserDetails {
 
-    private SysUser sysUser;
+    private final SysUser sysUser;
 
-    private List<SysPermission> permissionList;
+    private final List<SysPermission> permissionList;
 
     /**
      * 获取当前登录用户信息
-     *
-     * @return
      */
     public SysUser getSysUser() {
         return sysUser;
@@ -72,7 +67,7 @@ public class SysUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return sysUser.getState().equals(StateEnum.ENABLE.getValue());
+        return sysUser.getStatus().equals(StatusEnum.ENABLE);
     }
 
 }

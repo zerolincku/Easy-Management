@@ -1,8 +1,8 @@
 package com.linck.management.common.api;
 
 /**
- * @author: linck
  * 通用返回对象
+ * @author linck
  */
 public class Result<T> {
     private long code;
@@ -24,7 +24,7 @@ public class Result<T> {
      * @param data 获取的数据
      */
     public static <T> Result<T> success(T data) {
-        return new Result<T>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), data);
+        return new Result<>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), data);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Result<T> {
      * @param  message 提示信息
      */
     public static <T> Result<T> success(T data, String message) {
-        return new Result<T>(ResultCodeEnum.SUCCESS.getCode(), message, data);
+        return new Result<>(ResultCodeEnum.SUCCESS.getCode(), message, data);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Result<T> {
      * @param errorCode 错误码
      */
     public static <T> Result<T> failed(IErrorCode errorCode) {
-        return new Result<T>(errorCode.getCode(), errorCode.getMessage(), null);
+        return new Result<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Result<T> {
      * @param message 提示信息
      */
     public static <T> Result<T> failed(String message) {
-        return new Result<T>(ResultCodeEnum.FAILED.getCode(), message, null);
+        return new Result<>(ResultCodeEnum.FAILED.getCode(), message, null);
     }
 
     /**
@@ -72,21 +72,21 @@ public class Result<T> {
      * @param message 提示信息
      */
     public static <T> Result<T> validateFailed(String message) {
-        return new Result<T>(ResultCodeEnum.VALIDATE_FAILED.getCode(), message, null);
+        return new Result<>(ResultCodeEnum.VALIDATE_FAILED.getCode(), message, null);
     }
 
     /**
      * 未登录返回结果
      */
     public static <T> Result<T> unauthorized(T data) {
-        return new Result<T>(ResultCodeEnum.UNAUTHORIZED.getCode(), ResultCodeEnum.UNAUTHORIZED.getMessage(), data);
+        return new Result<>(ResultCodeEnum.UNAUTHORIZED.getCode(), ResultCodeEnum.UNAUTHORIZED.getMessage(), data);
     }
 
     /**
      * 未授权返回结果
      */
     public static <T> Result<T> forbidden(T data) {
-        return new Result<T>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
+        return new Result<>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
     }
 
     public long getCode() {

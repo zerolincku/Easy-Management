@@ -2,8 +2,6 @@ package com.linck.management.system.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 
 /**
- * @program: management
- * @description
- * @author: linck
- * @create: 2020-10-03 15:32
+ * 验证码控制器
+ *
+ * @author linck
  **/
 @Slf4j
-@Api(tags = "验证码控制器")
 @Controller
 @RequestMapping("/verification")
 public class VerificationCodeController {
@@ -31,8 +27,10 @@ public class VerificationCodeController {
     @Autowired
     private Producer captchaProducer;
 
+    /**
+     * 获取验证码
+     */
     @GetMapping("/code")
-    @ApiOperation("获取验证码")
     public void getVerificationCodeImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setDateHeader("Expires", 0);
         // Set standard HTTP/1.1 no-cache headers.
@@ -50,7 +48,7 @@ public class VerificationCodeController {
         log.debug(capText);
         // create the image with the text
         BufferedImage bi = captchaProducer.createImage(capText);
-        try (ServletOutputStream out = response.getOutputStream();) {
+        try (ServletOutputStream out = response.getOutputStream()) {
             // write the data out
             ImageIO.write(bi, "jpg", out);
             out.flush();

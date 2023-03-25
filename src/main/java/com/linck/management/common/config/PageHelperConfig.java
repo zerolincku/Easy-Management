@@ -7,10 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * @program: management
- * @description PageHelper配置
- * @author: linck
- * @create: 2020-10-29 23:01
+ * PageHelper配置
+ * @author linck
  **/
 @Configuration
 public class PageHelperConfig {

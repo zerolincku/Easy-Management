@@ -4,15 +4,12 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 import java.util.Properties;
 
 /**
- * @program: management
- * @description 验证码配置
- * @author: linck
- * @create: 2020-10-03 15:29
+ * 验证码配置
+ * @author linck
  **/
 @Configuration
 public class KaptchaConfig {

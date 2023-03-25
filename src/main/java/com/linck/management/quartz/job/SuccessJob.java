@@ -3,10 +3,7 @@ package com.linck.management.quartz.job;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @program: management
- * @description
- * @author: linck
- * @create: 2020-10-13 21:44
+ * @author linck
  **/
 @Slf4j
 public class SuccessJob extends AbstractJob {

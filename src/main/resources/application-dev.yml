@@ -2,7 +2,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/mymanagement?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/management?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 # 自定义jwt key
@@ -11,7 +11,3 @@ jwt:
   secret: jhi40S8232amR #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24*7)s
   tokenHead: Bearar  #JWT负载中拿到开头
-
-# mybatis handler 包路径
-mybatis-plus:
-  type-handlers-package: com.linck.management.common.handler.mybatis

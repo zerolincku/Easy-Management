@@ -21,11 +21,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 扫描指定包下的所有 Job, 如果 Job 类，没有注册到 SysJob 表的话，会自动注册到该张表
  * @author lck
- * @date 2020/10/13 18:23
- * @description 扫描指定包下的所有 Job
- * <p>
- * 如果 Job 类，没有注册到 SysJob 表的话，会自动注册到该张表
  */
 @Slf4j
 @Component
@@ -34,7 +31,7 @@ public class JobInitialize implements ApplicationRunner {
     @Autowired
     private SysJobMapper sysJobMapper;
 
-    private static Map<Class<? extends AbstractJob>, Long> jobIdMap = new HashMap<>();
+    private static final Map<Class<? extends AbstractJob>, Long> jobIdMap = new HashMap<>();
 
     @Override
     @SneakyThrows

@@ -2,16 +2,14 @@ package com.linck.management.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.constant.StateEnum;
-import com.linck.management.common.model.dto.IdDTO;
-import com.linck.management.common.model.dto.StateDTO;
+import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.StatusDto;
+import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
-import com.linck.management.system.model.dto.SysPermissionDTO;
+import com.linck.management.system.model.dto.SysPermissionDto;
 import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,12 +26,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @program: management
- * @description
- * @author: linck
- * @create: 2020-10-23 23:39
+ * 系统权限
+ *
+ * @author linck
  **/
-@Api(tags = "系统权限")
 @RestController
 @RequestMapping("sysPermission")
 public class SysPermissionController {
@@ -41,19 +37,23 @@ public class SysPermissionController {
     @Autowired
     private SysPermissionService sysPermissionService;
 
+    /**
+     * 查询权限列表(嵌套封装)
+     */
     @PreAuthorize("hasAuthority('permission:view')")
-    @ApiOperation("查询权限列表(嵌套封装)")
     @PostMapping("list")
-    public Result<List<SysMenuAndButton>> list(@RequestBody StateDTO stateDTO) {
-        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton(stateDTO);
+    public Result<List<SysMenuAndButton>> list(@RequestBody StatusDto statusDto) {
+        List<SysMenuAndButton> result = sysPermissionService.allMenuAndButton(statusDto);
         return Result.success(result);
     }
 
+    /**
+     * 所有菜单和按钮
+     */
     @PreAuthorize("hasAuthority('permission:view')")
-    @ApiOperation("所有菜单和按钮")
     @PostMapping("allMenuAndButton")
     public Result<Map<String, List<SysPermission>>> allMenuAndButton() {
-        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("state", StateEnum.ENABLE.getValue()));
+        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("status", StatusEnum.ENABLE.getValue()));
         List<SysPermission> menus = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.MENU.getType())).collect(Collectors.toList());
         List<SysPermission> buttons = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.BUTTON.getType())).collect(Collectors.toList());
         Map<String, List<SysPermission>> result = new HashMap<>();
@@ -62,34 +62,40 @@ public class SysPermissionController {
         return Result.success(result);
     }
 
+    /**
+     * 新增权限
+     */
     @PreAuthorize("hasAuthority('permission:add')")
-    @ApiOperation("新增权限")
     @PostMapping("add")
-    public Result add(@RequestBody @Validated SysPermissionDTO permissionDTO) {
-        permissionDTO.setId(null);
+    public Result add(@RequestBody @Validated SysPermissionDto permissionDto) {
+        permissionDto.setId(null);
         SysPermission sysPermission = new SysPermission();
-        BeanUtils.copyProperties(permissionDTO, sysPermission);
+        BeanUtils.copyProperties(permissionDto, sysPermission);
         sysPermission.setCreateTime(LocalDateTime.now());
         return sysPermissionService.add(sysPermission);
     }
 
+    /**
+     * 更新权限
+     */
     @PreAuthorize("hasAuthority('permission:update')")
-    @ApiOperation("更新权限")
     @PostMapping("update")
-    public Result<Long> update(@RequestBody @Validated SysPermissionDTO permissionDTO) {
+    public Result<Long> update(@RequestBody @Validated SysPermissionDto permissionDto) {
         SysPermission sysPermission = new SysPermission();
-        BeanUtils.copyProperties(permissionDTO, sysPermission);
+        BeanUtils.copyProperties(permissionDto, sysPermission);
         sysPermission.setUpdateTime(LocalDateTime.now());
         sysPermissionService.updateById(sysPermission);
         return Result.success(sysPermission.getId());
     }
 
+    /**
+     * 删除权限
+     */
     @PreAuthorize("hasAuthority('permission:remove')")
-    @ApiOperation("删除权限")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdDTO idDTO) {
-        sysPermissionService.removeById(idDTO.getId());
-        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDTO.getId()));
+    public Result remove(@RequestBody @Validated IdDto idDto) {
+        sysPermissionService.removeById(idDto.getId());
+        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDto.getId()));
         return Result.success("");
     }
 }

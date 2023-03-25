@@ -1,7 +1,7 @@
 package com.linck.management.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.linck.management.system.model.dto.SysUserSearchDTO;
+import com.linck.management.system.model.dto.SysUserSearchDto;
 import com.linck.management.system.model.entity.SysUser;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +16,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
      * 用户列表
      * 未返回密码
-     *
-     * @param sysUserSearchDTO
      */
-    List<SysUser> listWithSearch(SysUserSearchDTO sysUserSearchDTO);
+    List<SysUser> listWithSearch(SysUserSearchDto sysUserSearchDto);
 }

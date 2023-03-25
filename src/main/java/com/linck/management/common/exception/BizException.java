@@ -3,12 +3,10 @@ package com.linck.management.common.exception;
 import com.linck.management.common.api.ResultCodeEnum;
 
 /**
- * @program: management
- * @description 自定义运行时异常
- * @author: linck
- * @create: 2020-09-12 10:22
+ * 自定义运行时异常
+ * @author linck
  **/
-public class CustomException extends RuntimeException{
+public class BizException extends RuntimeException {
 
     /**
      * 状态码
@@ -25,9 +23,9 @@ public class CustomException extends RuntimeException{
      * 自定义异常
      *
      * @param resultCodeEnum 返回枚举对象
-     * @param method     方法
+     * @param method         方法
      */
-    public CustomException(ResultCodeEnum resultCodeEnum, String method) {
+    public BizException(ResultCodeEnum resultCodeEnum, String method) {
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
         this.method = method;
@@ -38,7 +36,7 @@ public class CustomException extends RuntimeException{
      * @param message 错误信息
      * @param method  方法
      */
-    public CustomException(Integer code, String message, String method) {
+    public BizException(Integer code, String message, String method) {
         super(message);
         this.code = code;
         this.method = method;

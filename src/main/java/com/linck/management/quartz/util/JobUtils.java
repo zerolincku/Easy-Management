@@ -10,10 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: management
- * @description
- * @author: linck
- * @create: 2020-09-16 23:18
+ * @author linck
  **/
 @Slf4j
 public class JobUtils {
@@ -21,7 +18,7 @@ public class JobUtils {
     /**
      * 运行状态的 Job 的 JobKey 记录下来，用于停止 Job 时使用
      */
-    private static Map<Class, JobDetail> jobDetailMap = new HashMap<>();
+    private static final Map<Class<?>, JobDetail> jobDetailMap = new HashMap<>();
 
     /**
      * @param scheduler   quartz调度器
@@ -88,8 +85,6 @@ public class JobUtils {
 
     /**
      * 停止 Job
-     *
-     * @param jobBean
      */
     @SneakyThrows
     public static void stopJob(Scheduler scheduler, Class<? extends Job> jobBean) {

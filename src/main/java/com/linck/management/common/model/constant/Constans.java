@@ -1,10 +1,7 @@
 package com.linck.management.common.model.constant;
 
 /**
- * @program: MyManagement
- * @description
- * @author: linck
- * @create: 2020-08-09 23:26
+ * @author linck
  **/
 public interface Constans {
 

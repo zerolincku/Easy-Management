@@ -18,10 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @program: MyManagement
- * @description 过滤器-token校验
- * @author: linck
- * @create: 2020-08-09 22:39
+ * 过滤器-token校验
+ * @author linck
  **/
 @Slf4j
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {

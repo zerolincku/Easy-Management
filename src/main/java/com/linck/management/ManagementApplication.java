@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author: linck
+ * @author linck
  */
 @SpringBootApplication
 @MapperScan("com.linck.management.*.mapper")

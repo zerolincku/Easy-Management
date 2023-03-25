@@ -2,13 +2,11 @@ package com.linck.management.quartz.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.dto.IdDTO;
+import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.vo.ListWithPage;
-import com.linck.management.quartz.model.dto.SysJobDTO;
+import com.linck.management.quartz.model.dto.SysJobDto;
 import com.linck.management.quartz.model.entity.SysJob;
 import com.linck.management.quartz.service.SysJobService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,13 +19,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @program: management
- * @description
- * @author: linck
- * @create: 2020-10-29 21:35
+ * Job管理
+ *
+ * @author linck
  **/
 @Slf4j
-@Api(tags = "Job管理")
 @RestController
 @RequestMapping("sys/job")
 public class SysJobController {
@@ -35,10 +31,12 @@ public class SysJobController {
     @Autowired
     private SysJobService sysJobService;
 
-    @ApiOperation("job列表")
+    /**
+     * job列表
+     */
     @PostMapping("list")
-    public Result<ListWithPage<SysJob>> list(@RequestBody SysJobDTO sysJobDTO) {
-        List<SysJob> list = sysJobService.list(sysJobDTO);
+    public Result<ListWithPage<SysJob>> list(@RequestBody SysJobDto sysJobDto) {
+        List<SysJob> list = sysJobService.list(sysJobDto);
         PageInfo<SysJob> pageInfo = new PageInfo<>(list);
         ListWithPage<SysJob> result = new ListWithPage<>();
         result.setList(list);
@@ -46,44 +44,54 @@ public class SysJobController {
         return Result.success(result);
     }
 
-    @ApiOperation("新增job")
+    /**
+     * 新增job
+     */
     @PostMapping("add")
     @PreAuthorize("hasAuthority('job:add')")
-    public Result add(@RequestBody SysJob sysJob) {
+    public Result<Long> add(@RequestBody SysJob sysJob) {
         sysJob.setCreateTime(LocalDateTime.now());
         sysJob.setUpdateTime(LocalDateTime.now());
         sysJobService.save(sysJob);
         return Result.success(sysJob.getId());
     }
 
-    @ApiOperation("更新job")
+    /**
+     * 更新job
+     */
     @PostMapping("update")
     @PreAuthorize("hasAuthority('job:update')")
-    public Result update(@RequestBody SysJob sysJob) {
+    public Result<String> update(@RequestBody SysJob sysJob) {
         sysJob.setUpdateTime(LocalDateTime.now());
         sysJobService.updateById(sysJob);
         return Result.success("");
     }
 
-    @ApiOperation("删除job")
+    /**
+     * 删除job
+     */
     @PostMapping("remove")
     @PreAuthorize("hasAuthority('job:remove')")
-    public Result remove(@RequestBody IdDTO idDTO) {
-        sysJobService.removeById(idDTO.getId());
+    public Result<String> remove(@RequestBody IdDto idDto) {
+        sysJobService.removeById(idDto.getId());
         return Result.success("");
     }
 
-    @ApiOperation("启动Job")
+    /**
+     * 启动Job
+     */
     @PostMapping("start")
-    public Result start(@RequestBody IdDTO idDTO) {
-        sysJobService.start(idDTO.getId());
+    public Result<String> start(@RequestBody IdDto idDto) {
+        sysJobService.start(idDto.getId());
         return Result.success("");
     }
 
-    @ApiOperation("停止Job")
+    /**
+     * 停止Job
+     */
     @PostMapping("stop")
-    public Result stop(@RequestBody IdDTO idDTO) {
-        sysJobService.stop(idDTO.getId());
+    public Result<String> stop(@RequestBody IdDto idDto) {
+        sysJobService.stop(idDto.getId());
         return Result.success("");
     }
 
