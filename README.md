@@ -2,10 +2,10 @@
 
 Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权限管理系统
 
-| 使用技术               | 版本          |
-| ---------------------- | ------------- |
+| 使用技术               | 版本            |
+| ---------------------- |---------------|
 | SpringBoot             | 2.3.2.RELEASE |
-| MySQL                  | 5.7.29        |
+| MySQL                  | 8.0.27        |
 | Druid                  | 1.1.16        |
 | Mybatis-plus           | 3.2.0         |
 | Mybatis-plus-generator | 3.3.1.tmp     |
@@ -38,5 +38,14 @@ swagger地址：http://139.224.44.141:8089/doc.html
 
 ![image-20200824222938586](https://gitee.com/zerolinck/Easy-Management/raw/master/doc/image/image-20200824222938586.png)
 
-
+## 运行方法
+1. 运行 db/management.sql，创建 management 数据库
+2. 添加下述内容到 hosts 文件
+```
+# management
+127.0.0.1 management-mysql
+127.0.0.1 management-redis
+127.0.0.1 management-app
+```
+3. 运行 ManagementApplication 启动类
 

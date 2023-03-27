@@ -1,0 +1,32 @@
+version: '3'
+services:
+  management-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+    expose:
+      - 3306
+    restart: always
+    container_name: management-mysql
+    image: management-mysql
+
+  management-redis:
+    image: redis:7.0.0
+    restart: always
+    container_name: management-redis
+    hostname: management-redis
+
+  management-app:
+    build:
+      context: .
+    container_name: management-app
+    hostname: management-app
+    restart: always
+    image: management-app
+    depends_on:
+      - management-redis
+      - management-mysql
+    ports:
+      - "8098:8098"

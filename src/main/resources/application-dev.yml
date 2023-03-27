@@ -2,7 +2,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/management?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://management-mysql:3306/management?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 # 自定义jwt key
