@@ -1,12 +1,20 @@
-FROM liferay/jdk11:5.0.11-20230215153115
+FROM maven:3.8.6-openjdk-11 AS build
 
-RUN mkdir -p /management
+COPY pom.xml /app/
+
+COPY src /app/src/
+
+WORKDIR /app/
+
+RUN mvn clean package -Dmaven.test.skip=true -Pdev
+
+FROM openjdk:11-jdk-slim
+
+ARG JAR_FILE=management-*.jar
+
+COPY --from=build /app/target/${JAR_FILE} /management/app.jar
 
 WORKDIR /management
-
-ARG JAR_FILE=target/management-*.jar
-
-COPY ${JAR_FILE} app.jar
 
 EXPOSE 8089
 
