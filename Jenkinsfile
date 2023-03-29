@@ -25,7 +25,7 @@ pipeline {
         }
         stage('制品') {
             steps {
-                archiveArtifacts artifacts: 'target/management-0.0.1.jar', followSymlinks: false
+                archiveArtifacts artifacts: 'target/management-*.jar', followSymlinks: false
             }
         }
     }
