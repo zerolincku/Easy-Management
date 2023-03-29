@@ -20,6 +20,7 @@ pipeline {
         }
         stage('测试') {
             steps {
+                sh 'docker ps'
                 sh 'docker build -f db/Dockerfile -t management-mysql:test db'
                 sh 'docker run -d --name management-mysql-test -p 3306:3306 management-mysql:test'
                 sh 'mvn -B test'
