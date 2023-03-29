@@ -22,10 +22,10 @@ pipeline {
             steps {
                 sh 'docker ps'
                 sh 'docker build -f db/Dockerfile -t management-mysql:test db'
-                sh 'docker run -d --name management-mysql management-mysql:1.0'
+                sh 'docker run -d --name management-mysql management-mysql:test'
                 sh 'mvn -B test'
                 sh 'docker rm -f management-mysql'
-                sh 'docker rmi management-mysql'
+                sh 'docker rmi management-mysql:test'
             }
         }
         stage('打包') {
