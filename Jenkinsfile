@@ -1,6 +1,16 @@
 pipeline {
-    agent any
+    docker {
+        image 'maven:3.8.6-openjdk-11'
+        args '-v $HOME/.m2:/root/.m2'
+    }
     stages {
+        stage('Git pull') {
+            steps {
+                echo '开始拉取代码 ..'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '4b52c3d1-2653-4537-be52-58ea5a408a55', url: 'https://gitee.com/zerolinck/Easy-Management.git']]])
+                echo '代码拉取成功'
+            }
+        }
         stage('编译测试') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev clean compile'
@@ -9,11 +19,6 @@ pipeline {
         stage('打包') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev package'
-            }
-        }
-        stage('部署') {
-            steps {
-                sh 'sh ./shell/dev.sh'
             }
         }
         stage('制品') {
@@ -25,7 +30,7 @@ pipeline {
     post {
         success {
             dingtalk (
-                robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
+                robot: '79d3681d-dc2c-4784-a8b4-381e9581c5d1',
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
@@ -39,7 +44,7 @@ pipeline {
         }
         failure {
             dingtalk (
-                robot: 'df5ba78f-ef02-411f-8da5-bd329a6d9974',
+                robot: '79d3681d-dc2c-4784-a8b4-381e9581c5d1',
                 type: 'ACTION_CARD',
                 title: currentBuild.result,
                 text: [
