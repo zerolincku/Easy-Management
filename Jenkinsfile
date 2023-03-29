@@ -1,7 +1,9 @@
 pipeline {
-    docker {
-        image 'maven:3.8.6-openjdk-11'
-        args '-v $HOME/.m2:/root/.m2'
+    agent {
+        docker {
+            image 'maven:3.8.6-openjdk-11'
+            args '-v $HOME/.m2:/root/.m2'
+        }
     }
     stages {
         stage('Git pull') {
