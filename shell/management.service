@@ -1,0 +1,14 @@
+[Unit]
+Description=management
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/jdk-11/bin/java -jar /opt/management/management-1.0.1.jar
+ExecReload=/bin/kill -HUP ${MAINPID}
+Restart=on-failure
+RestartSec=10s
+ExecStop=/bin/kill -9 ${MAINPID}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,20 +1,21 @@
 #!/bin/sh
 Path="/opt/management"
-File="/opt/management/management-0.0.1.jar"
-BakFile="/opt/management/management-0.0.1.jar.bak"
+File="management-1.0.1.jar"
 
 # 如果路径不存在，创建目录
 if [ ! -d "$Path" ]; then
-mkdir "$Path"
+  mkdir -p "$Path"
 fi
 
 # 判断文件是否存在 
-if [ -f "$File" ]; then
-    # 备份文件如果存在，删除备份文件
-    if [ -f "$BakFile" ]; then
-        rm -f "$BakFile"
-    fi
-    mv "$File" "$BakFile"
+if [ -f "$Path/$File" ]; then
+  # 备份文件如果存在，删除备份文件
+  if [ -f "$Path/$File.bak" ]; then
+    rm -f "$Path/$File.bak"
+  fi
+  # 备份项目
+  mv "$Path/$File" "$Path/$File.bak"
 fi
-cp target/management-0.0.1.jar "$Path"
-systemctl restart mymanagement
+# 上传制品文件
+cp target/management-*.jar "$Path/$File"
+systemctl restart management
