@@ -13,9 +13,18 @@ pipeline {
                 echo '代码拉取成功'
             }
         }
-        stage('编译测试') {
+        stage('编译') {
             steps {
                 sh 'mvn -B -DskipTests -Pdev clean compile'
+            }
+        }
+        stage('测试') {
+            steps {
+                sh 'docker build -f db/Dockerfile -t management-mysql:test db'
+                sh 'docker run -d --name management-mysql-test -p 3306:3306 management-mysql:test'
+                sh 'mvn -B test'
+                sh 'docker rm -f management-mysql-test'
+                sh 'docker rmi management-mysql:test'
             }
         }
         stage('打包') {
