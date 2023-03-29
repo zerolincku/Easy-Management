@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('Git pull') {
+        stage('拉取代码') {
             steps {
                 echo '开始拉取代码 ..'
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '4b52c3d1-2653-4537-be52-58ea5a408a55', url: 'https://gitee.com/zerolinck/Easy-Management.git']]])
