@@ -23,11 +23,6 @@ pipeline {
                 sh 'mvn -B -DskipTests -Pdev package'
             }
         }
-        stage('打包') {
-            steps {
-                sh 'mvn -B -DskipTests -Pdev package'
-            }
-        }
         stage('制品') {
             steps {
                 archiveArtifacts artifacts: 'target/management-*.jar', followSymlinks: false
