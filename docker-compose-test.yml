@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  management-mysql-test:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+    expose:
+      - 3306
+    container_name: management-mysql-test
+    image: management-mysql
+    hostname: management-mysql
+
+  management-redis-test:
+    image: redis:7.0.0
+    restart: always
+    container_name: management-redis-test
+
+  management-app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    container_name: management-app-test
+    image: management-app-test
+    volumes:
+      - $HOME/.m2:/root/.m2
+    depends_on:
+      - management-redis-test
+      - management-mysql-test
