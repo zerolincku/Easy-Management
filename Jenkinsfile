@@ -13,19 +13,14 @@ pipeline {
                 echo '代码拉取成功'
             }
         }
-        stage('编译') {
+        stage('编译测试') {
             steps {
-                sh 'mvn -B -DskipTests -Pdev clean compile'
+                sh 'docker-compose -f docker-compose-test.yml up --abort-on-container-exit'
             }
         }
-        stage('测试') {
+        stage('打包') {
             steps {
-                sh 'docker ps'
-                sh 'docker build -f db/Dockerfile -t management-mysql:test db'
-                sh 'docker run -d --name management-mysql management-mysql:test'
-                sh 'mvn -B test'
-                sh 'docker rm -f management-mysql'
-                sh 'docker rmi management-mysql:test'
+                sh 'mvn -B -DskipTests -Pdev package'
             }
         }
         stage('打包') {
