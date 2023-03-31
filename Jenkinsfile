@@ -8,6 +8,10 @@ pipeline {
     stages {
         stage('拉取代码') {
             steps {
+                sh 'pwd'
+                sh 'echo $HOSTNAME'
+                sh 'which docker'
+                sh 'which docker-compose'
                 echo '开始拉取代码 ..'
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '4b52c3d1-2653-4537-be52-58ea5a408a55', url: 'https://gitee.com/zerolinck/Easy-Management.git']]])
                 echo '代码拉取成功'
@@ -15,6 +19,10 @@ pipeline {
         }
         stage('编译测试') {
             steps {
+                sh 'pwd'
+                sh 'echo $HOSTNAME'
+                sh 'which docker'
+                sh 'which docker-compose'
                 sh 'docker-compose --profile test up --build --abort-on-container-exit; docker-compose --profile test down'
             }
         }
