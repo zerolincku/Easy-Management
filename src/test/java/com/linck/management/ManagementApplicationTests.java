@@ -23,7 +23,6 @@ class ManagementApplicationTests {
     @Test
     void contextLoads() {
         List<SysPermission> sysPermissions = sysPermissionMapper.listByUserId(1L);
-        int a = 1/0;
         sysPermissions.forEach(System.out::println);
     }
 
