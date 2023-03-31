@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'echo $HOSTNAME'
+                sh 'docker inspect $HOSTNAME'
                 sh 'which docker'
                 sh 'which docker-compose'
                 echo '开始拉取代码 ..'
