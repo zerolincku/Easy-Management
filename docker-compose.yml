@@ -11,12 +11,18 @@ services:
     restart: always
     container_name: management-mysql
     image: management-mysql
+    profiles:
+      - deploy
+      - test
 
   management-redis:
     image: redis:7.0.0
     restart: always
     container_name: management-redis
     hostname: management-redis
+    profiles:
+      - deploy
+      - test
 
   management-app:
     build:
@@ -30,3 +36,19 @@ services:
       - management-mysql
     ports:
       - "8089:8089"
+    profiles:
+      - deploy
+
+  management-app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    container_name: management-app-test
+    image: management-app-test
+    volumes:
+      - $HOME/.m2:/root/.m2
+    depends_on:
+      - management-redis
+      - management-mysql
+    profiles:
+      - test
