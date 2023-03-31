@@ -15,7 +15,7 @@ pipeline {
         }
         stage('编译测试') {
             steps {
-                sh 'docker-compose --profile test up --abort-on-container-exit && docker-compose --profile test down'
+                sh 'docker-compose --profile test up --build --abort-on-container-exit; docker-compose --profile test down'
             }
         }
         stage('打包') {

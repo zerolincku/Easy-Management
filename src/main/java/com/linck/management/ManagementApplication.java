@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author linck
  */
 @SpringBootApplication
-@MapperScan("com.linck.management.*.mapper")
+@MapperScan("com.linck.management.**.mapper")
 public class ManagementApplication {
     public static void main(String[] args) {
         SpringApplication.run(ManagementApplication.class, args);
