@@ -221,6 +221,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <!-- 排除运行不需要的文件 -->
                 <excludes>
                     <exclude>**/.*ftl</exclude>
                     <exclude>smart-doc.json</exclude>
