@@ -11,7 +11,7 @@
     <!--单日志文件最大大小-->
     <property name="file.maxSize" value="10MB"/>
     <!--日志文件保留天数-->
-    <property name="file.maxHistory" value="15"/>
+    <property name="file.maxHistory" value="30"/>
 
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
@@ -180,7 +180,7 @@
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
         <!--mybatis sql日志 日志的级别需要是DEBUG-->
-        <logger name="com.linck.management" level="debug"></logger>
+        <logger name="com.linck.management" level="debug"/>
         <root level="info">
             <appender-ref ref="CONSOLE"/>
         </root>
@@ -200,7 +200,7 @@
     <springProfile name="test">
         <root level="info">
             <!--mybatis sql日志 日志的级别需要是DEBUG-->
-            <logger name="com.linck.management" level="debug"></logger>
+            <logger name="com.linck.management" level="debug"/>
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="DEBUG_FILE"/>
             <appender-ref ref="INFO_FILE"/>
