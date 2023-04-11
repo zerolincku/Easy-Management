@@ -11,9 +11,9 @@ import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    @Value("${spring.mvc.servlet.path}")
+    private String servletPath;
 
     /**
      * 配置拦截器保护请求
@@ -63,13 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                // 允许GET请求无授权访问
-                .antMatchers(HttpMethod.GET,
-                        "/**"
-                )
-                .permitAll()
                 // 登录注册允许匿名访问
-                .antMatchers("/sys/user/login", "/sys/user/register", "/test/**")
+                .mvcMatchers("sys/user/login", "sys/user/register", "management/test/**")
+                .servletPath(servletPath)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

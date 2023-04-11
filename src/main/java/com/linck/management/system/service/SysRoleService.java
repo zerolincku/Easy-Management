@@ -3,10 +3,11 @@ package com.linck.management.system.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
-import com.linck.management.common.api.Result;
+import com.linck.management.common.api.ResultCodeEnum;
+import com.linck.management.common.exception.BizException;
+import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.dto.PageDto;
 import com.linck.management.system.mapper.SysRoleMapper;
-import com.linck.management.system.mapper.SysRolePermissionMapper;
 import com.linck.management.system.model.dto.RolePermissionDto;
 import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysRolePermission;
@@ -24,48 +25,74 @@ import java.util.stream.Collectors;
 public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
 
     @Autowired
-    private SysRoleMapper sysRoleMapper;
-
-    @Autowired
-    private SysRolePermissionMapper sysRolePermissionMapper;
+    private SysRolePermissionService sysRolePermissionService;
 
     /**
-     * 分页查询角色
+     * 分页查询
      */
     public List<SysRole> selectByPage(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
-        return sysRoleMapper.selectList(null);
+        return baseMapper.selectList(null);
     }
 
     /**
+     * 新增
+     */
+    public SysRole insert(SysRole sysRole) {
+        Long count = baseMapper.selectCount(new QueryWrapper<SysRole>().eq("value", sysRole.getValue()));
+        if (count > 0) {
+            throw new BizException(ResultCodeEnum.FAILED, "当前内容已经存在");
+        }
+        baseMapper.insert(sysRole);
+        return sysRole;
+    }
+
+    /**
+     * 批量新增
+     */
+    public int batchInsert(List<SysRole> list) {
+        if (list.isEmpty()) {
+            return 0;
+        }
+        return baseMapper.batchInsert(list);
+    }
+
+    /**
+     * 删除
+     */
+    public int remove(IdsDto ids) {
+        if (ids.getIds().isEmpty()) {
+            return 0;
+        }
+        return baseMapper.deleteBatchIds(ids.getIds());
+    }
+
+    /**
+     * 修改
+     */
+    public int update(SysRole sysRole) {
+        return baseMapper.updateById(sysRole);
+    }
+    
+    /**
      * 保存角色权限列表
      */
-    public Result<Integer> saveSolePermission(RolePermissionDto rolePermissionDto) {
-        List<SysRolePermission> databaseList = sysRolePermissionMapper.selectList(new QueryWrapper<SysRolePermission>().eq("r_id", rolePermissionDto.getRoleId()));
+    public int saveSolePermission(RolePermissionDto rolePermissionDto) {
+        List<SysRolePermission> databaseList = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().eq("r_id", rolePermissionDto.getRoleId()));
         List<Long> databasePermissionIdList = databaseList.stream().map(SysRolePermission::getPId).collect(Collectors.toList());
         // 查找待删除的映射
         List<Long> deleteIdList = databaseList.stream().filter(t -> !rolePermissionDto.getPermissionIdList().contains(t.getPId())).map(SysRolePermission::getId).collect(Collectors.toList());
         // 查找待添加的映射
         List<SysRolePermission> insertList = rolePermissionDto.getPermissionIdList().stream().filter(t -> !databasePermissionIdList.contains(t)).map(t -> new SysRolePermission(null, rolePermissionDto.getRoleId(), t)).collect(Collectors.toList());
         if (!deleteIdList.isEmpty()) {
-            sysRolePermissionMapper.deleteBatchIds(deleteIdList);
+            sysRolePermissionService.removeByIds(deleteIdList);
         }
-        Integer insertCount = 0;
+        int insertCount = 0;
         if (!insertList.isEmpty()) {
-            insertCount = sysRolePermissionMapper.insertList(insertList);
+            // FIXME 改用自定义 batchInsert
+            sysRolePermissionService.saveBatch(insertList);
         }
-        return Result.success(insertCount);
+        return insertCount;
     }
-
-    /**
-     * 新增角色
-     */
-    public Result<String> add(SysRole sysRole) {
-        Integer count = sysRoleMapper.selectCount(new QueryWrapper<SysRole>().eq("value", sysRole.getValue()));
-        if (count > 0) {
-            return Result.failed("当前内容已经存在");
-        }
-        sysRoleMapper.insert(sysRole);
-        return Result.success("");
-    }
+    
 }

@@ -19,7 +19,7 @@
         <mysql.connector.version>8.0.32</mysql.connector.version>
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
         <mybatis.typehandlers.jsr310.version>1.0.2</mybatis.typehandlers.jsr310.version>
-        <mybatis.plus.generator.version>3.3.2</mybatis.plus.generator.version>
+        <mybatis.plus.generator.version>3.5.1</mybatis.plus.generator.version>
         <jjwt.version>0.9.1</jjwt.version>
         <hutool.version>5.8.16</hutool.version>
         <spring.boot.starter.quartz.version>3.0.4</spring.boot.starter.quartz.version>
@@ -91,6 +91,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <!-- JSON Web Token -->

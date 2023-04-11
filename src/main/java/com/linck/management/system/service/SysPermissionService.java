@@ -11,7 +11,9 @@ import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.model.vo.SysPermissionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,33 +26,33 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
+@CacheConfig(cacheNames = "permission")
 public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPermission> {
-
-    @Autowired
-    private SysPermissionMapper sysPermissionMapper;
 
     /**
      * 根据UserId查询所有启用状态权限
      */
     public List<SysPermission> listByUserId(Long id) {
-        return sysPermissionMapper.listByUserId(id);
+        return baseMapper.listByUserId(id);
     }
 
     /**
      * 查询权限列表
      */
+    @Cacheable(key = "'all'")
     public List<SysPermission> listAll(StatusDto statusDto) {
         QueryWrapper<SysPermission> wrapper = new QueryWrapper<>();
         if (statusDto.getStatus() != null) {
             wrapper.eq("status", statusDto.getStatus());
         }
         wrapper.orderByAsc("type", "sort");
-        return sysPermissionMapper.selectList(wrapper);
+        return baseMapper.selectList(wrapper);
     }
 
     /**
      * 查询菜单和按钮
      */
+    @Cacheable(key = "'tree:all'")
     public List<SysMenuAndButton> allMenuAndButton(StatusDto statusDto) {
         List<SysPermission> sysPermissions = listAll(statusDto);
         List<SysMenuAndButton> result = new ArrayList<>();
@@ -89,6 +91,7 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     /**
      * 查询用户菜单和按钮
      */
+    @Cacheable(key = "'userId:' + #userId")
     public List<SysMenuAndButton> getMenuAndButtonByUserId(Long userId) {
         // 查询当前用户权限
         List<SysPermission> sysPermissions = listByUserId(userId);
@@ -117,24 +120,25 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     /**
      * 新增权限
      */
+    @CacheEvict(allEntries = true)
     public Result add(SysPermission sysPermission) {
         if (SysPermissionTypeEnum.MENU.getType().equals(sysPermission.getType())) {
-            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("name", sysPermission.getName()));
+            Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("name", sysPermission.getName()));
             if (count > 0) {
                 return Result.failed("当前菜单名称已经存在");
             }
         } else if (SysPermissionTypeEnum.BUTTON.getType().equals(sysPermission.getType())) {
-            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("url", sysPermission.getUrl()));
+            Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("url", sysPermission.getUrl()));
             if (count > 0) {
                 return Result.failed("当前按钮url已经存在");
             }
         } else if (SysPermissionTypeEnum.PERMISSION.getType().equals(sysPermission.getType())) {
-            Integer count = sysPermissionMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("value", sysPermission.getUrl()));
+            Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("value", sysPermission.getUrl()));
             if (count > 0) {
                 return Result.failed("当前权限内容已经存在");
             }
         }
-        sysPermissionMapper.insert(sysPermission);
+        baseMapper.insert(sysPermission);
         return Result.success(sysPermission.getId());
     }
 }

@@ -1,4 +1,4 @@
-package com.linck.management.common.config;
+package com.linck.management.common.config.mybatis;
 
 import cn.hutool.core.util.ClassUtil;
 import com.linck.management.common.model.enums.NameValueInterface;
@@ -17,14 +17,11 @@ import java.sql.SQLException;
 import java.util.Set;
 
 /**
- * 自动注册枚举转换处理
- *
  * @author linck
+ * @date 2023-04-11
  */
 @Configuration
-@SuppressWarnings("rawtypes")
-public class MyBatisConfig {
-
+public class EnumHandler {
     @Autowired
     SqlSessionFactory sqlSessionFactory;
 

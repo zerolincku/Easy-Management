@@ -4,9 +4,17 @@ server:
 spring:
   mvc:
     servlet:
-      path: /
+      path: /management
   profiles:
     # 如果直接运行出错，需使用maven指定profile编译后，再点击运行
     active: @active.file@
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  global-config:
+    db-config:
+      # 0-表示正常，1-逻辑删除
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      # 新增数据策略 not_null: 只更新和插入非null的值
+      insert-strategy: not_null

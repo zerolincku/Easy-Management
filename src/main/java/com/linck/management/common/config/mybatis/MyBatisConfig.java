@@ -1,5 +1,7 @@
-package com.linck.management.common.config;
+package com.linck.management.common.config.mybatis;
 
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,11 +9,24 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * PageHelper配置
+ * 自动注册枚举转换处理
+ *
  * @author linck
- **/
+ */
 @Configuration
-public class PageHelperConfig {
+@SuppressWarnings("rawtypes")
+public class MyBatisConfig {
+
+    /**
+     * 乐观锁插件
+     */
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        return interceptor;
+    }
+
     @Bean
     public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();

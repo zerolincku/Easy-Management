@@ -16,6 +16,8 @@
 
 package com.linck.management.common.util;
 
+import com.linck.management.common.model.SysUserDetails;
+import com.linck.management.system.model.entity.SysUser;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
@@ -23,6 +25,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -94,6 +98,16 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
     @SneakyThrows
     public void destroy() {
         SpringContextHolder.clearHolder();
+    }
+
+    /**
+     * 从 Spring Security 获取当前的登录用户
+     */
+    public static SysUser getCurrentSysUser() {
+        // 从SecurityContextHolder获取当前用户
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
+        return sysUserDetails.getSysUser();
     }
 
 }

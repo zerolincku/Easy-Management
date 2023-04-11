@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.dto.PageDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.system.model.dto.RolePermissionDto;
@@ -69,8 +70,8 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:update')")
     @PostMapping("saveSolePermission")
-    public Result saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {
-        return sysRoleService.saveSolePermission(rolePermissionDto);
+    public Result<Integer> saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {
+        return Result.success(sysRoleService.saveSolePermission(rolePermissionDto));
     }
 
     /**
@@ -78,8 +79,7 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:update')")
     @PostMapping("update")
-    public Result update(@RequestBody SysRole sysRole) {
-        sysRole.setCreateTime(null);
+    public Result<String> update(@RequestBody SysRole sysRole) {
         sysRoleService.updateById(sysRole);
         return Result.success("");
     }
@@ -93,7 +93,7 @@ public class SysRoleController {
         if (sysRole.getValue() == null) {
             return Result.failed("内容不能为空");
         }
-        return sysRoleService.add(sysRole);
+        return Result.success(sysRoleService.insert(sysRole));
     }
 
     /**
@@ -101,9 +101,8 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:remove')")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdDto idDto) {
-        sysRoleService.removeById(idDto.getId());
-        return Result.success("");
+    public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
+        return Result.success(sysRoleService.remove(ids));
     }
 
 }

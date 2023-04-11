@@ -4,8 +4,18 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , value, name, description, status, create_time, update_time
+        id, value, name, description, status, create_at, update_at, create_by, update_by, del_flag, version
     </sql>
 
+    <insert id="batchInsert">
+        insert into sys_role
+        (<include refid="Base_Column_List"/>)
+        values
+            <foreach collection="list" item="t" index="index" separator=",">
+                (
+                 #{t.id}, #{t.value}, #{t.name}, #{t.description}, #{t.status}, #{t.createAt}, #{t.updateAt}, #{t.createBy}, #{t.updateBy}, #{t.delFlag}, #{t.version}
+                )
+            </foreach>
+
+    </insert>
 </mapper>

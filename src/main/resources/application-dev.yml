@@ -5,9 +5,15 @@ spring:
     url: jdbc:mysql://management-mysql:3306/management?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  redis:
+    host: management-redis
+    port: 6379
+    password: 123456
+    database: 0
+
 # 自定义jwt key
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: jhi40S8232amR #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24*7)s
-  tokenHead: Bearar  #JWT负载中拿到开头
+  tokenHead: Bearer  #JWT负载中拿到开头

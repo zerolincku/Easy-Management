@@ -2,10 +2,9 @@ package com.linck.management.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 /**
  * 系统角色
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
  * @create 2020-11-04
  */
 @Data
-public class SysRole {
+public class SysRole extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,15 +42,5 @@ public class SysRole {
      * 状态 1-启用 0-禁用
      */
     private StatusEnum status;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
 }

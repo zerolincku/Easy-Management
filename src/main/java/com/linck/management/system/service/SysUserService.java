@@ -79,7 +79,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(loginUser, sysUser);
         // 查询是否有相同用户名的用户
-        int count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
+        Long count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
         if (count > 0) {
             return null;
         }
@@ -100,7 +100,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     }
 
     public Result add(SysUser sysUser) {
-        Integer count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
+        Long count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
         if (count > 0) {
             return Result.failed("当前账户已经存在");
         }
