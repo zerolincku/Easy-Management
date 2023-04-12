@@ -117,7 +117,7 @@ public class SysUserController {
     @PreAuthorize("hasAuthority('user:update')")
     @PostMapping("update")
     public Result update(@RequestBody SysUser sysUser) {
-        sysUser.setCreateTime(null);
+        sysUser.setCreateAt(null);
         // 将密码进行加密操作
         String encodePassword = passwordEncoder.encode(sysUser.getPwd());
         sysUser.setPwd(encodePassword);

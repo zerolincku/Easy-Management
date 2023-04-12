@@ -5,13 +5,13 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , account, pwd, status, create_time, update_time
+        , account, pwd, status, create_at, update_at
     </sql>
 
     <!-- 不返回密码 -->
     <select id="listWithSearch" resultType="com.linck.management.system.model.entity.SysUser"
             parameterType="com.linck.management.system.model.dto.SysUserSearchDto">
-        select id, account, status,create_time, update_time from sys_user
+        select id, account, status,create_at, update_at from sys_user
         <where>
             <if test="account != null and account != ''">
                 and account = #{account}
@@ -20,6 +20,6 @@
                 and status = #{status}
             </if>
         </where>
-        order by update_time desc
+        order by update_at desc
     </select>
 </mapper>

@@ -2,10 +2,10 @@ package com.linck.management.quartz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 /**
  * SysJob对象
@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
  * @create 2020-11-04
  */
 @Data
-public class SysJob {
+@EqualsAndHashCode(callSuper = false)
+public class SysJob extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -54,15 +55,5 @@ public class SysJob {
      * 组
      */
     private String groupName;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
 }

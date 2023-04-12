@@ -57,7 +57,7 @@ public abstract class AbstractJob implements Job {
             log.debug("{} after method execute", this.getClass().getName());
         }
         sysJobLog.setSpendTime((int) (System.currentTimeMillis() - sysJobLog.getSpendTime()));
-        sysJobLog.setCreateTime(LocalDateTime.now());
+        sysJobLog.setCreateAt(LocalDateTime.now());
         SysJobLogMapper sysJobLogMapper = SpringContextHolder.getBean(SysJobLogMapper.class);
         sysJobLogMapper.insert(sysJobLog);
     }

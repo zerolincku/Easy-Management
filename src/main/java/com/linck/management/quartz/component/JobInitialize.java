@@ -49,8 +49,8 @@ public class JobInitialize implements ApplicationRunner {
                     sysJob.setName(clazz.getSimpleName());
                     sysJob.setCron("* */1 * * * ?");
                     sysJob.setGroupName("default");
-                    sysJob.setCreateTime(LocalDateTime.now());
-                    sysJob.setUpdateTime(LocalDateTime.now());
+                    sysJob.setCreateAt(LocalDateTime.now());
+                    sysJob.setUpdateAt(LocalDateTime.now());
                     sysJobMapper.insert(sysJob);
                 }
                 jobIdMap.put((Class<? extends AbstractJob>) clazz, sysJob.getId());

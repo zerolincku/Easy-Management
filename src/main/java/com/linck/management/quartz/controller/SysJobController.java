@@ -50,8 +50,8 @@ public class SysJobController {
     @PostMapping("add")
     @PreAuthorize("hasAuthority('job:add')")
     public Result<Long> add(@RequestBody SysJob sysJob) {
-        sysJob.setCreateTime(LocalDateTime.now());
-        sysJob.setUpdateTime(LocalDateTime.now());
+        sysJob.setCreateAt(LocalDateTime.now());
+        sysJob.setUpdateAt(LocalDateTime.now());
         sysJobService.save(sysJob);
         return Result.success(sysJob.getId());
     }
@@ -62,7 +62,7 @@ public class SysJobController {
     @PostMapping("update")
     @PreAuthorize("hasAuthority('job:update')")
     public Result<String> update(@RequestBody SysJob sysJob) {
-        sysJob.setUpdateTime(LocalDateTime.now());
+        sysJob.setUpdateAt(LocalDateTime.now());
         sysJobService.updateById(sysJob);
         return Result.success("");
     }

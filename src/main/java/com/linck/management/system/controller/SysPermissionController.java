@@ -71,7 +71,7 @@ public class SysPermissionController {
         permissionDto.setId(null);
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDto, sysPermission);
-        sysPermission.setCreateTime(LocalDateTime.now());
+        sysPermission.setCreateAt(LocalDateTime.now());
         return sysPermissionService.add(sysPermission);
     }
 
@@ -83,7 +83,7 @@ public class SysPermissionController {
     public Result<Long> update(@RequestBody @Validated SysPermissionDto permissionDto) {
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDto, sysPermission);
-        sysPermission.setUpdateTime(LocalDateTime.now());
+        sysPermission.setUpdateAt(LocalDateTime.now());
         sysPermissionService.updateById(sysPermission);
         return Result.success(sysPermission.getId());
     }

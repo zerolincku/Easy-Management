@@ -5,7 +5,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , job_class, name, description, cron, status, trigger_name, group_name, create_time, update_time
+        , job_class, name, description, cron, status, trigger_name, group_name, create_at, update_at
     </sql>
 
     <select id="list" resultType="com.linck.management.quartz.model.entity.SysJob"

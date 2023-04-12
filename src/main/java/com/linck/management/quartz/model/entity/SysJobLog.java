@@ -49,6 +49,6 @@ public class SysJobLog implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private LocalDateTime createAt;
 
 }

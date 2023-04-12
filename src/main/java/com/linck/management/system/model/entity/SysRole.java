@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 系统角色
@@ -13,6 +14,7 @@ import lombok.Data;
  * @create 2020-11-04
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class SysRole extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
