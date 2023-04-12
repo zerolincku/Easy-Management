@@ -5,8 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.dto.IdsDto;
-import com.linck.management.common.model.dto.PageDto;
 import com.linck.management.common.model.vo.ListWithPage;
+import com.linck.management.common.util.QueryCondition;
 import com.linck.management.system.model.dto.RolePermissionDto;
 import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysRolePermission;
@@ -45,8 +45,10 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:view')")
     @PostMapping("list")
-    public Result<ListWithPage<SysRole>> list(@RequestBody(required = false) PageDto pageDto) {
-        List<SysRole> list = sysRoleService.selectByPage(pageDto);
+    public Result<ListWithPage<SysRole>> list(QueryCondition condition) {
+        condition.startPage();
+        QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class, null);
+        List<SysRole> list = sysRoleService.list(queryWrapper);
         PageInfo<SysRole> pageInfo = new PageInfo<>(list);
         ListWithPage<SysRole> result = new ListWithPage<>();
         result.setList(list);
