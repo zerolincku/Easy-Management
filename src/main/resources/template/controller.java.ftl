@@ -1,14 +1,19 @@
 package ${package.Controller};
 
-import com.jk.mes.common.model.dto.IdDto;
-import com.jk.mes.common.model.dto.IdsDto;
-import com.jk.mes.${entity?lower_case}.dto.${entity}Dto;
-import io.swagger.annotations.Api;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.linck.management.common.api.Result;
+import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.IdsDto;
+import com.linck.management.common.model.vo.ListWithPage;
+import com.linck.management.common.util.QueryCondition;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
@@ -30,6 +35,7 @@ import java.util.List;
  * @author ${author}
  * @date ${date}
  */
+@Slf4j
 <#if restControllerStyle>
 @RestController
 <#else>
@@ -42,50 +48,49 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 <#if superControllerClass??>
 public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
-@Api(tags = "${table.comment!}")
 public class ${table.controllerName} {
 </#if>
 
+    <#assign serviceInstanceName="${table.serviceName[0..0]?lower_case}${table.serviceName[1..]}"/>
     @Autowired
-    private ${table.serviceName} ${table.serviceName[0..0]?lower_case}${table.serviceName[1..]};
+    private ${table.serviceName} ${serviceInstanceName};
 
-    @PostMapping("list")
-    public List<${entity}> list(@RequestBody ${entity}Dto ${entity[0..0]?lower_case}${entity[1..]}Dto) {
-        return ${table.serviceName[0..0]?lower_case}${table.serviceName[1..]}.list(${entity[0..0]?lower_case}${entity[1..]}Dto);
+    /**
+    * 查询${table.comment!}列表
+    */
+    @GetMapping("page")
+    public Result<ListWithPage<${entity}>> list(QueryCondition<${entity}> condition) {
+        QueryWrapper<${entity}> queryWrapper = condition.dealQueryCondition(${entity}.class);
+        Page<${entity}> page = ${serviceInstanceName}.page(condition.page(), queryWrapper);
+        return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
     /**
-    * 新增
+    * 新增${table.comment!}
     */
-    @PostMapping("add")
-    public Result add(@RequestBody SysRole sysRole) {
+    @PostMapping
+    public Result<${entity}> add(@RequestBody SysRole sysRole) {
         if (sysRole.getValue() == null) {
             return Result.failed("内容不能为空");
         }
-        return Result.success(sysRoleService.insert(sysRole));
+        return Result.success(${serviceInstanceName}.insert(sysRole));
     }
 
     /**
-    * 修改
+    * 修改${table.comment!}
     */
-    @PreAuthorize("hasAuthority('role:update')")
-    @PostMapping("update")
-    public Result<String> update(@RequestBody SysRole sysRole) {
-        sysRoleService.updateById(sysRole);
+    @PutMapping
+    public Result<String> update(@RequestBody ${entity} sysRole) {
+        ${serviceInstanceName}.updateById(sysRole);
         return Result.success("");
     }
 
     /**
-    * 删除
+    * 删除${table.comment!}
     */
-    @PostMapping("remove")
+    @DeleteMapping
     public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
-        return Result.success(sysRoleService.remove(ids));
-    }
-
-    @PostMapping("disable")
-    public void disable(@RequestBody @Validated IdsDto idsDto) {
-        ${table.serviceName[0..0]?lower_case}${table.serviceName[1..]}.disable(idsDto.getIds());
+        return Result.success(${serviceInstanceName}.remove(ids));
     }
 }
 </#if>

@@ -6,7 +6,7 @@ import ${package.Mapper}.${table.mapperName};
 import org.springframework.stereotype.Service;
 
 /**
-* ${table.comment!}Service
+* ${table.comment!} Service
 * @author ${author}
 * @date ${date}
 */

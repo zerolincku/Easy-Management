@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,11 +41,42 @@ public class SysRoleController {
      * 查询角色列表
      */
     @PreAuthorize("hasAuthority('role:view')")
-    @GetMapping("list")
-    public Result<ListWithPage<SysRole>> list(QueryCondition<SysRole> condition) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+    @GetMapping("page")
+    public Result<ListWithPage<SysRole>> list(QueryCondition<SysRole> condition) {
         QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class);
         Page<SysRole> page = sysRoleService.page(condition.page(), queryWrapper);
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
+    }
+
+    /**
+     * 新增角色
+     */
+    @PreAuthorize("hasAuthority('role:add')")
+    @PostMapping
+    public Result<SysRole> add(@RequestBody SysRole sysRole) {
+        if (sysRole.getValue() == null) {
+            return Result.failed("内容不能为空");
+        }
+        return Result.success(sysRoleService.insert(sysRole));
+    }
+
+    /**
+     * 修改角色
+     */
+    @PreAuthorize("hasAuthority('role:update')")
+    @PutMapping
+    public Result<String> update(@RequestBody SysRole sysRole) {
+        sysRoleService.updateById(sysRole);
+        return Result.success("");
+    }
+
+    /**
+     * 删除角色
+     */
+    @PreAuthorize("hasAuthority('role:remove')")
+    @DeleteMapping
+    public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
+        return Result.success(sysRoleService.remove(ids));
     }
 
     /**
@@ -67,37 +97,6 @@ public class SysRoleController {
     @PostMapping("saveSolePermission")
     public Result<Integer> saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {
         return Result.success(sysRoleService.saveSolePermission(rolePermissionDto));
-    }
-
-    /**
-     * 修改角色
-     */
-    @PreAuthorize("hasAuthority('role:update')")
-    @PostMapping("update")
-    public Result<String> update(@RequestBody SysRole sysRole) {
-        sysRoleService.updateById(sysRole);
-        return Result.success("");
-    }
-
-    /**
-     * 新增角色
-     */
-    @PreAuthorize("hasAuthority('role:add')")
-    @PostMapping("add")
-    public Result<SysRole> add(@RequestBody SysRole sysRole) {
-        if (sysRole.getValue() == null) {
-            return Result.failed("内容不能为空");
-        }
-        return Result.success(sysRoleService.insert(sysRole));
-    }
-
-    /**
-     * 删除角色
-     */
-    @PreAuthorize("hasAuthority('role:remove')")
-    @PostMapping("remove")
-    public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
-        return Result.success(sysRoleService.remove(ids));
     }
 
 }

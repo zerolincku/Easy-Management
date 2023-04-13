@@ -17,7 +17,7 @@ import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.model.BaseEntity;
 
 /**
-* ${table.comment!}Entity
+* ${table.comment!} Entity
 * @author ${author}
 * @date ${date}
 */

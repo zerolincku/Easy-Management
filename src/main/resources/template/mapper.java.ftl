@@ -4,7 +4,7 @@ import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 
 /**
- * ${table.comment!}Mapper
+ * ${table.comment!} Mapper
  *
  * @author ${author}
  * @date ${date}
@@ -13,6 +13,7 @@ import ${superMapperClassPackage};
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
     /**
     * 批量新增
     */
