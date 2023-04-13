@@ -10,7 +10,7 @@ spring:
     active: @active.file@
 
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  mapper-locations: classpath*:com/linck/**/mapper/xml/*Mapper.xml
   global-config:
     db-config:
       # 0-表示正常，1-逻辑删除

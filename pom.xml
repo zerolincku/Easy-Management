@@ -243,9 +243,14 @@
                 <filtering>true</filtering>
                 <!-- 排除运行不需要的文件 -->
                 <excludes>
-                    <exclude>**/.*ftl</exclude>
                     <exclude>smart-doc.json</exclude>
                 </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
             </resource>
         </resources>
     </build>

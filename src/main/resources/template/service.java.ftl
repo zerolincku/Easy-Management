@@ -4,33 +4,32 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import com.linck.management.common.model.dto.IdsDto;
+
+import java.util.List;
 
 /**
-* ${table.comment!} Service
-* @author ${author}
-* @date ${date}
-*/
+ * ${table.comment!} Service
+ *
+ * @author ${author}
+ * @date ${date}
+ */
 @Slf4j
 @Service
 <#if kotlin>
 interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
+<#assign serviceInstanceName="${table.serviceName[0..0]?lower_case}${table.serviceName[1..]}"/>
+<#assign entityInstanceName="${entity[0..0]?lower_case}${entity[1..]}"/>
 public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>  {
-
-    /**
-    * 分页查询
-    */
-    public List<${entity}> selectByPage(PageDto pageDto) {
-        PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
-        return baseMapper.selectList(null);
-    }
 
     /**
     * 新增
     */
-    public SysRole insert(${entity} ${entity[0..0]?lower_case}${entity[1..]}) {
-        baseMapper.insert(sysRole);
-        return sysRole;
+    public ${entity} insert(${entity} ${entityInstanceName}) {
+        baseMapper.insert(${entityInstanceName});
+        return ${entityInstanceName};
     }
 
     /**
@@ -44,6 +43,13 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     }
 
     /**
+    * 修改
+    */
+    public int update(${entity} ${entityInstanceName}) {
+        return baseMapper.updateById(${entityInstanceName});
+    }
+
+    /**
     * 删除
     */
     public int remove(IdsDto ids) {
@@ -53,11 +59,5 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
         return baseMapper.deleteBatchIds(ids.getIds());
     }
 
-    /**
-    * 修改
-    */
-    public int update(${entity} ${entity[0..0]?lower_case}${entity[1..]}) {
-        return baseMapper.updateById(sysRole);
-    }
 }
 </#if>

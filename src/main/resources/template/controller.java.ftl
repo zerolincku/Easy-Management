@@ -3,7 +3,6 @@ package ${package.Controller};
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
@@ -11,9 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
@@ -25,12 +21,8 @@ import ${superControllerClassPackage};
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${entity};
 
-import java.util.List;
-
 /**
- * <p>
  * ${table.comment!} 前端控制器
- * </p>
  *
  * @author ${author}
  * @date ${date}
@@ -52,6 +44,7 @@ public class ${table.controllerName} {
 </#if>
 
     <#assign serviceInstanceName="${table.serviceName[0..0]?lower_case}${table.serviceName[1..]}"/>
+    <#assign entityInstanceName="${entity[0..0]?lower_case}${entity[1..]}"/>
     @Autowired
     private ${table.serviceName} ${serviceInstanceName};
 
@@ -69,10 +62,7 @@ public class ${table.controllerName} {
     * 新增${table.comment!}
     */
     @PostMapping
-    public Result<${entity}> add(@RequestBody SysRole sysRole) {
-        if (sysRole.getValue() == null) {
-            return Result.failed("内容不能为空");
-        }
+    public Result<${entity}> add(@RequestBody ${entity} sysRole) {
         return Result.success(${serviceInstanceName}.insert(sysRole));
     }
 
@@ -80,8 +70,8 @@ public class ${table.controllerName} {
     * 修改${table.comment!}
     */
     @PutMapping
-    public Result<String> update(@RequestBody ${entity} sysRole) {
-        ${serviceInstanceName}.updateById(sysRole);
+    public Result<String> update(@RequestBody ${entity} ${entityInstanceName}) {
+        ${serviceInstanceName}.updateById(${entityInstanceName});
         return Result.success("");
     }
 

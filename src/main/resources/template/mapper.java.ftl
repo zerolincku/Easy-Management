@@ -3,6 +3,8 @@ package ${package.Mapper};
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 
+import java.util.List;
+
 /**
  * ${table.comment!} Mapper
  *

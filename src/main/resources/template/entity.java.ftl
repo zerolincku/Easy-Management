@@ -1,6 +1,5 @@
 package ${package.Entity};
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
@@ -17,10 +16,11 @@ import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.model.BaseEntity;
 
 /**
-* ${table.comment!} Entity
-* @author ${author}
-* @date ${date}
-*/
+ * ${table.comment!} Entity
+ *
+ * @author ${author}
+ * @date ${date}
+ */
 <#if entityLombokModel>
 @Data
     <#if superEntityClass??>
@@ -92,7 +92,7 @@ public class ${entity} extends BaseEntity implements Serializable {
     @TableLogic
     </#if>
     <#if field.propertyName == "status">
-    private StateEnum ${field.propertyName};
+    private StatusEnum ${field.propertyName};
     <#elseif field.propertyName == "createBy" || field.propertyName == "createAt" || field.propertyName == "updateBy" || field.propertyName == "updateAt" || field.propertyName == "delFlag" || field.propertyName == "version">
     <#else>
     private ${field.propertyType} ${field.propertyName};
