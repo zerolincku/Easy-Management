@@ -25,14 +25,4 @@ public class ListWithPage<T> {
      */
     private Long total;
 
-    /**
-     * 当前页
-     */
-    private Long pageNo;
-
-    /**
-     * 当前页查询条数
-     */
-    private Long pageSize;
-
 }

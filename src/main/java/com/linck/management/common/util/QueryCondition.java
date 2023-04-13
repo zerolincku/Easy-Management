@@ -29,7 +29,21 @@ public class QueryCondition<T> {
     /**
      * 创建 page 以及，queryWrapper 是泛型对应的具体实体类
      */
-    Class<?> entityClazz;
+    private Class<?> entityClazz;
+
+    /**
+     * 表别名，只作用于实体类字段，不作用于 fieldNameCover 映射
+     * eg: eq[name] = 2，对应到SQL时，不是 name = 2，而应该是 user.name = 2
+     * 就可以设置 tableAlise = user.
+     */
+    private String tableAlise;
+
+    /**
+     * 字段名转换
+     * eg：eq[name] = 2，对应到SQL时，不是 name = 2，而应该是 user.display_name = 2
+     * 就可以配置 name: user.display_name 这样的映射关系
+     */
+    private Map<String, String> fieldNameCover;
 
     /**
      * 字段缓存
@@ -114,65 +128,80 @@ public class QueryCondition<T> {
     }
 
     /**
+     * 设置表别名
+     */
+    public QueryCondition<T> tableAlise(String tableAlise) {
+        this.tableAlise = tableAlise;
+        return this;
+    }
+
+    /**
+     * 设置字段名转换映射
+     */
+    public QueryCondition<T> fieldNameCover(Map<String, String> fieldNameCover) {
+        this.fieldNameCover = fieldNameCover;
+        return this;
+    }
+
+    /**
      * 根据 condition 内容创建 queryWrapper
      * column 会优先使用别名转换映射进行转换
      * 如果字段在别名转换映射中不存在，则会通过 clazz 获取对应实体类的字段，存在的字段，才允许作为条件
      *
      * @param clazz           list 查询的实体类
-     * @param tableAliseCover 别名转换映射
      */
-    public QueryWrapper<T> dealQueryCondition(Class<?> clazz, Map<String, String> tableAliseCover) {
+    public QueryWrapper<T> dealQueryCondition(Class<?> clazz) {
 
-        entityClazz = clazz;
+        this.entityClazz = clazz;
 
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         this.getEq().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.eq(coverColumn, value);
         }));
 
         this.getNe().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.ne(coverColumn, value);
         }));
 
         this.getGt().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.gt(coverColumn, value);
         }));
 
         this.getGe().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.ge(coverColumn, value);
         }));
 
         this.getLt().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.lt(coverColumn, value);
         }));
 
         this.getLe().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.le(coverColumn, value);
         }));
 
         this.getLike().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.like(coverColumn, value);
         }));
 
         this.getNLike().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.notLike(coverColumn, value);
         }));
 
         this.getLikeL().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.likeLeft(coverColumn, value);
         }));
 
         this.getLikeR().forEach((column, values) -> values.forEach(value -> {
-            String coverColumn = fieldCover(column, tableAliseCover);
+            String coverColumn = fieldCover(column);
             queryWrapper.likeRight(coverColumn, value);
         }));
         return queryWrapper;
@@ -181,18 +210,17 @@ public class QueryCondition<T> {
     /**
      * 字段转换
      *
-     * @param column          原字段
-     * @param tableAliseCover 自定义的字段转换
+     * @param column 原字段
      * @return 转换后的字段
      */
-    public String fieldCover(String column, Map<String, String> tableAliseCover) {
-        if (tableAliseCover != null && tableAliseCover.containsKey(column)) {
-            return tableAliseCover.get(column);
+    public String fieldCover(String column) {
+        if (this.fieldNameCover != null && this.fieldNameCover.containsKey(column)) {
+            return this.fieldNameCover.get(column);
         }
         Map<String, Field> fieldMap = this.getFields();
         if (fieldMap.containsKey(column)) {
             // 驼峰转下划线
-            return StringUtils.camelToUnderline(column);
+            return (this.tableAlise == null ? "" : this.tableAlise) + StringUtils.camelToUnderline(column);
         }
         throw new BizException(ResultCodeEnum.FAILED, String.format("不允许的搜索条件: %s", column));
     }
@@ -201,10 +229,10 @@ public class QueryCondition<T> {
      * 获取字段缓存
      */
     private Map<String, Field> getFields() {
-        if (!FIELD_CACHE.containsKey(entityClazz)) {
-            FIELD_CACHE.put(entityClazz, getClassFields(entityClazz));
+        if (!FIELD_CACHE.containsKey(this.entityClazz)) {
+            FIELD_CACHE.put(this.entityClazz, getClassFields(this.entityClazz));
         }
-        return FIELD_CACHE.get(entityClazz);
+        return FIELD_CACHE.get(this.entityClazz);
     }
 
     /**

@@ -44,9 +44,9 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('role:view')")
     @GetMapping("list")
     public Result<ListWithPage<SysRole>> list(QueryCondition<SysRole> condition) throws InvocationTargetException, InstantiationException, IllegalAccessException {
-        QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class, null);
+        QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class);
         Page<SysRole> page = sysRoleService.page(condition.page(), queryWrapper);
-        return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal(), page.getCurrent(), page.getSize()));
+        return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
     /**
@@ -84,7 +84,7 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:add')")
     @PostMapping("add")
-    public Result add(@RequestBody SysRole sysRole) {
+    public Result<SysRole> add(@RequestBody SysRole sysRole) {
         if (sysRole.getValue() == null) {
             return Result.failed("内容不能为空");
         }
