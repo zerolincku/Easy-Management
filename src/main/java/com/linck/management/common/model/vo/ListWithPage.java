@@ -1,6 +1,8 @@
 package com.linck.management.common.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -9,7 +11,14 @@ import java.util.List;
  * @author linck
  **/
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ListWithPage<T> {
+
+    /**
+     * 数据列表
+     */
+    private List<T> list;
 
     /**
      * 总条数
@@ -17,8 +26,13 @@ public class ListWithPage<T> {
     private Long total;
 
     /**
-     * 数据列表
+     * 当前页
      */
-    private List<T> list;
+    private Long pageNo;
+
+    /**
+     * 当前页查询条数
+     */
+    private Long pageSize;
 
 }
