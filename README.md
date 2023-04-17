@@ -6,17 +6,13 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 | ---------------------- |---------------|
 | SpringBoot             | 2.3.2.RELEASE |
 | MySQL                  | 8.0.27        |
-| Druid                  | 1.1.16        |
 | Mybatis-plus           | 3.2.0         |
 | Mybatis-plus-generator | 3.3.1.tmp     |
 | Spring Security        | 2.3.2.RELEASE |
 | Jjwt                   | 0.9.0         |
-| Swagger2               | 2.9.2         |
-| Knife4j                | 2.0.4         |
 | Hutool                 | 4.5.7         |
 | Junit                  | 4.13          |
 | Quartz                 | 2.3.2         |
-| pagehelper             | 5.1.10        |
 
 前端项目：https://gitee.com/zerolinck/easy-management-ui
 
