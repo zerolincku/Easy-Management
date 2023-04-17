@@ -3,7 +3,12 @@
   "serverUrl": "http://localhost:8089",
   "allInOne": true,
   "projectName": "Easy Management",
+  "pathPrefix": "management",
   "inlineEnum":true,
+  "coverOld": true,
+  "createDebugPage": true,
+  "style": "agate",
+  "recursionLimit": 3,
   "requestHeaders": [{
     "name": "token",
     "type": "string",

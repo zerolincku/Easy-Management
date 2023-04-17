@@ -1,5 +1,6 @@
 package com.linck.management.common.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -7,10 +8,11 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 跨域配置
+ * 跨域配置，仅仅 dev 配置下生效
  * @author linck
  **/
 @Configuration
+@ConditionalOnProperty(value = "spring.profile.active", havingValue = "dev")
 public class CorsConfig implements WebMvcConfigurer {
 
     @Bean

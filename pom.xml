@@ -232,6 +232,8 @@
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>openapi</goal>
+                            <goal>markdown</goal>
+                            <goal>html</goal>
                         </goals>
                     </execution>
                 </executions>
