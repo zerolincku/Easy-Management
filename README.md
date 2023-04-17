@@ -34,10 +34,6 @@ swagger地址：http://139.224.44.141:8089/doc.html
 
 ![image-20200824222938586](https://gitee.com/zerolinck/Easy-Management/raw/master/doc/image/屏幕截图2020-11-09095943.png)
 
-![image-20200824222859241](https://gitee.com/zerolinck/Easy-Management/raw/master/doc/image/image-20200824222859241.png)
-
-![image-20200824222938586](https://gitee.com/zerolinck/Easy-Management/raw/master/doc/image/image-20200824222938586.png)
-
 ## 本地运行方法
 1. 运行 db/management.sql，创建 management 数据库
 2. 添加下述内容到 hosts 文件
