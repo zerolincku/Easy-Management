@@ -20,12 +20,6 @@ Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权
 
 前端项目：https://gitee.com/zerolinck/easy-management-ui
 
-Demo地址：http://119.3.159.234:8081/#/login
-
-访客账户/密码（无修改数据权限）：test/123456
-
-swagger地址：http://139.224.44.141:8089/doc.html
-
 ## 项目截图
 
 ![image-20200824222859241](https://gitee.com/zerolinck/Easy-Management/raw/master/doc/image/屏幕截图2020-11-09100504.jpg)
