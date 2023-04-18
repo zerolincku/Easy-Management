@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  * SysUser对象
  *
  * @author linck
- * @create 2020-11-04
+ * @date 2020-11-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -13,40 +13,32 @@ public class BizException extends RuntimeException {
      */
     private final Integer code;
 
-    /**
-     * 方法名称
-     */
-    private final String method;
-
+    public BizException(String message) {
+        super(message);
+        this.code = ResultCodeEnum.FAILED.getCode();
+    }
 
     /**
      * 自定义异常
      *
      * @param resultCodeEnum 返回枚举对象
-     * @param method         方法
      */
-    public BizException(ResultCodeEnum resultCodeEnum, String method) {
+    public BizException(ResultCodeEnum resultCodeEnum) {
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
-        this.method = method;
     }
 
     /**
-     * @param code    状态码
+     * @param resultCodeEnum 返回枚举对象
      * @param message 错误信息
-     * @param method  方法
      */
-    public BizException(Integer code, String message, String method) {
+    public BizException(ResultCodeEnum resultCodeEnum, String message) {
         super(message);
-        this.code = code;
-        this.method = method;
+        this.code = resultCodeEnum.getCode();
     }
 
     public Integer getCode() {
         return code;
     }
 
-    public String getMethod() {
-        return method;
-    }
 }

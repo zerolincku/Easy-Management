@@ -9,7 +9,7 @@ import lombok.Data;
  * SysUserRole对象
  *
  * @author linck
- * @create 2020-11-04
+ * @date 2020-11-04
  */
 @Data
 @AllArgsConstructor

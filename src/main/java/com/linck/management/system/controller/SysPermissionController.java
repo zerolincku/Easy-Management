@@ -67,12 +67,13 @@ public class SysPermissionController {
      */
     @PreAuthorize("hasAuthority('permission:add')")
     @PostMapping("add")
-    public Result add(@RequestBody @Validated SysPermissionDto permissionDto) {
+    public Result<Long> add(@RequestBody @Validated SysPermissionDto permissionDto) {
         permissionDto.setId(null);
         SysPermission sysPermission = new SysPermission();
         BeanUtils.copyProperties(permissionDto, sysPermission);
         sysPermission.setCreateAt(LocalDateTime.now());
-        return sysPermissionService.add(sysPermission);
+        sysPermissionService.save(sysPermission);
+        return Result.success(sysPermission.getId());
     }
 
     /**
@@ -96,6 +97,6 @@ public class SysPermissionController {
     public Result<String> remove(@RequestBody @Validated IdDto idDto) {
         sysPermissionService.removeById(idDto.getId());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDto.getId()));
-        return Result.success("");
+        return Result.success();
     }
 }

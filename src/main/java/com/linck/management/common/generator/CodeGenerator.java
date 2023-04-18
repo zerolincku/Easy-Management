@@ -64,7 +64,6 @@ public class CodeGenerator {
                             .enableRestStyle();
 
                     builder.mapperBuilder()
-                            .enableBaseResultMap()
                             .enableBaseColumnList();
 
                     builder.serviceBuilder()

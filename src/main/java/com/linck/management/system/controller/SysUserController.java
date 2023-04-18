@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.system.model.dto.SysUserDto;
 import com.linck.management.system.model.dto.SysUserSearchDto;
@@ -72,13 +73,9 @@ public class SysUserController {
      * @return 用户信息
      */
     @PostMapping("/register")
-    public Result register(@RequestBody @Validated SysUserDto userDetail) {
-        SysUser sysUser = sysUserService.register(userDetail);
-        if (sysUser == null) {
-            return Result.failed("该用户名已经被注册");
-        }
-        sysUser.setPwd(null);
-        return Result.success(sysUser);
+    public Result<String> register(@RequestBody @Validated SysUserDto userDetail) {
+        sysUserService.register(userDetail);
+        return Result.success();
     }
 
     /**
@@ -116,13 +113,13 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:update')")
     @PostMapping("update")
-    public Result update(@RequestBody SysUser sysUser) {
+    public Result<String> update(@RequestBody SysUser sysUser) {
         sysUser.setCreateAt(null);
         // 将密码进行加密操作
         String encodePassword = passwordEncoder.encode(sysUser.getPwd());
         sysUser.setPwd(encodePassword);
         sysUserService.updateById(sysUser);
-        return Result.success("");
+        return Result.success();
     }
 
     /**
@@ -130,19 +127,20 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:add')")
     @PostMapping("add")
-    public Result add(@RequestBody @Validated SysUser sysUser) {
-        return sysUserService.add(sysUser);
+    public Result<Long> add(@RequestBody @Validated SysUser sysUser) {
+        sysUserService.save(sysUser);
+        return Result.success(sysUser.getId());
     }
 
     /**
      * 删除用户
-     * @param idDto id集合
+     * @param idsDto id集合
      */
     @PreAuthorize("hasAuthority('user:remove')")
     @PostMapping("remove")
-    public Result remove(@RequestBody @Validated IdDto idDto) {
-        sysUserService.removeById(idDto.getId());
-        return Result.success("");
+    public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
+        sysUserService.removeBatchByIds(idsDto.getIds());
+        return Result.success();
     }
 
     /**
@@ -159,8 +157,9 @@ public class SysUserController {
      */
     @PreAuthorize("hasAuthority('user:update')")
     @PostMapping("saveRoleList")
-    public Result saveRoleList(@RequestBody @Validated UserRoleSaveModel model) {
-        return sysUserService.saveRoleList(model);
+    public Result<String> saveRoleList(@RequestBody @Validated UserRoleSaveModel model) {
+        sysUserService.saveRoleList(model);
+        return Result.success();
     }
 
 }

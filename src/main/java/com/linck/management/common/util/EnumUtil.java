@@ -1,6 +1,5 @@
 package com.linck.management.common.util;
 
-import com.linck.management.common.api.ResultCodeEnum;
 import com.linck.management.common.exception.BizException;
 import com.linck.management.common.model.enums.NameValueInterface;
 
@@ -18,6 +17,6 @@ public class EnumUtil {
                 return nameValue;
             }
         }
-        throw new BizException(ResultCodeEnum.FAILED, clazz.getSimpleName() + " 无此value: " + value);
+        throw new BizException(clazz.getSimpleName() + " 无此value: " + value);
     }
 }

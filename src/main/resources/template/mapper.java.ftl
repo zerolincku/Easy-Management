@@ -15,10 +15,5 @@ import java.util.List;
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
-
-    /**
-    * 批量新增
-    */
-    int batchInsert(List<${entity}> list);
 }
 </#if>

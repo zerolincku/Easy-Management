@@ -62,8 +62,9 @@ public class ${table.controllerName} {
     * 新增${table.comment!}
     */
     @PostMapping
-    public Result<${entity}> add(@RequestBody ${entity} sysRole) {
-        return Result.success(${serviceInstanceName}.insert(sysRole));
+    public Result<String> add(@RequestBody ${entity} ${entityInstanceName}) {
+        ${serviceInstanceName}.save(${entityInstanceName}));
+        return Result.success();
     }
 
     /**
@@ -72,15 +73,16 @@ public class ${table.controllerName} {
     @PutMapping
     public Result<String> update(@RequestBody ${entity} ${entityInstanceName}) {
         ${serviceInstanceName}.updateById(${entityInstanceName});
-        return Result.success("");
+        return Result.success();
     }
 
     /**
     * 删除${table.comment!}
     */
     @DeleteMapping
-    public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
-        return Result.success(${serviceInstanceName}.remove(ids));
+    public Result<String> remove(@RequestBody @Validated IdsDto ids) {
+        ${serviceInstanceName}.removeBatchByIds(idsDto.getIds());
+        return Result.success();
     }
 }
 </#if>

@@ -3,7 +3,6 @@ package com.linck.management.common.util;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.linck.management.common.api.ResultCodeEnum;
 import com.linck.management.common.exception.BizException;
 import lombok.Data;
 
@@ -222,7 +221,7 @@ public class QueryCondition<T> {
             // 驼峰转下划线
             return (this.tableAlise == null ? "" : this.tableAlise) + StringUtils.camelToUnderline(column);
         }
-        throw new BizException(ResultCodeEnum.FAILED, String.format("不允许的搜索条件: %s", column));
+        throw new BizException(String.format("不允许的搜索条件: %s", column));
     }
 
     /**

@@ -64,7 +64,7 @@ public class SysJobController {
     public Result<String> update(@RequestBody SysJob sysJob) {
         sysJob.setUpdateAt(LocalDateTime.now());
         sysJobService.updateById(sysJob);
-        return Result.success("");
+        return Result.success();
     }
 
     /**
@@ -74,7 +74,7 @@ public class SysJobController {
     @PreAuthorize("hasAuthority('job:remove')")
     public Result<String> remove(@RequestBody IdDto idDto) {
         sysJobService.removeById(idDto.getId());
-        return Result.success("");
+        return Result.success();
     }
 
     /**
@@ -83,7 +83,7 @@ public class SysJobController {
     @PostMapping("start")
     public Result<String> start(@RequestBody IdDto idDto) {
         sysJobService.start(idDto.getId());
-        return Result.success("");
+        return Result.success();
     }
 
     /**
@@ -92,7 +92,7 @@ public class SysJobController {
     @PostMapping("stop")
     public Result<String> stop(@RequestBody IdDto idDto) {
         sysJobService.stop(idDto.getId());
-        return Result.success("");
+        return Result.success();
     }
 
 }

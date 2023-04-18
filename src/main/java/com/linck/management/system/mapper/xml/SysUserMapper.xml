@@ -4,8 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , account, pwd, status, create_at, update_at
+        id, account, pwd, status, create_at, update_at
     </sql>
 
     <!-- 不返回密码 -->

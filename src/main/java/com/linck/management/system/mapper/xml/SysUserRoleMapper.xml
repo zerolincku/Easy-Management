@@ -4,17 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , u_id, r_id
+        id, u_id, r_id
     </sql>
 
-    <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="false">
-        insert into sys_user_role (u_id,r_id) values
-        <foreach collection="list" item="item" index="index" separator=",">
-            (
-            #{item.uId},
-            #{item.rId}
-            )
-        </foreach>
-    </insert>
 </mapper>

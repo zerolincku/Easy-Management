@@ -1,9 +1,12 @@
 package com.linck.management.common.api;
 
+import lombok.Data;
+
 /**
  * 通用返回对象
  * @author linck
  */
+@Data
 public class Result<T> {
     private long code;
     private String message;
@@ -16,6 +19,13 @@ public class Result<T> {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    /**
+     * 成功返回结果
+     */
+    public static Result<String> success() {
+        return new Result<>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), "");
     }
 
     /**
@@ -54,20 +64,6 @@ public class Result<T> {
     }
 
     /**
-     * 失败返回结果
-     */
-    public static <T> Result<T> failed() {
-        return failed(ResultCodeEnum.FAILED);
-    }
-
-    /**
-     * 参数验证失败返回结果
-     */
-    public static <T> Result<T> validateFailed() {
-        return failed(ResultCodeEnum.VALIDATE_FAILED);
-    }
-
-    /**
      * 参数验证失败返回结果
      * @param message 提示信息
      */
@@ -89,27 +85,4 @@ public class Result<T> {
         return new Result<>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
     }
 
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

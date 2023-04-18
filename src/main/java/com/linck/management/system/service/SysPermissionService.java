@@ -2,7 +2,7 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.linck.management.common.api.Result;
+import com.linck.management.common.exception.BizException;
 import com.linck.management.common.model.dto.StatusDto;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.mapper.SysPermissionMapper;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 /**
  * @author linck
- * @create 2020-08-09
+ * @date 2020-08-09
  */
 @Slf4j
 @Service
@@ -121,24 +121,25 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
      * 新增权限
      */
     @CacheEvict(allEntries = true)
-    public Result add(SysPermission sysPermission) {
+    @Override
+    public boolean save(SysPermission sysPermission) {
         if (SysPermissionTypeEnum.MENU.getType().equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("name", sysPermission.getName()));
             if (count > 0) {
-                return Result.failed("当前菜单名称已经存在");
+                throw new BizException("当前菜单名称已经存在");
             }
         } else if (SysPermissionTypeEnum.BUTTON.getType().equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("url", sysPermission.getUrl()));
             if (count > 0) {
-                return Result.failed("当前按钮url已经存在");
+                throw new BizException("当前按钮url已经存在");
             }
         } else if (SysPermissionTypeEnum.PERMISSION.getType().equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("value", sysPermission.getUrl()));
             if (count > 0) {
-                return Result.failed("当前权限内容已经存在");
+                throw new BizException("当前权限内容已经存在");
             }
         }
         baseMapper.insert(sysPermission);
-        return Result.success(sysPermission.getId());
+        return true;
     }
 }

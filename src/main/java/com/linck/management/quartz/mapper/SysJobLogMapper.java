@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author linck
- * @create 2021-11-15
+ * @date 2021-11-15
  */
 @Repository
 public interface SysJobLogMapper extends BaseMapper<SysJobLog> {

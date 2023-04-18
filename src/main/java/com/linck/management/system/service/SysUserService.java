@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.exception.BizException;
 import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
-import com.linck.management.system.mapper.SysUserRoleMapper;
 import com.linck.management.system.model.dto.SysUserDto;
 import com.linck.management.system.model.dto.SysUserSearchDto;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author linck
- * @create 2020-08-09
+ * @date 2020-08-09
  */
 @Slf4j
 @Service
@@ -49,7 +49,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     @Autowired
     private SysRoleMapper sysRoleMapper;
     @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+    private SysUserRoleService sysUserRoleService;
 
     /**
      * 登录功能
@@ -81,7 +81,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         // 查询是否有相同用户名的用户
         Long count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
         if (count > 0) {
-            return null;
+            throw new BizException("该账号已经被注册");
         }
         // 将密码进行加密操作
         String encodePassword = passwordEncoder.encode(sysUser.getPwd());
@@ -99,15 +99,17 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         return sysUserMapper.listWithSearch(sysUserSearchDto);
     }
 
-    public Result add(SysUser sysUser) {
+    @Override
+    public boolean save(SysUser sysUser) {
         Long count = sysUserMapper.selectCount(new QueryWrapper<SysUser>().eq("account", sysUser.getAccount()));
         if (count > 0) {
-            return Result.failed("当前账户已经存在");
+            throw new BizException("当前账户已经存在");
         }
         // 将密码进行加密操作
         String encodePassword = passwordEncoder.encode(sysUser.getPwd());
         sysUser.setPwd(encodePassword);
-        return Result.success(sysUserMapper.insert(sysUser));
+        sysUserMapper.insert(sysUser);
+        return true;
     }
 
     /**
@@ -115,7 +117,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      */
     public Result<List<UserRoleModel>> roleList(IdDto model) {
         List<SysRole> sysRoles = sysRoleMapper.selectList(null);
-        List<Long> roleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(SysUserRole::getRId).collect(Collectors.toList());
+        List<Long> roleIdList = sysUserRoleService.list(new QueryWrapper<SysUserRole>().eq("u_id", model.getId())).stream().map(SysUserRole::getRId).collect(Collectors.toList());
         List<UserRoleModel> result = sysRoles.stream().map(t -> new UserRoleModel(t.getId(), t.getName(), roleIdList.contains(t.getId()))).collect(Collectors.toList());
         return Result.success(result);
     }
@@ -123,17 +125,15 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     /**
      * 保存用户角色
      */
-    public Result saveRoleList(UserRoleSaveModel model) {
-        List<Long> databaseRoleIdList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(SysUserRole::getRId).collect(Collectors.toList());
+    public void saveRoleList(UserRoleSaveModel model) {
+        List<Long> databaseRoleIdList = sysUserRoleService.list(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId())).stream().map(SysUserRole::getRId).collect(Collectors.toList());
         List<SysUserRole> addList = model.getRoleIdList().stream().filter(t -> !databaseRoleIdList.contains(t)).map(t -> new SysUserRole(null, model.getUserId(), t)).collect(Collectors.toList());
         List<Long> deleteIdList = databaseRoleIdList.stream().filter(t -> !model.getRoleIdList().contains(t)).collect(Collectors.toList());
         if (!deleteIdList.isEmpty()) {
-            sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId()).in("r_id", deleteIdList));
+            sysUserRoleService.remove(new QueryWrapper<SysUserRole>().eq("u_id", model.getUserId()).in("r_id", deleteIdList));
         }
-        Integer count = 0;
         if (!addList.isEmpty()) {
-            count = sysUserRoleMapper.insertList(addList);
+            sysUserRoleService.saveBatch(addList);
         }
-        return Result.success(count);
     }
 }

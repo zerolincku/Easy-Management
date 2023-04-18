@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * SysJobLog对象
  *
  * @author linck
- * @create 2021-11-15
+ * @date 2021-11-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -53,11 +53,12 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:add')")
     @PostMapping
-    public Result<SysRole> add(@RequestBody SysRole sysRole) {
+    public Result<Long> add(@RequestBody SysRole sysRole) {
         if (sysRole.getValue() == null) {
             return Result.failed("内容不能为空");
         }
-        return Result.success(sysRoleService.insert(sysRole));
+        sysRoleService.save(sysRole);
+        return Result.success(sysRole.getId());
     }
 
     /**
@@ -67,7 +68,7 @@ public class SysRoleController {
     @PutMapping
     public Result<String> update(@RequestBody SysRole sysRole) {
         sysRoleService.updateById(sysRole);
-        return Result.success("");
+        return Result.success();
     }
 
     /**
@@ -75,8 +76,9 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:remove')")
     @DeleteMapping
-    public Result<Integer> remove(@RequestBody @Validated IdsDto ids) {
-        return Result.success(sysRoleService.remove(ids));
+    public Result<String> remove(@RequestBody @Validated IdsDto ids) {
+        sysRoleService.removeBatchByIds(ids.getIds());
+        return Result.success();
     }
 
     /**
@@ -95,8 +97,9 @@ public class SysRoleController {
      */
     @PreAuthorize("hasAuthority('role:update')")
     @PostMapping("saveSolePermission")
-    public Result<Integer> saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {
-        return Result.success(sysRoleService.saveSolePermission(rolePermissionDto));
+    public Result<String> saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {
+        sysRoleService.saveSolePermission(rolePermissionDto);
+        return Result.success();
     }
 
 }

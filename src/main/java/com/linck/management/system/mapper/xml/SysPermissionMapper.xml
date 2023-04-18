@@ -4,8 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , pid, name, value, type, icon, url, status, sort, create_at, update_at
+        id, pid, name, value, type, icon, url, status, sort, create_at, update_at
     </sql>
 
     <select id="listByUserId" parameterType="long" resultType="com.linck.management.system.model.entity.SysPermission">

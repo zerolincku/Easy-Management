@@ -24,8 +24,17 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BizException.class)
     public Result<String> processException(BizException e) {
-        log.error("位置:{} -> 错误信息:{}", e.getMethod(), e.getLocalizedMessage());
+        log.error("捕获自定义异常", e);
         return Result.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
+    }
+
+    /**
+     * 捕获异常返回详细异常信息
+     */
+    @ExceptionHandler(Exception.class)
+    public Result<String> exceptionHandler(Exception e) {
+        log.error("捕获异常", e);
+        return Result.failed(e.getMessage());
     }
 
     /**
@@ -48,15 +57,6 @@ public class GlobalExceptionHandler {
         e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
 
         return Result.validateFailed(sj.toString());
-    }
-
-    /**
-     * 捕获异常返回详细异常信息
-     */
-    @ExceptionHandler(Exception.class)
-    public Result<String> exceptionHandler(Exception e) {
-        e.printStackTrace();
-        return Result.failed(e.getMessage());
     }
 
 }

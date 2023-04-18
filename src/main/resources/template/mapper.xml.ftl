@@ -33,16 +33,4 @@
     </sql>
     </#if>
 
-    <!-- 批量新增 -->
-    <insert id="batchInsert">
-        insert into ${table.name}
-        (<include refid="BaseColumnList"/>)
-        values
-        <foreach collection="list" item="t" index="index" separator=",">
-            (
-            <#list table.fields as field>${r"#{t."}${field.propertyName}"}<#sep>, </#sep></#list>
-            )
-        </foreach>
-
-    </insert>
 </mapper>
