@@ -23,7 +23,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         String moduleName = "test";
-        List<String> tableNames = Arrays.asList("sys_user");
+        List<String> tableNames = Arrays.asList("sys_user", "sys_role", "sys_permission");
         generate(moduleName, tableNames);
 
     }

@@ -6,6 +6,7 @@ import com.linck.management.common.api.Result;
 import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
+import com.linck.management.common.validate.Insert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -52,7 +53,7 @@ public class ${table.controllerName} {
     * 查询${table.comment!}列表
     */
     @GetMapping("page")
-    public Result<ListWithPage<${entity}>> list(QueryCondition<${entity}> condition) {
+    public Result<ListWithPage<${entity}>> page(QueryCondition<${entity}> condition) {
         QueryWrapper<${entity}> queryWrapper = condition.dealQueryCondition(${entity}.class);
         Page<${entity}> page = ${serviceInstanceName}.page(condition.page(), queryWrapper);
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
@@ -62,8 +63,8 @@ public class ${table.controllerName} {
     * 新增${table.comment!}
     */
     @PostMapping
-    public Result<String> add(@RequestBody ${entity} ${entityInstanceName}) {
-        ${serviceInstanceName}.save(${entityInstanceName}));
+    public Result<String> add(@RequestBody @Validated(Insert.class) ${entity} ${entityInstanceName}) {
+        ${serviceInstanceName}.save(${entityInstanceName});
         return Result.success();
     }
 
@@ -80,7 +81,7 @@ public class ${table.controllerName} {
     * 删除${table.comment!}
     */
     @DeleteMapping
-    public Result<String> remove(@RequestBody @Validated IdsDto ids) {
+    public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
         ${serviceInstanceName}.removeBatchByIds(idsDto.getIds());
         return Result.success();
     }

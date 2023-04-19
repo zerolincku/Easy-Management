@@ -14,6 +14,9 @@ import lombok.experimental.Accessors;
 </#if>
 import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.model.BaseEntity;
+import com.linck.management.common.validate.Insert;
+
+import javax.validation.constraints.Null;
 
 /**
  * ${table.comment!} Entity
@@ -67,10 +70,13 @@ public class ${entity} extends BaseEntity implements Serializable {
     <#-- 主键 -->
     <#if field.keyIdentityFlag>
     @TableId(value = "${field.name}", type = IdType.AUTO)
+    @Null(groups = Insert.class, message = "新增时id需要为空")
         <#elseif idType??>
     @TableId(value = "${field.name}", type = IdType.${idType})
+    @Null(groups = Insert.class, message = "新增时id需要为空")
         <#elseif field.convert>
     @TableId("${field.name}")
+    @Null(groups = Insert.class, message = "新增时id需要为空")
     </#if>
     <#-- 普通字段 -->
     <#elseif field.fill??>

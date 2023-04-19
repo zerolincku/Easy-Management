@@ -7,6 +7,7 @@ import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
+import com.linck.management.common.validate.Insert;
 import com.linck.management.system.model.dto.RolePermissionDto;
 import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysRolePermission;
@@ -38,33 +39,27 @@ public class SysRoleController {
     private SysRolePermissionService sysRolePermissionService;
 
     /**
-     * 查询角色列表
+     * 查询系统角色列表
      */
-    @PreAuthorize("hasAuthority('role:view')")
     @GetMapping("page")
-    public Result<ListWithPage<SysRole>> list(QueryCondition<SysRole> condition) {
+    public Result<ListWithPage<SysRole>> page(QueryCondition<SysRole> condition) {
         QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class);
         Page<SysRole> page = sysRoleService.page(condition.page(), queryWrapper);
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
     /**
-     * 新增角色
+     * 新增系统角色
      */
-    @PreAuthorize("hasAuthority('role:add')")
     @PostMapping
-    public Result<Long> add(@RequestBody SysRole sysRole) {
-        if (sysRole.getValue() == null) {
-            return Result.failed("内容不能为空");
-        }
+    public Result<String> add(@RequestBody @Validated(Insert.class) SysRole sysRole) {
         sysRoleService.save(sysRole);
-        return Result.success(sysRole.getId());
+        return Result.success();
     }
 
     /**
-     * 修改角色
+     * 修改系统角色
      */
-    @PreAuthorize("hasAuthority('role:update')")
     @PutMapping
     public Result<String> update(@RequestBody SysRole sysRole) {
         sysRoleService.updateById(sysRole);
@@ -72,12 +67,11 @@ public class SysRoleController {
     }
 
     /**
-     * 删除角色
+     * 删除系统角色
      */
-    @PreAuthorize("hasAuthority('role:remove')")
     @DeleteMapping
-    public Result<String> remove(@RequestBody @Validated IdsDto ids) {
-        sysRoleService.removeBatchByIds(ids.getIds());
+    public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
+        sysRoleService.removeBatchByIds(idsDto.getIds());
         return Result.success();
     }
 

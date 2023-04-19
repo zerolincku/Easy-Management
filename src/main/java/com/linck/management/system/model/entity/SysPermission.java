@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
+import com.linck.management.common.validate.Insert;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.Null;
 
 /**
  * @author linck
@@ -21,6 +24,7 @@ public class SysPermission extends BaseEntity {
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
+    @Null(groups = Insert.class, message = "新增时id需要为空")
     private Long id;
 
     /**

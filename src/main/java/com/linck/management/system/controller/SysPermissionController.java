@@ -1,25 +1,23 @@
 package com.linck.management.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linck.management.common.api.Result;
-import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.dto.StatusDto;
 import com.linck.management.common.model.enums.StatusEnum;
+import com.linck.management.common.model.vo.ListWithPage;
+import com.linck.management.common.util.QueryCondition;
+import com.linck.management.common.validate.Insert;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
-import com.linck.management.system.model.dto.SysPermissionDto;
 import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +34,44 @@ public class SysPermissionController {
 
     @Autowired
     private SysPermissionService sysPermissionService;
+
+    /**
+     * 查询列表
+     */
+    @GetMapping("page")
+    public Result<ListWithPage<SysPermission>> page(QueryCondition<SysPermission> condition) {
+        QueryWrapper<SysPermission> queryWrapper = condition.dealQueryCondition(SysPermission.class);
+        Page<SysPermission> page = sysPermissionService.page(condition.page(), queryWrapper);
+        return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
+    }
+
+    /**
+     * 新增
+     */
+    @PostMapping
+    public Result<String> add(@RequestBody @Validated(Insert.class) SysPermission sysPermission) {
+        sysPermissionService.save(sysPermission);
+        return Result.success();
+    }
+
+    /**
+     * 修改
+     */
+    @PutMapping
+    public Result<String> update(@RequestBody SysPermission sysPermission) {
+        sysPermissionService.updateById(sysPermission);
+        return Result.success();
+    }
+
+    /**
+     * 删除
+     */
+    @DeleteMapping
+    public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
+        sysPermissionService.removeBatchByIds(idsDto.getIds());
+        sysPermissionService.remove(new QueryWrapper<SysPermission>().in("pid", idsDto.getIds()));
+        return Result.success();
+    }
 
     /**
      * 查询权限列表(嵌套封装)
@@ -62,41 +98,4 @@ public class SysPermissionController {
         return Result.success(result);
     }
 
-    /**
-     * 新增权限
-     */
-    @PreAuthorize("hasAuthority('permission:add')")
-    @PostMapping("add")
-    public Result<Long> add(@RequestBody @Validated SysPermissionDto permissionDto) {
-        permissionDto.setId(null);
-        SysPermission sysPermission = new SysPermission();
-        BeanUtils.copyProperties(permissionDto, sysPermission);
-        sysPermission.setCreateAt(LocalDateTime.now());
-        sysPermissionService.save(sysPermission);
-        return Result.success(sysPermission.getId());
-    }
-
-    /**
-     * 更新权限
-     */
-    @PreAuthorize("hasAuthority('permission:update')")
-    @PostMapping("update")
-    public Result<Long> update(@RequestBody @Validated SysPermissionDto permissionDto) {
-        SysPermission sysPermission = new SysPermission();
-        BeanUtils.copyProperties(permissionDto, sysPermission);
-        sysPermission.setUpdateAt(LocalDateTime.now());
-        sysPermissionService.updateById(sysPermission);
-        return Result.success(sysPermission.getId());
-    }
-
-    /**
-     * 删除权限
-     */
-    @PreAuthorize("hasAuthority('permission:remove')")
-    @PostMapping("remove")
-    public Result<String> remove(@RequestBody @Validated IdDto idDto) {
-        sysPermissionService.removeById(idDto.getId());
-        sysPermissionService.remove(new QueryWrapper<SysPermission>().eq("pid", idDto.getId()));
-        return Result.success();
-    }
 }

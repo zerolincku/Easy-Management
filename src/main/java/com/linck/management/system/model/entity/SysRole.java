@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
+import com.linck.management.common.validate.Insert;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.Null;
 
 /**
  * 系统角色
@@ -22,6 +25,7 @@ public class SysRole extends BaseEntity {
     /**
      * 主键id
      */
+    @Null(groups = Insert.class, message = "新增时id需要为空")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 

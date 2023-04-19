@@ -2,9 +2,12 @@ package com.linck.management.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.linck.management.common.validate.Insert;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Null;
 
 /**
  * SysRolePermission对象
@@ -23,6 +26,7 @@ public class SysRolePermission {
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
+    @Null(groups = Insert.class, message = "新增时id需要为空")
     private Long id;
 
     /**
