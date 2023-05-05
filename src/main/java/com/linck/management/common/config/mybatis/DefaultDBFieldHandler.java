@@ -45,9 +45,7 @@ public class DefaultDBFieldHandler implements MetaObjectHandler {
         LocalDateTime now = LocalDateTime.now();
         SysUser sysUser = SpringContextHolder.getCurrentSysUser();
 
-        fillValIfNullByName("createAt", null, metaObject, true);
         fillValIfNullByName("updateAt", now, metaObject, true);
-        fillValIfNullByName("createBy", null, metaObject, true);
         fillValIfNullByName("updateBy", sysUser.getId(), metaObject, true);
     }
 

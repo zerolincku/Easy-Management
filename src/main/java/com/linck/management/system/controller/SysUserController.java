@@ -9,6 +9,7 @@ import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
 import com.linck.management.common.validate.Insert;
+import com.linck.management.common.validate.Update;
 import com.linck.management.system.model.dto.SysUserDto;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.entity.SysUser;
@@ -69,7 +70,7 @@ public class SysUserController {
      * 修改系统用户
      */
     @PutMapping
-    public Result<String> update(@RequestBody SysUser sysUser) {
+    public Result<String> update(@RequestBody @Validated(Update.class) SysUser sysUser) {
         sysUserService.updateById(sysUser);
         return Result.success();
     }

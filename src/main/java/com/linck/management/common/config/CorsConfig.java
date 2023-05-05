@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author linck
  **/
 @Configuration
-@ConditionalOnProperty(value = "spring.profile.active", havingValue = "dev")
+@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "dev")
 public class CorsConfig implements WebMvcConfigurer {
 
     @Bean

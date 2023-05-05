@@ -1,7 +1,6 @@
 package com.linck.management.common.handler;
 
 import com.linck.management.common.api.Result;
-import com.linck.management.common.api.ResultCodeEnum;
 import com.linck.management.common.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
@@ -25,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
     public Result<String> processException(BizException e) {
         log.error("捕获自定义异常", e);
-        return Result.failed(Objects.requireNonNull(ResultCodeEnum.getByCode(e.getCode())));
+        return Result.failed(e.getMessage());
     }
 
     /**

@@ -7,6 +7,7 @@ import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
 import com.linck.management.common.validate.Insert;
+import com.linck.management.common.validate.Update;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -72,7 +73,7 @@ public class ${table.controllerName} {
     * 修改${table.comment!}
     */
     @PutMapping
-    public Result<String> update(@RequestBody ${entity} ${entityInstanceName}) {
+    public Result<String> update(@RequestBody @Validated(Update.class) ${entity} ${entityInstanceName}) {
         ${serviceInstanceName}.updateById(${entityInstanceName});
         return Result.success();
     }

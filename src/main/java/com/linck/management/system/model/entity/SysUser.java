@@ -41,7 +41,7 @@ public class SysUser extends BaseEntity {
     /**
      * 密码
      */
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(groups = {Insert.class}, message = "密码不能为空")
     @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
     private String pwd;
 

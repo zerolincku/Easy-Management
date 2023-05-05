@@ -60,7 +60,7 @@ public class JacksonConfig {
         deserializers.put(LocalTime.class, new LocalTimeDeserializer(TIME_FORMATTER));
 
         // 扫描当前项目下所有 NameValueInterface 实现类
-        Set<Class<?>> classes = ClassUtil.scanPackage("com.linck.forum"
+        Set<Class<?>> classes = ClassUtil.scanPackage("com.linck"
                 , aClass -> NameValueInterface.class.isAssignableFrom(aClass) && !NameValueInterface.class.equals(aClass));
 
         // 自动注册枚举反序列化规则

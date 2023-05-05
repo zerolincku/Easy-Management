@@ -124,13 +124,6 @@
             <version>${spring.boot.starter.quartz.version}</version>
         </dependency>
 
-        <!-- Kaptcha Verification Code Generator -->
-        <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>${kaptcha.version}</version>
-        </dependency>
-
         <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
