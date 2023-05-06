@@ -3,6 +3,7 @@ package com.linck.management.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.model.vo.ListWithPage;
@@ -73,6 +74,14 @@ public class SysPermissionController {
         sysPermissionService.removeBatchByIds(idsDto.getIds());
         sysPermissionService.remove(new QueryWrapper<SysPermission>().in("pid", idsDto.getIds()));
         return Result.success();
+    }
+
+    /**
+     * 查询系统用户
+     */
+    @GetMapping
+    public Result<SysPermission> get(@RequestBody @Validated IdDto idDto) {
+        return Result.success(sysPermissionService.getById(idDto.getId()));
     }
 
     /**

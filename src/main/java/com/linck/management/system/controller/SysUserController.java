@@ -85,6 +85,14 @@ public class SysUserController {
     }
 
     /**
+     * 查询系统用户
+     */
+    @GetMapping
+    public Result<SysUser> get(@RequestBody @Validated IdDto idDto) {
+        return Result.success(sysUserService.getById(idDto.getId()));
+    }
+
+    /**
      * 用户登录
      * @return 返回 token
      */

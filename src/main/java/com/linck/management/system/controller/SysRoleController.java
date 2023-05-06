@@ -76,6 +76,14 @@ public class SysRoleController {
     }
 
     /**
+     * 查询系统用户
+     */
+    @GetMapping
+    public Result<SysRole> get(@RequestBody @Validated IdDto idDto) {
+        return Result.success(sysRoleService.getById(idDto.getId()));
+    }
+
+    /**
      * 查询角色权限id集合
      */
     @PreAuthorize("hasAuthority('role:view')")

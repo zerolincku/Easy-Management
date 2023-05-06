@@ -86,5 +86,13 @@ public class ${table.controllerName} {
         ${serviceInstanceName}.removeBatchByIds(idsDto.getIds());
         return Result.success();
     }
+
+    /**
+    * 查询${table.comment!}
+    */
+    @GetMapping
+    public Result<${entity}> get(@RequestBody @Validated IdDto idDto) {
+        return Result.success(${serviceInstanceName}.getById(idDto.getId()));
+    }
 }
 </#if>
