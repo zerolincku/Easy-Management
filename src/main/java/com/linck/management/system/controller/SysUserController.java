@@ -3,6 +3,7 @@ package com.linck.management.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linck.management.common.api.Result;
+import com.linck.management.common.exception.BizException;
 import com.linck.management.common.model.SysUserDetails;
 import com.linck.management.common.model.dto.IdDto;
 import com.linck.management.common.model.dto.IdsDto;
@@ -80,6 +81,9 @@ public class SysUserController {
      */
     @DeleteMapping
     public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
+        if (idsDto.getIds().contains(1L)) {
+            throw new BizException("系统管理员不允许删除");
+        }
         sysUserService.removeBatchByIds(idsDto.getIds());
         return Result.success();
     }
