@@ -15,6 +15,9 @@ import java.util.Map;
  * 通用条件构造器，通过 url param 参数设置，使用方式
  * eg: 查询 id = 1 的数据，eq[id]=1
  * eg: 模糊查询 name 包含张三的数据，like[name]=张三
+ * eg: 左模糊查询 name 包含张三的数据，likeL[name]=张三
+ * eg: 右模糊查询 name 包含张三的数据，likeR[name]=张三
+ * eg: 模糊查询 name 不包含张三的数据，nLike[name]=张三
  * eg: 范围查询 time 在 2023-01-01 和 2023-02-02 之间的数据, ge[time]=2023-01-01&le[time]=2023-02-02
  *
  * @param <T> 创建 page 以及，queryWrapper 的泛型类
@@ -97,11 +100,11 @@ public class QueryCondition<T> {
      */
     private Map<String, List<String>> nLike;
     /**
-     * 左模糊 eg: phone like 138%
+     * 左模糊 eg: phone like %138
      */
     private Map<String, List<String>> likeL;
     /**
-     * 右模糊 eg: phone like %138
+     * 右模糊 eg: phone like 138%
      */
     private Map<String, List<String>> likeR;
     /**
