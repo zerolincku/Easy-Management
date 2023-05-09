@@ -1,22 +1,20 @@
 package com.linck.management.quartz.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.model.dto.IdDto;
+import com.linck.management.common.model.dto.IdsDto;
 import com.linck.management.common.model.vo.ListWithPage;
-import com.linck.management.quartz.model.dto.SysJobDto;
+import com.linck.management.common.util.QueryCondition;
+import com.linck.management.common.validate.Insert;
+import com.linck.management.common.validate.Update;
 import com.linck.management.quartz.model.entity.SysJob;
 import com.linck.management.quartz.service.SysJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Job管理
@@ -32,49 +30,48 @@ public class SysJobController {
     private SysJobService sysJobService;
 
     /**
-     * job列表
+     * 查询任务列表
      */
-    @PostMapping("list")
-    public Result<ListWithPage<SysJob>> list(@RequestBody SysJobDto sysJobDto) {
-        List<SysJob> list = sysJobService.list(sysJobDto);
-        PageInfo<SysJob> pageInfo = new PageInfo<>(list);
-        ListWithPage<SysJob> result = new ListWithPage<>();
-        result.setList(list);
-        result.setTotal(pageInfo.getTotal());
-        return Result.success(result);
+    @GetMapping("page")
+    public Result<ListWithPage<SysJob>> page(QueryCondition<SysJob> condition) {
+        QueryWrapper<SysJob> queryWrapper = condition.dealQueryCondition(SysJob.class);
+        Page<SysJob> page = sysJobService.page(condition.page(), queryWrapper);
+        return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
     /**
-     * 新增job
+     * 新增任务
      */
-    @PostMapping("add")
-    @PreAuthorize("hasAuthority('job:add')")
-    public Result<Long> add(@RequestBody SysJob sysJob) {
-        sysJob.setCreateAt(LocalDateTime.now());
-        sysJob.setUpdateAt(LocalDateTime.now());
+    @PostMapping
+    public Result<String> add(@RequestBody @Validated(Insert.class) SysJob sysJob) {
         sysJobService.save(sysJob);
-        return Result.success(sysJob.getId());
+        return Result.success();
     }
 
     /**
-     * 更新job
+     * 修改任务
      */
-    @PostMapping("update")
-    @PreAuthorize("hasAuthority('job:update')")
-    public Result<String> update(@RequestBody SysJob sysJob) {
-        sysJob.setUpdateAt(LocalDateTime.now());
+    @PutMapping
+    public Result<String> update(@RequestBody @Validated(Update.class) SysJob sysJob) {
         sysJobService.updateById(sysJob);
         return Result.success();
     }
 
     /**
-     * 删除job
+     * 删除任务
      */
-    @PostMapping("remove")
-    @PreAuthorize("hasAuthority('job:remove')")
-    public Result<String> remove(@RequestBody IdDto idDto) {
-        sysJobService.removeById(idDto.getId());
+    @DeleteMapping
+    public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
+        sysJobService.removeBatchByIds(idsDto.getIds());
         return Result.success();
+    }
+
+    /**
+     * 查询任务
+     */
+    @GetMapping
+    public Result<SysJob> get(@RequestBody @Validated IdDto idDto) {
+        return Result.success(sysJobService.getById(idDto.getId()));
     }
 
     /**
