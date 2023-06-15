@@ -36,7 +36,7 @@ public class QueryCondition<T> {
     /**
      * 表别名，只作用于实体类字段，不作用于 fieldNameCover 映射
      * eg: eq[name] = 2，对应到SQL时，不是 name = 2，而应该是 user.name = 2
-     * 就可以设置 tableAlise = user.
+     * 就可以设置 tableAlise = user
      */
     private String tableAlise;
 
@@ -53,19 +53,6 @@ public class QueryCondition<T> {
      * 内存 map key 为字段名称
      */
     private static final Map<Class<?>, Map<String, Field>> FIELD_CACHE = new HashMap<>();
-
-    public QueryCondition() {
-        eq = new HashMap<>();
-        gt = new HashMap<>();
-        ge = new HashMap<>();
-        lt = new HashMap<>();
-        le = new HashMap<>();
-        ne = new HashMap<>();
-        like = new HashMap<>();
-        nLike = new HashMap<>();
-        likeL = new HashMap<>();
-        likeR = new HashMap<>();
-    }
 
     /**
      * eq ==
@@ -115,6 +102,19 @@ public class QueryCondition<T> {
      * 每页行数
      */
     private Integer pageSize;
+
+    public QueryCondition() {
+        eq = new HashMap<>();
+        gt = new HashMap<>();
+        ge = new HashMap<>();
+        lt = new HashMap<>();
+        le = new HashMap<>();
+        ne = new HashMap<>();
+        like = new HashMap<>();
+        nLike = new HashMap<>();
+        likeL = new HashMap<>();
+        likeR = new HashMap<>();
+    }
 
     /**
      * 开启分页查询，如果没有分页参数，则查询第一页，20行数据
@@ -222,7 +222,7 @@ public class QueryCondition<T> {
         Map<String, Field> fieldMap = this.getFields();
         if (fieldMap.containsKey(column)) {
             // 驼峰转下划线
-            return (this.tableAlise == null ? "" : this.tableAlise) + StringUtils.camelToUnderline(column);
+            return (this.tableAlise == null ? "" : (this.tableAlise + ".")) + StringUtils.camelToUnderline(column);
         }
         throw new BizException(String.format("不允许的搜索条件: %s", column));
     }
