@@ -19,6 +19,7 @@ import com.linck.management.system.model.vo.UserRoleModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -39,10 +40,12 @@ import java.util.stream.Collectors;
 @Service
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     @Autowired
+    @Lazy
     private UserDetailsService userDetailsService;
     @Autowired
     private JwtTokenUtils jwtTokenUtils;
     @Autowired
+    @Lazy
     private PasswordEncoder passwordEncoder;
     @Autowired
     private SysUserMapper sysUserMapper;

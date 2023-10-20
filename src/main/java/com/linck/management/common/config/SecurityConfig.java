@@ -11,7 +11,6 @@ import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,8 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
 
     /**
      * 配置拦截器保护请求
@@ -66,14 +63,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 登录注册允许匿名访问
-                .mvcMatchers("sys/user/login", "sys/user/register", "management/test/**")
-                .servletPath(contextPath)
+                .mvcMatchers("sys/user/login", "sys/user/register", "webjars/**", "swagger-resources/**", "v2/api-docs", "doc.html")
+                .permitAll()
+                // swagger 放开的接口
+                .mvcMatchers("webjars/**", "swagger-resources/**", "v2/api-docs", "doc.html")
                 .permitAll()
                 .anyRequest()
-                .authenticated()
-                // 设置跨域, 如果不设置, 即使配置了filter, 也不会生效
-                .and()
-                .cors();
+                .authenticated();
         // 禁用缓存
         httpSecurity.headers().cacheControl();
         // 添加JWT filter

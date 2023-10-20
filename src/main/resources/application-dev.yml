@@ -22,3 +22,6 @@ mybatis-plus:
   configuration:
     # SQL语句使用标准输出
     log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+knife4j:
+  enable: true

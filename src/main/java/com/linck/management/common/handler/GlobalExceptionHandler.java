@@ -3,11 +3,12 @@ package com.linck.management.common.handler;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 /**
@@ -32,7 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result<String> exceptionHandler(Exception e) {
         log.error("捕获异常", e);
-        return Result.failed(e.getMessage());
+        return Result.failed("系统错误，错误时间：" + LocalDateTime.now());
     }
 
     /**
@@ -47,12 +48,12 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * get参数验证异常,会抛出一个ConstraintViolationException
+     * get参数验证异常,会抛出一个BindException
      */
-    @ExceptionHandler(ConstraintViolationException.class)
-    public Result<String> constraintViolationExceptionHandler(ConstraintViolationException e) {
+    @ExceptionHandler(BindException.class)
+    public Result<String> constraintViolationExceptionHandler(BindException e) {
         StringJoiner sj = new StringJoiner("，");
-        e.getConstraintViolations().forEach(x -> sj.add(x.getMessage()));
+        e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
 
         return Result.validateFailed(sj.toString());
     }
