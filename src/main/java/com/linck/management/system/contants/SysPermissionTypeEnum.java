@@ -1,9 +1,11 @@
 package com.linck.management.system.contants;
 
+import com.linck.management.common.model.enums.NameValueInterface;
+
 /**
  * @author linck
  **/
-public enum SysPermissionTypeEnum {
+public enum SysPermissionTypeEnum implements NameValueInterface {
 
     /**
      * 菜单
@@ -24,7 +26,13 @@ public enum SysPermissionTypeEnum {
         this.type = type;
     }
 
-    public Integer getType() {
+    @Override
+    public String getName() {
+        return this.name();
+    }
+
+    @Override
+    public Integer getValue() {
         return type;
     }
 }

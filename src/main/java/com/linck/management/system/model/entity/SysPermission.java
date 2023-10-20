@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.validate.Insert;
+import com.linck.management.system.contants.SysPermissionTypeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -45,7 +46,7 @@ public class SysPermission extends BaseEntity {
     /**
      * 类型 1-菜单 2-按钮 3-权限
      */
-    private Integer type;
+    private SysPermissionTypeEnum type;
 
     /**
      * 图标

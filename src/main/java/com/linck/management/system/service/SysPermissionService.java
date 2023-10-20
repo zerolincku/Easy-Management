@@ -58,12 +58,12 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
             // 封装一级折叠菜单
-            if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
+            if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU)) {
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
                 BeanUtils.copyProperties(sysPermission, menuAndButton);
                 result.add(menuAndButton);
                 // 封装二级按钮
-            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON.getType())) {
+            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON)) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
@@ -72,7 +72,7 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
                 }
                 optional.get().getChildrenList().add(sysPermissionVO);
                 // 封装权限
-            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.PERMISSION.getType())) {
+            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.PERMISSION)) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 Optional<SysPermission> button = sysPermissions.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
@@ -99,12 +99,12 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
         List<SysMenuAndButton> result = new ArrayList<>();
         sysPermissions.forEach(sysPermission -> {
             // 封装一级折叠菜单
-            if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU.getType())) {
+            if (sysPermission.getType().equals(SysPermissionTypeEnum.MENU)) {
                 SysMenuAndButton menuAndButton = new SysMenuAndButton();
                 BeanUtils.copyProperties(sysPermission, menuAndButton);
                 result.add(menuAndButton);
                 // 封装二级按钮
-            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON.getType())) {
+            } else if (sysPermission.getType().equals(SysPermissionTypeEnum.BUTTON)) {
                 SysPermissionVO sysPermissionVO = new SysPermissionVO();
                 BeanUtils.copyProperties(sysPermission, sysPermissionVO);
                 Optional<SysMenuAndButton> optional = result.stream().filter(t -> t.getId().equals(sysPermissionVO.getPid())).findFirst();
@@ -123,17 +123,17 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
     @CacheEvict(allEntries = true)
     @Override
     public boolean save(SysPermission sysPermission) {
-        if (SysPermissionTypeEnum.MENU.getType().equals(sysPermission.getType())) {
+        if (SysPermissionTypeEnum.MENU.equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("name", sysPermission.getName()));
             if (count > 0) {
                 throw new BizException("当前菜单名称已经存在");
             }
-        } else if (SysPermissionTypeEnum.BUTTON.getType().equals(sysPermission.getType())) {
+        } else if (SysPermissionTypeEnum.BUTTON.equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("url", sysPermission.getUrl()));
             if (count > 0) {
                 throw new BizException("当前按钮url已经存在");
             }
-        } else if (SysPermissionTypeEnum.PERMISSION.getType().equals(sysPermission.getType())) {
+        } else if (SysPermissionTypeEnum.PERMISSION.equals(sysPermission.getType())) {
             Long count = baseMapper.selectCount(new QueryWrapper<SysPermission>().eq("pid", sysPermission.getPid()).eq("value", sysPermission.getUrl()));
             if (count > 0) {
                 throw new BizException("当前权限内容已经存在");

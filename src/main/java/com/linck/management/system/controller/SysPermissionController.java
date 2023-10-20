@@ -100,9 +100,9 @@ public class SysPermissionController {
     @PreAuthorize("hasAuthority('permission:view')")
     @PostMapping("allMenuAndButton")
     public Result<Map<String, List<SysPermission>>> allMenuAndButton() {
-        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION.getType()).eq("status", StatusEnum.ENABLE.getValue()));
-        List<SysPermission> menus = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.MENU.getType())).collect(Collectors.toList());
-        List<SysPermission> buttons = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.BUTTON.getType())).collect(Collectors.toList());
+        List<SysPermission> list = sysPermissionService.list(new QueryWrapper<SysPermission>().ne("type", SysPermissionTypeEnum.PERMISSION).eq("status", StatusEnum.ENABLE.getValue()));
+        List<SysPermission> menus = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.MENU)).collect(Collectors.toList());
+        List<SysPermission> buttons = list.stream().filter(t -> t.getType().equals(SysPermissionTypeEnum.BUTTON)).collect(Collectors.toList());
         Map<String, List<SysPermission>> result = new HashMap<>();
         result.put("menus", menus);
         result.put("buttons", buttons);

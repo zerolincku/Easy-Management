@@ -1,6 +1,7 @@
 package com.linck.management.system.model.vo;
 
 import com.linck.management.common.model.enums.StatusEnum;
+import com.linck.management.system.contants.SysPermissionTypeEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,7 @@ public class SysMenuAndButton {
     /**
      * 类型1-菜单 2-按钮 3-权限
      */
-    private Integer type;
+    private SysPermissionTypeEnum type;
 
     /**
      * 图标
