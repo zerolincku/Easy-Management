@@ -23,7 +23,13 @@ public class ManagementApplication {
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = environment.getProperty("server.port");
         String path = environment.getProperty("server.servlet.context-path");
-        log.info("项目启动成功\nLocal: \thttp://localhost:{}{}\nExternal: \thttp://{}:{}{}\n", port, path, ip, port, path
+        log.info("""
+                        项目启动成功
+                        Local: \t\t\thttp://localhost:{}{}
+                        External: \t\thttp://{}:{}{}
+                        Swagger: \t\thttp://localhost:{}{}/doc.html
+                        """
+                , port, path, ip, port, path, port, path
         );
     }
 }

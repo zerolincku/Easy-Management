@@ -27,7 +27,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +54,8 @@ public class SysUserController {
     public Result<ListWithPage<SysUser>> page(QueryCondition<SysUser> condition) {
         QueryWrapper<SysUser> queryWrapper = condition.dealQueryCondition(SysUser.class);
         Page<SysUser> page = sysUserService.page(condition.page(), queryWrapper);
+        // 空置密码
+        page.getRecords().forEach(user -> user.setPwd(null));
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
@@ -93,7 +94,9 @@ public class SysUserController {
      */
     @GetMapping
     public Result<SysUser> get(@Validated IdDto idDto) {
-        return Result.success(sysUserService.getById(idDto.getId()));
+        SysUser user = sysUserService.getById(idDto.getId());
+        user.setPwd(null);
+        return Result.success(user);
     }
 
     /**
@@ -101,7 +104,7 @@ public class SysUserController {
      * @return 返回 token
      */
     @PostMapping("/login")
-    public Result login(@RequestBody @Validated SysUserDto userDetail, HttpServletRequest request) {
+    public Result login(@RequestBody @Validated SysUserDto userDetail) {
         /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
             return CommonResult.validateFailed("验证码错误");
         }*/
