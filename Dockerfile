@@ -1,5 +1,5 @@
 # Use Maven to build the project
-FROM maven:3.8.6-openjdk-11 AS build
+FROM maven:3.8.6-openjdk-17 AS build
 
 # Copy the pom.xml file into the /app/ directory
 COPY pom.xml /app/
@@ -14,7 +14,7 @@ WORKDIR /app/
 RUN mvn clean package -Dmaven.test.skip=true -Pdev
 
 # Start with OpenJDK 11 slim image for smaller footprint
-FROM openjdk:11-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Set the JAR_FILE argument to the name of the JAR file produced by the Maven build
 ARG JAR_FILE=management-*.jar

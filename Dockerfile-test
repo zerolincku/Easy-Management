@@ -1,5 +1,5 @@
 # Use Maven to build the project
-FROM maven:3.8.6-openjdk-11
+FROM maven:3.8.6-openjdk-17
 
 # Copy the pom.xml file into the /app/ directory
 COPY pom.xml /app/
