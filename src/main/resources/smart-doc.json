@@ -8,15 +8,5 @@
   "coverOld": true,
   "createDebugPage": true,
   "style": "agate",
-  "recursionLimit": 3,
-  "requestHeaders": [{
-    "name": "token",
-    "type": "string",
-    "desc": "token请求头的值",
-    "value":"token请求头的值",
-    "required": true,
-    "since": "-",
-    "pathPatterns": "/**",
-    "excludePathPatterns":"/sys/user/login"
-  }]
+  "recursionLimit": 3
 }

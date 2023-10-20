@@ -4,8 +4,8 @@ package ${package.Entity};
 import ${pkg};
 </#list>
 <#if swagger2??>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+
 </#if>
 <#if entityLombokModel>
 import lombok.Data;
@@ -37,7 +37,7 @@ import javax.validation.constraints.Null;
 @TableName("${table.name}")
 </#if>
 <#if swagger2??>
-@ApiModel(value="${entity}对象", description="${table.comment!}")
+
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
@@ -58,7 +58,7 @@ public class ${entity} extends BaseEntity implements Serializable {
 
     <#if field.comment!?length gt 0>
         <#if swagger2??>
-    @ApiModelProperty(value = "${field.comment}")
+    /**${field.comment}*/
         <#else>
      <#if field.propertyName != "createBy" && field.propertyName != "createAt" && field.propertyName != "updateBy" && field.propertyName != "updateAt" && field.propertyName != "delFlag" && field.propertyName != "version">
     /**

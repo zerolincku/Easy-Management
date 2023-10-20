@@ -1,10 +1,9 @@
 server:
   port: 8089
+  servlet:
+    context-path: /management
 
 spring:
-  mvc:
-    servlet:
-      path: /management
   profiles:
     # 如果直接运行出错，需使用maven指定profile编译后，再点击运行
     active: @active.file@

@@ -48,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    @Value("${spring.mvc.servlet.path}")
-    private String servletPath;
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     /**
      * 配置拦截器保护请求
@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 登录注册允许匿名访问
                 .mvcMatchers("sys/user/login", "sys/user/register", "management/test/**")
-                .servletPath(servletPath)
+                .servletPath(contextPath)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
