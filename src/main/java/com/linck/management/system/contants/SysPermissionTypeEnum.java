@@ -7,28 +7,23 @@ import com.linck.management.common.model.enums.NameValueInterface;
  **/
 public enum SysPermissionTypeEnum implements NameValueInterface {
 
-    /**
-     * 菜单
-     */
-    MENU(1),
-    /**
-     * 按钮
-     */
-    BUTTON(2),
-    /**
-     * 权限
-     */
-    PERMISSION(3);
+    MENU(1, "菜单"),
 
+    BUTTON(2, "按钮"),
+
+    PERMISSION(3, "权限");
+
+    private final String name;
     private final Integer type;
 
-    SysPermissionTypeEnum(Integer type) {
+    SysPermissionTypeEnum(Integer type, String name) {
         this.type = type;
+        this.name = name;
     }
 
     @Override
     public String getName() {
-        return this.name();
+        return name;
     }
 
     @Override
