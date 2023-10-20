@@ -7,6 +7,7 @@ import com.linck.management.common.util.SpringContextHolder;
 import com.linck.management.system.model.entity.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.property.PropertyTokenizer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 
@@ -44,7 +45,8 @@ public class DefaultDBFieldHandler implements MetaObjectHandler {
         log.debug("mybatis plus start update fill ....");
         LocalDateTime now = LocalDateTime.now();
         SysUser sysUser = SpringContextHolder.getCurrentSysUser();
-
+        fillValIfNullByName("createAt", null, metaObject, true);
+        fillValIfNullByName("createBy", null, metaObject, true);
         fillValIfNullByName("updateAt", now, metaObject, true);
         fillValIfNullByName("updateBy", sysUser.getId(), metaObject, true);
     }
@@ -65,6 +67,11 @@ public class DefaultDBFieldHandler implements MetaObjectHandler {
         Object userSetValue = metaObject.getValue(fieldName);
         String setValueStr = StrUtil.str(userSetValue, Charset.defaultCharset());
         if (StrUtil.isNotBlank(setValueStr) && !isCover) {
+            return;
+        }
+        if (fieldVal == null) {
+            PropertyTokenizer prop = new PropertyTokenizer(fieldName);
+            metaObject.getObjectWrapper().set(prop, null);
             return;
         }
         // 3. field 类型相同时设置
