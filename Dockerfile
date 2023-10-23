@@ -1,7 +1,7 @@
 # Use Maven to build the project
-FROM maven:3.8.6-openjdk-17 AS build
+FROM maven:3.8.5-openjdk-17-slim AS build
 
-# Copy the pom.xml file into the /app/ directory
+# Copy the pom.xml file into the /app/ directorydocker
 COPY pom.xml /app/
 
 # Copy the source code into the /app/src/ directory
