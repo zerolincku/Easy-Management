@@ -13,6 +13,8 @@ import com.linck.management.system.contants.SysPermissionTypeEnum;
 import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.service.SysPermissionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,10 +27,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 系统权限
- *
  * @author linck
  **/
+@Api(tags = "系统权限")
 @RestController
 @RequestMapping("sysPermission")
 public class SysPermissionController {
@@ -36,9 +37,7 @@ public class SysPermissionController {
     @Autowired
     private SysPermissionService sysPermissionService;
 
-    /**
-     * 查询列表
-     */
+    @ApiOperation("查询列表")
     @GetMapping("page")
     public Result<ListWithPage<SysPermission>> page(QueryCondition<SysPermission> condition) {
         QueryWrapper<SysPermission> queryWrapper = condition.dealQueryCondition(SysPermission.class);
@@ -46,18 +45,14 @@ public class SysPermissionController {
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
-    /**
-     * 新增
-     */
+    @ApiOperation("新增")
     @PostMapping
     public Result<String> add(@RequestBody @Validated(Insert.class) SysPermission sysPermission) {
         sysPermissionService.save(sysPermission);
         return Result.success();
     }
 
-    /**
-     * 修改
-     */
+    @ApiOperation("修改")
     @PutMapping
     @CacheEvict(cacheNames = "permission", allEntries = true)
     public Result<String> update(@RequestBody SysPermission sysPermission) {
@@ -65,9 +60,7 @@ public class SysPermissionController {
         return Result.success();
     }
 
-    /**
-     * 删除
-     */
+    @ApiOperation("删除")
     @DeleteMapping
     @CacheEvict(cacheNames = "permission", allEntries = true)
     public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
@@ -76,17 +69,13 @@ public class SysPermissionController {
         return Result.success();
     }
 
-    /**
-     * 查询系统用户
-     */
+    @ApiOperation("查询系统用户")
     @GetMapping
     public Result<SysPermission> get(@RequestBody @Validated IdDto idDto) {
         return Result.success(sysPermissionService.getById(idDto.getId()));
     }
 
-    /**
-     * 查询权限列表(嵌套封装)
-     */
+    @ApiOperation("查询权限列表(嵌套封装)")
     @PreAuthorize("hasAuthority('permission:view')")
     @GetMapping("getAllPermission")
     public Result<List<SysMenuAndButton>> getAllPermission() {
@@ -94,9 +83,7 @@ public class SysPermissionController {
         return Result.success(result);
     }
 
-    /**
-     * 所有菜单和按钮
-     */
+    @ApiOperation("所有菜单和按钮")
     @PreAuthorize("hasAuthority('permission:view')")
     @PostMapping("allMenuAndButton")
     public Result<Map<String, List<SysPermission>>> allMenuAndButton() {

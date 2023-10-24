@@ -7,6 +7,8 @@ import com.linck.management.common.model.vo.ListWithPage;
 import com.linck.management.common.util.QueryCondition;
 import com.linck.management.quartz.model.entity.SysJobLog;
 import com.linck.management.quartz.service.SysJobLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Job日志管理
- *
  * @author linck
  **/
+@Api(tags = "Job日志管理")
 @Slf4j
 @RestController
 @RequestMapping("sys/job/log")
@@ -27,9 +28,7 @@ public class SysJobLogController {
     @Autowired
     private SysJobLogService sysJobLogService;
 
-    /**
-     * 查询任务日志列表
-     */
+    @ApiOperation("查询任务日志列表")
     @PreAuthorize("hasAuthority('role:view')")
     @GetMapping("page")
     public Result<ListWithPage<SysJobLog>> page(QueryCondition<SysJobLog> condition) {

@@ -14,6 +14,8 @@ import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysRolePermission;
 import com.linck.management.system.service.SysRolePermissionService;
 import com.linck.management.system.service.SysRoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,10 +26,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 系统角色
- *
  * @author linck
  **/
+@Api(tags = "系统角色")
 @Slf4j
 @RestController
 @RequestMapping("sysRole")
@@ -39,9 +40,7 @@ public class SysRoleController {
     @Autowired
     private SysRolePermissionService sysRolePermissionService;
 
-    /**
-     * 查询系统角色列表
-     */
+    @ApiOperation("查询系统角色列表")
     @GetMapping("page")
     public Result<ListWithPage<SysRole>> page(QueryCondition<SysRole> condition) {
         QueryWrapper<SysRole> queryWrapper = condition.dealQueryCondition(SysRole.class);
@@ -49,27 +48,21 @@ public class SysRoleController {
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
-    /**
-     * 新增系统角色
-     */
+    @ApiOperation("新增系统角色")
     @PostMapping
     public Result<String> add(@RequestBody @Validated(Insert.class) SysRole sysRole) {
         sysRoleService.save(sysRole);
         return Result.success();
     }
 
-    /**
-     * 修改系统角色
-     */
+    @ApiOperation("修改系统角色")
     @PutMapping
     public Result<String> update(@RequestBody SysRole sysRole) {
         sysRoleService.updateById(sysRole);
         return Result.success();
     }
 
-    /**
-     * 删除系统角色
-     */
+    @ApiOperation("删除系统角色")
     @DeleteMapping
     public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
         if (idsDto.getIds().contains(1L)) {
@@ -79,17 +72,13 @@ public class SysRoleController {
         return Result.success();
     }
 
-    /**
-     * 查询系统用户
-     */
+    @ApiOperation("查询系统用户")
     @GetMapping
     public Result<SysRole> get(@RequestBody @Validated IdDto idDto) {
         return Result.success(sysRoleService.getById(idDto.getId()));
     }
 
-    /**
-     * 查询角色权限id集合
-     */
+    @ApiOperation("查询角色权限id集合")
     @PreAuthorize("hasAuthority('role:view')")
     @PostMapping("permissionIdList")
     public Result<List<Long>> permissionIdList(@RequestBody @Validated IdDto idDto) {
@@ -98,9 +87,7 @@ public class SysRoleController {
         return Result.success(permissionIdList);
     }
 
-    /**
-     * 保存角色权限映射
-     */
+    @ApiOperation("保存角色权限映射")
     @PreAuthorize("hasAuthority('role:update')")
     @PostMapping("saveSolePermission")
     public Result<String> saveSolePermission(@RequestBody @Validated RolePermissionDto rolePermissionDto) {

@@ -16,3 +16,7 @@ mybatis-plus:
   configuration:
     # SQL语句不输出
     log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+knife4j:
+  # 开启生产环境屏蔽
+  production: true

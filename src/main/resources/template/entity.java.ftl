@@ -15,12 +15,12 @@ import lombok.experimental.Accessors;
 import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.validate.Insert;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.Null;
 
 /**
- * ${table.comment!} Entity
- *
  * @author ${author}
  * @date ${date}
  */
@@ -36,9 +36,7 @@ import javax.validation.constraints.Null;
 <#if table.convert>
 @TableName("${table.name}")
 </#if>
-<#if swagger2??>
-
-</#if>
+@ApiModel(value="${entity}对象", description="${table.comment!}")
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>
@@ -46,7 +44,6 @@ public class ${entity} extends Model<${entity}> {
 <#else>
 public class ${entity} extends BaseEntity implements Serializable {
 </#if>
-
 <#if entitySerialVersionUID>
     private static final long serialVersionUID = 1L;
 </#if>
@@ -55,15 +52,9 @@ public class ${entity} extends BaseEntity implements Serializable {
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>
     </#if>
-
     <#if field.comment!?length gt 0>
-        <#if swagger2??>
-    /**${field.comment}*/
-        <#else>
-     <#if field.propertyName != "createBy" && field.propertyName != "createAt" && field.propertyName != "updateBy" && field.propertyName != "updateAt" && field.propertyName != "delFlag" && field.propertyName != "version">
-    /**
-    * ${field.comment}
-    */</#if>
+    <#if field.propertyName != "createBy" && field.propertyName != "createAt" && field.propertyName != "updateBy" && field.propertyName != "updateAt" && field.propertyName != "delFlag" && field.propertyName != "version">
+    @ApiModelProperty(value = "${field.comment}")
     </#if>
     </#if>
     <#if field.keyFlag>

@@ -2,7 +2,6 @@ package com.linck.management.system.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.linck.management.common.api.Result;
 import com.linck.management.common.exception.BizException;
 import com.linck.management.common.model.dto.IdDto;
@@ -10,7 +9,6 @@ import com.linck.management.common.util.JwtTokenUtils;
 import com.linck.management.system.mapper.SysRoleMapper;
 import com.linck.management.system.mapper.SysUserMapper;
 import com.linck.management.system.model.dto.SysUserDto;
-import com.linck.management.system.model.dto.SysUserSearchDto;
 import com.linck.management.system.model.dto.UserRoleSaveModel;
 import com.linck.management.system.model.entity.SysRole;
 import com.linck.management.system.model.entity.SysUser;
@@ -92,14 +90,6 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         sysUserMapper.insert(sysUser);
         log.debug("注册用户成功");
         return sysUser;
-    }
-
-    /**
-     * 分页查询用户
-     */
-    public List<SysUser> selectList(SysUserSearchDto sysUserSearchDto) {
-        PageHelper.startPage(sysUserSearchDto.getPageNum(), sysUserSearchDto.getPageSize());
-        return sysUserMapper.listWithSearch(sysUserSearchDto);
     }
 
     @Override

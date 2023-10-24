@@ -17,3 +17,6 @@ mybatis-plus:
       logic-not-delete-value: 0
       # 新增数据策略 not_null: 只更新和插入非null的值
       insert-strategy: not_null
+
+knife4j:
+  enable: true

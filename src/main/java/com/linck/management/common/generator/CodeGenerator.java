@@ -34,6 +34,7 @@ public class CodeGenerator {
                 .globalConfig(builder -> {
                     builder.author(author) // 设置作者
                             .disableOpenDir()
+                            .enableSwagger()
                             .outputDir(System.getProperty("user.dir") + "/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {

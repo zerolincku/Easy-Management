@@ -18,6 +18,8 @@ import com.linck.management.system.model.vo.SysMenuAndButton;
 import com.linck.management.system.model.vo.UserRoleModel;
 import com.linck.management.system.service.SysPermissionService;
 import com.linck.management.system.service.SysUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,9 +34,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户相关接口
  * @author linck
  **/
+@Api(tags = "系统用户")
 @Slf4j
 @RestController
 @RequestMapping("/sys/user")
@@ -47,9 +49,7 @@ public class SysUserController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    /**
-     * 查询系统用户列表
-     */
+    @ApiOperation("查询系统用户列表")
     @GetMapping("page")
     public Result<ListWithPage<SysUser>> page(QueryCondition<SysUser> condition) {
         QueryWrapper<SysUser> queryWrapper = condition.dealQueryCondition(SysUser.class);
@@ -59,27 +59,21 @@ public class SysUserController {
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
-    /**
-     * 新增系统用户
-     */
+    @ApiOperation("新增系统用户")
     @PostMapping
     public Result<String> add(@RequestBody @Validated(Insert.class) SysUser sysUser) {
         sysUserService.save(sysUser);
         return Result.success();
     }
 
-    /**
-     * 修改系统用户
-     */
+    @ApiOperation("修改系统用户")
     @PutMapping
     public Result<String> update(@RequestBody @Validated(Update.class) SysUser sysUser) {
         sysUserService.updateById(sysUser);
         return Result.success();
     }
 
-    /**
-     * 删除系统用户
-     */
+    @ApiOperation("删除系统用户")
     @DeleteMapping
     public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
         if (idsDto.getIds().contains(1L)) {
@@ -89,9 +83,7 @@ public class SysUserController {
         return Result.success();
     }
 
-    /**
-     * 查询系统用户
-     */
+    @ApiOperation("查询系统用户")
     @GetMapping
     public Result<SysUser> get(@Validated IdDto idDto) {
         SysUser user = sysUserService.getById(idDto.getId());
@@ -99,10 +91,7 @@ public class SysUserController {
         return Result.success(user);
     }
 
-    /**
-     * 用户登录
-     * @return 返回 token
-     */
+    @ApiOperation("用户登录")
     @PostMapping("/login")
     public Result login(@RequestBody @Validated SysUserDto userDetail) {
         /*if(!userDetail.getVerificationCode().equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))){
@@ -117,20 +106,14 @@ public class SysUserController {
         return Result.success(tokenMap);
     }
 
-    /**
-     * 用户注册
-     * @return 用户信息
-     */
+    @ApiOperation("用户注册")
     @PostMapping("/register")
     public Result<String> register(@RequestBody @Validated SysUserDto userDetail) {
         sysUserService.register(userDetail);
         return Result.success();
     }
 
-    /**
-     * 查询用户菜单和按钮
-     * @return 权限树
-     */
+    @ApiOperation("查询用户菜单和按钮")
     @PreAuthorize("hasAuthority('user:view')")
     @PostMapping("/query/menu")
     public Result<List<SysMenuAndButton>> queryPermission() {
@@ -142,18 +125,14 @@ public class SysUserController {
         return Result.success(result);
     }
 
-    /**
-     * 查询用户角色列表
-     */
+    @ApiOperation("查询用户角色列表")
     @PreAuthorize("hasAuthority('user:view')")
     @PostMapping("roleList")
     public Result<List<UserRoleModel>> roleList(@RequestBody @Validated IdDto model) {
         return sysUserService.roleList(model);
     }
 
-    /**
-     * 保存用户角色列表
-     */
+    @ApiOperation("保存用户角色列表")
     @PreAuthorize("hasAuthority('user:update')")
     @PostMapping("saveRoleList")
     public Result<String> saveRoleList(@RequestBody @Validated UserRoleSaveModel model) {

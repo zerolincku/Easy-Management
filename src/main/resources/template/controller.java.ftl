@@ -23,14 +23,15 @@ import ${superControllerClassPackage};
 </#if>
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${entity};
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
- * ${table.comment!} 前端控制器
- *
  * @author ${author}
  * @date ${date}
  */
 @Slf4j
+@Api(tags = "${table.comment!}")
 <#if restControllerStyle>
 @RestController
 <#else>
@@ -51,9 +52,7 @@ public class ${table.controllerName} {
     @Autowired
     private ${table.serviceName} ${serviceInstanceName};
 
-    /**
-    * 查询${table.comment!}列表
-    */
+    @ApiOperation("查询${table.comment!}列表")
     @GetMapping("page")
     public Result<ListWithPage<${entity}>> page(QueryCondition<${entity}> condition) {
         QueryWrapper<${entity}> queryWrapper = condition.dealQueryCondition(${entity}.class);
@@ -61,36 +60,28 @@ public class ${table.controllerName} {
         return Result.success(new ListWithPage<>(page.getRecords(), page.getTotal()));
     }
 
-    /**
-    * 新增${table.comment!}
-    */
+    @ApiOperation("新增${table.comment!}")
     @PostMapping
     public Result<String> add(@RequestBody @Validated(Insert.class) ${entity} ${entityInstanceName}) {
         ${serviceInstanceName}.save(${entityInstanceName});
         return Result.success();
     }
 
-    /**
-    * 修改${table.comment!}
-    */
+    @ApiOperation("修改${table.comment!}")
     @PutMapping
     public Result<String> update(@RequestBody @Validated(Update.class) ${entity} ${entityInstanceName}) {
         ${serviceInstanceName}.updateById(${entityInstanceName});
         return Result.success();
     }
 
-    /**
-    * 删除${table.comment!}
-    */
+    @ApiOperation("删除${table.comment!}")
     @DeleteMapping
     public Result<String> remove(@RequestBody @Validated IdsDto idsDto) {
         ${serviceInstanceName}.removeBatchByIds(idsDto.getIds());
         return Result.success();
     }
 
-    /**
-    * 查询${table.comment!}
-    */
+    @ApiOperation("查询${table.comment!}")
     @GetMapping
     public Result<${entity}> get(@RequestBody @Validated IdDto idDto) {
         return Result.success(${serviceInstanceName}.getById(idDto.getId()));
