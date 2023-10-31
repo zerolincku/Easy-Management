@@ -49,6 +49,7 @@ public class ${entity} extends BaseEntity implements Serializable {
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
+
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>
     </#if>
