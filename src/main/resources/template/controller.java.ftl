@@ -83,7 +83,7 @@ public class ${table.controllerName} {
 
     @ApiOperation("查询${table.comment!}")
     @GetMapping
-    public Result<${entity}> get(@RequestBody @Validated IdDto idDto) {
+    public Result<${entity}> get(@Validated IdDto idDto) {
         return Result.success(${serviceInstanceName}.getById(idDto.getId()));
     }
 }
