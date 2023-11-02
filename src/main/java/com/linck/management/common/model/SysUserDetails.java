@@ -1,6 +1,5 @@
 package com.linck.management.common.model;
 
-import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.system.model.entity.SysPermission;
 import com.linck.management.system.model.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,7 +66,7 @@ public class SysUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return sysUser.getStatus().equals(StatusEnum.ENABLE);
+        return !sysUser.getDelFlag();
     }
 
 }

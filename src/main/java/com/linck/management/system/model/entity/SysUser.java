@@ -2,52 +2,41 @@ package com.linck.management.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.linck.management.common.model.BaseEntity;
-import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.common.validate.Insert;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.Length;
+import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * SysUser对象
- *
  * @author linck
- * @date 2020-11-04
+ * @date 2023-11-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysUser extends BaseEntity {
-
+@Accessors(chain = true)
+@TableName("sys_user")
+@ApiModel(value="SysUser对象", description="系统用户")
+public class SysUser extends BaseEntity implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
     @Null(groups = Insert.class, message = "新增时id需要为空")
     private Long id;
 
-    /**
-     * 账号
-     */
-    @NotBlank(message = "账户不能为空")
-    @Length(min = 4, max = 32, message = "账户长度需要4-32个字符")
+    @ApiModelProperty(value = "账号")
     private String account;
 
-    /**
-     * 密码
-     */
-    @NotBlank(groups = {Insert.class}, message = "密码不能为空")
-    @Length(min = 4, max = 32, message = "密码长度需要4-32个字符")
+    @ApiModelProperty(value = "密码")
     private String pwd;
-
-    /**
-     * 状态 1-启用 0-禁用
-     */
-    private StatusEnum status;
 
 }

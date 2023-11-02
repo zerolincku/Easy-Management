@@ -2,58 +2,58 @@ package com.linck.management.quartz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.model.enums.StatusEnum;
+import com.linck.management.common.validate.Insert;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import javax.validation.constraints.Null;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * SysJob对象
  * @author linck
- * @date 2020-11-04
+ * @date 2023-11-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysJob extends BaseEntity {
+@Accessors(chain = true)
+@TableName("sys_job")
+@ApiModel(value="SysJob对象", description="任务")
+public class SysJob extends BaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
+    @Null(groups = Insert.class, message = "新增时id需要为空")
     private Long id;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "job类路径")
     private String jobClass;
 
-    /**
-     * job名字
-     */
+    @ApiModelProperty(value = "job名字")
     private String name;
 
-    /**
-     * 描述
-     */
+    @ApiModelProperty(value = "描述")
     private String description;
 
-    /**
-     * cron
-     */
+    @ApiModelProperty(value = "cron")
     private String cron;
 
-    /**
-     * 启用状态(1-启用 0-禁用)
-     */
+    @ApiModelProperty(value = "启用状态(1-启用 0-禁用)")
     private StatusEnum status;
 
-    /**
-     * 触发器name
-     */
+    @ApiModelProperty(value = "触发器name")
     private String triggerName;
 
-    /**
-     * 组
-     */
+    @ApiModelProperty(value = "组")
     private String groupName;
 
 }

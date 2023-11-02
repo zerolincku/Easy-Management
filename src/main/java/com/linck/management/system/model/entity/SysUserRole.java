@@ -2,39 +2,48 @@ package com.linck.management.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.linck.management.common.model.BaseEntity;
 import com.linck.management.common.validate.Insert;
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Null;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * SysUserRole对象
- *
  * @author linck
- * @date 2020-11-04
+ * @date 2023-11-02
  */
 @Data
-@AllArgsConstructor
-public class SysUserRole {
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("sys_user_role")
+@ApiModel(value="SysUserRole对象", description="")
+public class SysUserRole extends BaseEntity implements Serializable {
 
+    public SysUserRole(Long id, Long uId, Long rId) {
+        this.id = id;
+        this.uId = uId;
+        this.rId = rId;
+    }
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键id
-     */
+    @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.AUTO)
     @Null(groups = Insert.class, message = "新增时id需要为空")
     private Long id;
 
-    /**
-     * 用户id
-     */
+    @ApiModelProperty(value = "用户id")
     private Long uId;
 
-    /**
-     * 角色id
-     */
+    @ApiModelProperty(value = "角色id")
     private Long rId;
 
 }

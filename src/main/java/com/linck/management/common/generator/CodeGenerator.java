@@ -22,7 +22,7 @@ public class CodeGenerator {
     private static final String author = "linck";
 
     public static void main(String[] args) {
-        String moduleName = "test";
+        String moduleName = "quartz";
         List<String> tableNames = Arrays.asList("sys_job", "sys_job_log");
         generate(moduleName, tableNames);
 
@@ -34,6 +34,8 @@ public class CodeGenerator {
                 .globalConfig(builder -> {
                     builder.author(author) // 设置作者
                             .disableOpenDir()
+                            // 文件覆盖
+                            //.fileOverride()
                             .enableSwagger()
                             .outputDir(System.getProperty("user.dir") + "/src/main/java"); // 指定输出目录
                 })

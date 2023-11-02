@@ -19,6 +19,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.Null;
+<#if entitySerialVersionUID>
+import java.io.Serial;
+</#if>
 
 /**
  * @author ${author}
@@ -44,7 +47,9 @@ public class ${entity} extends Model<${entity}> {
 <#else>
 public class ${entity} extends BaseEntity implements Serializable {
 </#if>
+
 <#if entitySerialVersionUID>
+    @Serial
     private static final long serialVersionUID = 1L;
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->

@@ -31,16 +31,28 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Value("${spring.profiles.active}")
+    private String profileActive;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         // 获取开头Jwt的开头
         String authHeader = httpServletRequest.getHeader(this.tokenHeader);
-        // log.debug("jwt authHeader:{}",authHeader);
         // 判断authHeader不为空，同时authHeader以Head为开头
+        out:
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             // 去除Head和后面空格的部分
-            String authToken = authHeader.substring(this.tokenHead.length());
+            String authToken = authHeader.substring(this.tokenHead.length() + 1);
+
+            // 开发环境内置系统管理员后门token: Bearer admin
+            if ("dev".equals(profileActive) && "admin".equals(authToken)) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                break out;
+            }
+
             String username = jwtTokenUtils.getUserNameFromToken(authToken);
             // username不为null，同时未验证
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
