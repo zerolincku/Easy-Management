@@ -19,4 +19,14 @@ public class EnumUtil {
         }
         throw new BizException(clazz.getSimpleName() + " 无此value: " + value);
     }
+
+    public static NameValueInterface getEnumByName(Class<? extends NameValueInterface> clazz, Object name) {
+        NameValueInterface[] enumConstants = clazz.getEnumConstants();
+        for (NameValueInterface nameValue : enumConstants) {
+            if (nameValue.getName().equals(name)) {
+                return nameValue;
+            }
+        }
+        throw new BizException(clazz.getSimpleName() + " 无此name: " + name);
+    }
 }

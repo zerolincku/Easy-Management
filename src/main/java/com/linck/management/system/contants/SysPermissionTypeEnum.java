@@ -1,5 +1,6 @@
 package com.linck.management.system.contants;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.linck.management.common.model.enums.NameValueInterface;
 
 /**

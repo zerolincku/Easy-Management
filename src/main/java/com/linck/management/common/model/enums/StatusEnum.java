@@ -1,6 +1,5 @@
 package com.linck.management.common.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,6 @@ public enum StatusEnum implements NameValueInterface {
     DISABLE(0, "禁用"),
     ;
 
-    @JsonValue
     private final Integer value;
 
     private final String name;

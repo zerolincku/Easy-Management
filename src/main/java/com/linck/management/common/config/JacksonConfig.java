@@ -50,7 +50,7 @@ public class JacksonConfig {
         serializers.put(NameValueInterface.class, new JsonSerializer<NameValueInterface>() {
             @Override
             public void serialize(NameValueInterface value, JsonGenerator jsonGenerator, SerializerProvider serializers) throws IOException {
-                jsonGenerator.writeNumber(value.getValue());
+                jsonGenerator.writeString(value.getName());
             }
         });
 
@@ -67,8 +67,8 @@ public class JacksonConfig {
         classes.forEach(clazz -> deserializers.put(clazz, new JsonDeserializer() {
             @Override
             public Object deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
-                int intValue = jsonParser.getIntValue();
-                return EnumUtil.getEnumByValue((Class<? extends NameValueInterface>) clazz, intValue);
+                String value = jsonParser.getValueAsString();
+                return EnumUtil.getEnumByName((Class<? extends NameValueInterface>) clazz, value);
             }
         }));
 
