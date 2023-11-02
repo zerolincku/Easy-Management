@@ -33,7 +33,7 @@ public class QuartzStarter implements ApplicationRunner {
         if (log.isDebugEnabled()) {
             log.debug("QuartzConfig PostConstruct Init");
         }
-        List<SysJob> sysJobList = sysJobMapper.list(null);
+        List<SysJob> sysJobList = sysJobMapper.selectList(null);
         sysJobList.forEach(sysJob -> {
             if (StatusEnum.ENABLE.equals(sysJob.getStatus())) {
                 try {

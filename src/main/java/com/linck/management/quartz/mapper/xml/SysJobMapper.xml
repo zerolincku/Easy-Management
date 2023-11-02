@@ -2,37 +2,4 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.linck.management.quartz.mapper.SysJobMapper">
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id
-        , job_class, name, description, cron, status, trigger_name, group_name, create_at, update_at
-    </sql>
-
-    <select id="list" resultType="com.linck.management.quartz.model.entity.SysJob"
-            parameterType="com.linck.management.quartz.model.dto.SysJobDto">
-        SELECT
-        <include refid="Base_Column_List"></include>
-        FROM
-        sys_job
-        <where>
-            <if test="id != null">
-                AND id = #{id}
-            </if>
-            <if test="jobClass != null and jobClass != ''">
-                AND job_class = #{jobClass}
-            </if>
-            <if test="name != null and name != ''">
-                AND name = #{name}
-            </if>
-            <if test="status != null">
-                AND status = #{status}
-            </if>
-            <if test="triggerName != null and triggerName != ''">
-                AND trigger_name = #{triggerName}
-            </if>
-            <if test="group != null and group != ''">
-                AND group = #{group}
-            </if>
-        </where>
-    </select>
 </mapper>
