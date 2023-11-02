@@ -2,17 +2,17 @@
 
 Easy-Management 基于SpringBoot、Spring Security实现的前后端分离的权限管理系统
 
-| 使用技术               | 版本            |
-| ---------------------- |---------------|
-| SpringBoot             | 2.3.2.RELEASE |
-| MySQL                  | 8.0.27        |
-| Mybatis-plus           | 3.2.0         |
-| Mybatis-plus-generator | 3.3.1.tmp     |
-| Spring Security        | 2.3.2.RELEASE |
-| Jjwt                   | 0.9.0         |
-| Hutool                 | 4.5.7         |
-| Junit                  | 4.13          |
-| Quartz                 | 2.3.2         |
+| 使用技术               | 版本      |
+| ---------------------- |---------|
+| SpringBoot             | 2.7.17  |
+| MySQL                  | 8.0.27  |
+| Mybatis-plus           | 3.5.3.2 |
+| Mybatis-plus-generator | 3.5.1   |
+| Spring Security        | 5.7.11  |
+| Jjwt                   | 0.9.0   |
+| Hutool                 | 5.8.22   |
+| Junit                  | 4.13    |
+| Quartz                 | 2.3.2   |
 
 前端项目：https://gitee.com/zerolinck/easy-management-ui
 
