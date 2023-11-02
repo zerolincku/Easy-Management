@@ -1,6 +1,5 @@
 package com.linck.management.system.model.vo;
 
-import com.linck.management.common.model.enums.StatusEnum;
 import com.linck.management.system.contants.SysPermissionTypeEnum;
 import lombok.Data;
 
@@ -52,8 +51,6 @@ public class SysMenuAndButton {
      * 排序
      */
     private Integer sort;
-
-    private StatusEnum status;
 
     /**
      * 二级按钮

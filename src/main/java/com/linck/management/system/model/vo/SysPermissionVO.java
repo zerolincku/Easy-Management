@@ -1,6 +1,5 @@
 package com.linck.management.system.model.vo;
 
-import com.linck.management.common.model.enums.StatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -51,8 +50,6 @@ public class SysPermissionVO {
      * 排序
      */
     private Integer sort;
-
-    private StatusEnum status;
 
     /**
      * 权限集合
